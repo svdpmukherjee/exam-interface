@@ -15,6 +15,7 @@ export default function Home({ ip_address }) {
   const [showScore, setShowScore] = useState(false);
   const [databaseEntry, setDatabaseEntry] = useState([]);
   const [stateVar, setStateVar] = useState(0);
+  const [stateColor, setStateColor] = useState(0);
   const [answered, setAnswered] = useState(0);
   const [time_2, setTime_2] = useState(time);
   const [time_3, setTime_3] = useState(time_2);
@@ -42,7 +43,7 @@ export default function Home({ ip_address }) {
 
   // user input added to the database
   useEffect(async () => {
-    if (stateVar == 2) {
+    if (stateVar == 1) {
       let response = await fetch('/api/add-database', {
         method: 'POST',
         body: JSON.stringify(databaseEntry),
@@ -59,10 +60,10 @@ export default function Home({ ip_address }) {
     let timeTaken = time_2 - time_3;
     setTime_2(time_3);
     let question = currentQuestion + 1;
-    // setTogglePalette(1);
+
     enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
     enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-    if (stateVar == 0) {
+    if (stateColor == 0) {
       if (isAnswered === 'Yes')
         setColorAnswer([
           { currentQuestion: currentQuestion + 1, circleColor: 'bg-green-300' },
@@ -72,10 +73,7 @@ export default function Home({ ip_address }) {
           { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
         ]);
 
-      setDatabaseEntry([
-        { ip_address, question, enteredAnswer, timeTaken, date },
-      ]);
-      setStateVar(stateVar + 1);
+      setStateColor(stateColor + 1);
     } else {
       if (isAnswered === 'Yes')
         setColorAnswer([
@@ -90,12 +88,11 @@ export default function Home({ ip_address }) {
           ...colorAnswer,
           { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
         ]);
-
-      setDatabaseEntry([
-        ...databaseEntry,
-        { ip_address, question, enteredAnswer, timeTaken, date },
-      ]);
     }
+    setDatabaseEntry([
+      { ip_address, question, enteredAnswer, timeTaken, date },
+    ]);
+    setStateVar(stateVar + 1);
     setEnteredAnswer('');
   };
 
@@ -107,26 +104,19 @@ export default function Home({ ip_address }) {
     } else submit = 0;
 
     if (submit == 1) {
-      setStateVar(stateVar + 1);
+      setStateVar(1);
       let timeTaken = time_2 - time_3;
       setTime_2(time_3);
       let question = currentQuestion + 1;
-      console.log('array length', databaseEntry.length);
-      if (databaseEntry.length == 0)
-        setDatabaseEntry([
-          { ip_address, question, enteredAnswer, timeTaken, date },
-        ]);
-      else
-        setDatabaseEntry([
-          ...databaseEntry,
-          { ip_address, question, enteredAnswer, timeTaken, date },
-        ]);
+
+      setDatabaseEntry([
+        { ip_address, question, enteredAnswer, timeTaken, date },
+      ]);
       setShowScore(true);
 
-      // enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-      // enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+      enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
+      enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
       setEnteredAnswer('');
-      console.log(databaseEntry);
     }
   };
 
