@@ -368,14 +368,14 @@ export default function Home({ ip_address }) {
 
 export async function getServerSideProps({ req }) {
   // console.log(req.headers);
-  // const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   // console.log(JSON.stringify(ip));
   // console.log(ip);
 
-  const res = await axios.get('https://geolocation-db.com/json');
-  const ip = res.data.IPv4;
-  const ip_segments = ip.split('.');
-  let ip_segments_int = ip_segments.map((item) => parseInt(item, 10));
+  // const res = await axios.get('https://geolocation-db.com/json');
+  // const ip = res.data.IPv4;
+  // const ip_segments = ip.split('.');
+  // let ip_segments_int = ip_segments.map((item) => parseInt(item, 10));
 
   // transforming IP addresses
   // ip_segments_int[0] = ip_segments_int[0] * Math.pow(2, 2) + 5 * 5;
