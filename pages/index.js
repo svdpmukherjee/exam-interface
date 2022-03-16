@@ -22,7 +22,6 @@ export default function Home({ ip_address }) {
   const router = useRouter();
 
   let submit = 0;
-  let quit = 0;
   let isAnswered = '';
   let nextSubmitColor = '';
   let nextSubmitText = '';
@@ -102,25 +101,32 @@ export default function Home({ ip_address }) {
 
   // submit button
   const handleSubmitButton = () => {
+    let date = new Date().toISOString();
     if (window.confirm('You are about to submit the test. Want to Proceed?')) {
       submit = 1;
     } else submit = 0;
 
     if (submit == 1) {
-      let date = new Date().toISOString();
       setStateVar(stateVar + 1);
       let timeTaken = time_2 - time_3;
       setTime_2(time_3);
       let question = currentQuestion + 1;
-      setDatabaseEntry([
-        ...databaseEntry,
-        { ip_address, question, enteredAnswer, timeTaken, date },
-      ]);
+      console.log('array length', databaseEntry.length);
+      if (databaseEntry.length == 0)
+        setDatabaseEntry([
+          { ip_address, question, enteredAnswer, timeTaken, date },
+        ]);
+      else
+        setDatabaseEntry([
+          ...databaseEntry,
+          { ip_address, question, enteredAnswer, timeTaken, date },
+        ]);
       setShowScore(true);
 
-      enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-      enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+      // enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
+      // enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
       setEnteredAnswer('');
+      console.log(databaseEntry);
     }
   };
 

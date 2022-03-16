@@ -30,7 +30,7 @@ async function addPost(req, res) {
     //  console.log(JSON.parse(req.body));
     let data = JSON.parse(req.body);
     data.map((curElem) => {
-      console.log(curElem);
+      // console.log(curElem);
       db.collection('exam_interface').insertOne(curElem);
     });
 
