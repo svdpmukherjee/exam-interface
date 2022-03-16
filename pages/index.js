@@ -6,141 +6,28 @@ import Timer from '../components/Timer';
 import Header from '../components/Header';
 import axios from 'axios';
 import { browserName, isMobile } from 'react-device-detect';
+import { Input } from 'postcss';
 
 const time = 90 * 60; // setting time limit as 1.5 hours
 // export const ApplicationContext = createContext();
 export default function Home({ ip_address }) {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [enteredAnswer, setEnteredAnswer] = useState('');
-  const [showScore, setShowScore] = useState(false);
-  const [databaseEntry, setDatabaseEntry] = useState([]);
-  const [stateVar, setStateVar] = useState(0);
-  const [stateColor, setStateColor] = useState(0);
-  const [answered, setAnswered] = useState(0);
-  const [time_2, setTime_2] = useState(time);
-  const [time_3, setTime_3] = useState(time_2);
-  const [colorAnswer, setColorAnswer] = useState([]);
+  const [oath, setOath] = useState('');
   const router = useRouter();
 
   let submit = 0;
-  let isAnswered = '';
-  let nextSubmitColor = '';
-  let nextSubmitText = '';
-  let deviceType = '';
 
-  // const palette = {
-  //   currentQuestion: currentQuestion,
-  //   totalQuestion: questions.length,
-  //   isAnswered: isAnswered,
-  // };
-
-  // calculate time taken to solve each question
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime_3(time_3 - 1);
-    }, 1000);
-    return () => clearTimeout(intervalId);
-  });
-
-  // user input added to the database
-  useEffect(async () => {
-    if (stateVar == 1) {
-      let response = await fetch('/api/add-database', {
-        method: 'POST',
-        body: JSON.stringify(databaseEntry),
-      });
-      setStateVar(stateVar - 1);
-    }
-  }, [databaseEntry]);
-
-  // next button
-  const handleNext = () => {
-    isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
-    const nextQues = currentQuestion + 1;
-    let date = new Date().toISOString();
-    nextQues < questions.length && setCurrentQuestion(nextQues);
-    let timeTaken = time_2 - time_3;
-    setTime_2(time_3);
-    let question = currentQuestion + 1;
-
-    enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-    enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-    if (stateColor == 0) {
-      if (isAnswered === 'Yes')
-        setColorAnswer([
-          { currentQuestion: currentQuestion + 1, circleColor: 'bg-green-300' },
-        ]);
-      else
-        setColorAnswer([
-          { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
-        ]);
-
-      setStateColor(stateColor + 1);
-    } else {
-      if (isAnswered === 'Yes')
-        setColorAnswer([
-          ...colorAnswer,
-          {
-            currentQuestion: currentQuestion + 1,
-            circleColor: 'bg-green-300',
-          },
-        ]);
-      else
-        setColorAnswer([
-          ...colorAnswer,
-          { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
-        ]);
-    }
-    setDatabaseEntry([
-      {
-        ip_address,
-        question,
-        enteredAnswer,
-        timeTaken,
-        date,
-        deviceType,
-        browserName,
-      },
-    ]);
-    setStateVar(stateVar + 1);
-    setEnteredAnswer('');
-  };
-
-  // submit button
-  const handleSubmitButton = () => {
-    isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
-    let date = new Date().toISOString();
-    if (window.confirm('You are about to submit the test. Want to Proceed?')) {
-      submit = 1;
-    } else submit = 0;
-
-    if (submit == 1) {
-      setStateVar(1);
-      let timeTaken = time_2 - time_3;
-      setTime_2(time_3);
-      let question = currentQuestion + 1;
-
-      setDatabaseEntry([
-        {
-          ip_address,
-          question,
-          enteredAnswer,
-          timeTaken,
-          date,
-          deviceType,
-          browserName,
-        },
-      ]);
-      setShowScore(true);
-
-      enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-      enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-      setEnteredAnswer('');
-    }
-  };
-
-  const runCallback = (cb) => {
-    return cb();
+  // Proceed with test
+  const checkOath = () => {
+    // isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
+    // if (window.confirm('You are about to submit the test. Want to Proceed?')) {
+    //   submit = 1;
+    // } else submit = 0;
+    if (
+      oath ==
+      'I understand the consequences of visiting other websites or taking help from other aids during the exam'
+    )
+      router.push('/test');
+    else alert('Please type the text correctly');
   };
 
   // JSX
@@ -149,201 +36,54 @@ export default function Home({ ip_address }) {
       <Head>
         <title>Online test</title>
       </Head>
+      <div className="p-10 text-4xl text-center text-sky-700 shadow-md rounded-lg">
+        Welcome to the Online Test
+      </div>
+      <div className="container mx-auto px-20 h-full border-2">
+        <div className="text-3xl">
+          <ul>
+            <li className="text-center text-3xl my-5  text-red-500">
+              WARNING!
+            </li>
 
-      <Header showScore={showScore} />
-
-      {showScore ? (
-        <>
-          <h1 className="text-3xl font-medium text-center py-20">
-            <ul>
-              <li>You Answered {answered} out of 15 questions</li>
-              <li>Nice Attempt!</li>
-              <li></li>
-              <li className="py-20">
-                Your final score is: {((answered / 15) * 100).toFixed(3)}%
+            <li className="text-xl my-5">
+              DO NOT visit other websites or take help from other people during
+              the exam. If we discover that you did either of these activities,
+              we may:
+            </li>
+            <ol className="list-disc">
+              <li className="text-xl">Cancel your exam immediately</li>
+              <li className="text-xl">
+                Cancel your compensation for participating
               </li>
-            </ul>
+            </ol>
             <br />
-          </h1>
-          <div className="container m-auto py-10  bg-red-100">
-            <div className="text-3xl text-center">
-              You have completed the test. You may close the window now.
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="container py-8 mx-auto h-full">
-          <div className="grid grid-cols-7 gap-3">
-            <div className="bg-blue-200 rounded-lg shadow-md">
-              <div className=" flex items-center justify-center">
-                <div className="grid grid-cols-3 gap-3 py-24">
-                  {runCallback(() => {
-                    const row = [];
-                    colorAnswer.map((colorAnswer) =>
-                      row.push(
-                        <div
-                          className={`${colorAnswer.circleColor} text-blue-700 text-center p-2 rounded-full`}
-                          key={colorAnswer.currentQuestion}
-                        >
-                          {colorAnswer.currentQuestion}
-                        </div>
-                      )
-                    );
-                    for (var i = currentQuestion + 1; i <= 15; i++) {
-                      row.push(
-                        <div
-                          className="bg-blue-100 text-blue-700  text-center p-2 rounded-full"
-                          key={i}
-                        >
-                          {i}
-                        </div>
-                      );
-                    }
-                    return row;
-                  })}
-                </div>
-
-                {/* <ApplicationContext.Provider
-                  value={{ togglePalette, setTogglePalette }}
-                > */}
-                {/* <QuestionPalette palette={palette} /> */}
-                {/* </ApplicationContext.Provider> */}
-              </div>
-            </div>
-
-            <div className=" shadow-md col-span-4 p-3">
-              <div className="grid grid-rows-3">
-                <div className="row-span-2">
-                  <h4 className="mt-5 text-xl">
-                    Question {currentQuestion + 1} of {questions.length}
-                  </h4>
-                  <br />
-                  <p className="mt-4 py-3 text-lg">
-                    {questions[currentQuestion].question}
-                  </p>
-                </div>
-                <div>
-                  <input
-                    type="text "
-                    value={enteredAnswer}
-                    onChange={(event) => setEnteredAnswer(event.target.value)}
-                    className=" w-25 h-10 border-2 border-gray shadow-md"
-                    placeholder="Type your answer"
-                  />
-
-                  <div className="flex justify-between mt-5">
-                    {(() => {
-                      if (currentQuestion + 1 === questions.length) {
-                        nextSubmitColor = 'bg-green-500';
-                        nextSubmitText = 'text-white';
-                      } else {
-                        nextSubmitColor = 'bg-indigo-500';
-                        nextSubmitText = 'text-white';
-                      }
-                    })()}
-                    <button
-                      onClick={
-                        currentQuestion + 1 === questions.length
-                          ? handleSubmitButton
-                          : handleNext
-                      }
-                      className={`w-20 my-6 p-3 ${nextSubmitColor} ${nextSubmitText} rounded-lg shadow-xl`}
-                    >
-                      {currentQuestion + 1 === questions.length
-                        ? 'Submit'
-                        : 'Next'}
-                    </button>
-                    <div>
-                      {(() => {
-                        if (currentQuestion + 1 < questions.length) {
-                          return (
-                            <>
-                              <button
-                                className="w-20 my-6 p-3 bg-green-500 text-white rounded-lg shadow-xl ml-4"
-                                onClick={handleSubmitButton}
-                              >
-                                Submit
-                              </button>
-
-                              <button
-                                className="w-20 my-6 p-3 bg-gray-500 text-white rounded-lg shadow-xl ml-4"
-                                onClick={() => {
-                                  if (
-                                    window.confirm(
-                                      'You are about to quit the test. Want to Proceed?'
-                                    )
-                                  )
-                                    router.push('/quit');
-                                }}
-                              >
-                                Quit
-                              </button>
-                            </>
-                          );
-                        }
-                      })()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-rows-5 col-span-2 justify-items-center shadow-md">
-              <div className="w-full bg-red-400 p-5 rounded-2xl">
-                <div className="text-center text-white">
-                  <strong> Time left </strong>
-                  <Timer time={time} />
-                </div>
-              </div>
-              <div className="row-span-4 my-20">
-                <div>
-                  {(() => {
-                    if (currentQuestion > 9) {
-                      return (
-                        <div>
-                          <img
-                            src="images/monitoring.gif"
-                            alt="monitoring"
-                            className="h-3/5 w-3/5 mx-auto"
-                            on
-                          />
-                        </div>
-                      );
-                    } else if (currentQuestion > 4) {
-                      return (
-                        <div>
-                          <img
-                            src="images/warning.png"
-                            alt="warning"
-                            className=""
-                            ß
-                          />
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div className="p-10 text-sm shadow-sm">
-                          <p>Few points to note: </p>
-                          <br />
-                          <ul>
-                            <li>
-                              1. The questions are of moderate to difficult
-                              level
-                            </li>
-                            <li>
-                              2. You have enough time to answer each question
-                            </li>
-                            <li>3. You cannot go back to previous questions</li>
-                          </ul>
-                        </div>
-                      );
-                    }
-                  })()}
-                </div>
-              </div>
-            </div>
-          </div>
+            <li className="text-2xl">
+              Please show that you understand the rules of the exam by typing
+              the following text into the box below:
+            </li>
+            <br />
+            <li className="text-xl text-center italic">
+              "I understand the consequences of visiting other websites or
+              taking help from other aids during the exam"
+            </li>
+          </ul>
+          <br />
+          <input
+            type="text"
+            value={oath}
+            onChange={(event) => setOath(event.target.value)}
+            className="w-full h-20 text-lg border-2 border-red-300 shadow-md"
+            placeholder="Type the above text.."
+          />
         </div>
-      )}
+        <button
+          className="w-50 my-6 p-3 bg-green-500 text-white rounded-lg shadow-xl "
+          onClick={checkOath}
+        >
+          Proceed with the Test
+        </button>
+      </div>
     </div>
   );
 }
