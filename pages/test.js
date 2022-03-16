@@ -20,7 +20,7 @@ export default function Home({ ip_address }) {
   const [time_2, setTime_2] = useState(time);
   const [time_3, setTime_3] = useState(time_2);
   const [colorAnswer, setColorAnswer] = useState([]);
-  const [firstPage, setFirstPage] = useState(1);
+  const [cheerMessage, setCheerMessage] = useState('');
   const router = useRouter();
 
   let submit = 0;
@@ -66,6 +66,7 @@ export default function Home({ ip_address }) {
 
     enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
     enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+    setCheerMessage(isAnswered);
     if (stateColor == 0) {
       if (isAnswered === 'Yes')
         setColorAnswer([
@@ -136,6 +137,7 @@ export default function Home({ ip_address }) {
 
       enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
       enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+      setCheerMessage(isAnswered);
       setEnteredAnswer('');
     }
   };
@@ -319,19 +321,35 @@ export default function Home({ ip_address }) {
                           />
                         </div>
                       );
+                    } else if (cheerMessage === 'No') {
+                      return (
+                        <div className="p-8 shadow-sm">
+                          <br />
+                          <h3 className="text-red-500 text-lg">
+                            Leaving a question unanswered decrease the chance of
+                            receiving bonus!
+                          </h3>
+                          <br />
+                          <span>
+                            You have enough time to solve each question.
+                          </span>
+                          <strong className="text-xl">Try harder!!</strong>
+                        </div>
+                      );
                     } else {
                       return (
                         <div className="p-10 text-sm shadow-sm">
-                          <p>Few points to note: </p>
                           <br />
                           <ul>
                             <li>
                               1. The questions are of moderate to difficult
                               level
                             </li>
+                            <br />
                             <li>
                               2. You have enough time to answer each question
                             </li>
+                            <br />
                             <li>3. You cannot go back to previous questions</li>
                           </ul>
                         </div>
@@ -360,15 +378,15 @@ export async function getServerSideProps({ req }) {
   let ip_segments_int = ip_segments.map((item) => parseInt(item, 10));
 
   // transforming IP addresses
-  ip_segments_int[0] = ip_segments_int[0] * Math.pow(2, 2) + 5 * 5;
-  ip_segments_int[1] = ip_segments_int[1] * Math.pow(3, 3) + 4 * 4;
-  ip_segments_int[2] = ip_segments_int[2] * Math.pow(4, 4) + 3 * 3;
-  ip_segments_int[3] = ip_segments_int[3] * Math.pow(5, 5) + 2 * 2;
-  const ip_address = ip_segments_int.join('.').toString();
+  // ip_segments_int[0] = ip_segments_int[0] * Math.pow(2, 2) + 5 * 5;
+  // ip_segments_int[1] = ip_segments_int[1] * Math.pow(3, 3) + 4 * 4;
+  // ip_segments_int[2] = ip_segments_int[2] * Math.pow(4, 4) + 3 * 3;
+  // ip_segments_int[3] = ip_segments_int[3] * Math.pow(5, 5) + 2 * 2;
+  // const ip_address = ip_segments_int.join('.').toString();
 
   return {
     props: {
-      ip_address,
+      ip_address: ip,
     }, // will be passed to the page component as props
   };
 }

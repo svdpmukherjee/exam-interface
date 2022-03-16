@@ -7,7 +7,9 @@ function Header(props) {
         </div>
       ) : (
         <div className="p-10 text-3xl text-center text-sky-700 shadow-md rounded-lg">
-          If you solve 80% of questions correctly, a bonus is waiting for you!
+          If you solve 80% of questions correctly, a <span></span>
+          <span className="text-black underline">bonus</span> is waiting for
+          you!
         </div>
       )}
     </>
