@@ -321,21 +321,21 @@ export default function Home({ ip_address }) {
                           />
                         </div>
                       );
-                    } else if (cheerMessage === 'No') {
-                      return (
-                        <div className="p-8 shadow-sm">
-                          <br />
-                          <h3 className="text-red-500 text-lg">
-                            Leaving a question unanswered decrease the chance of
-                            receiving bonus!
-                          </h3>
-                          <br />
-                          <span>
-                            You have enough time to solve each question.
-                          </span>
-                          <strong className="text-xl">Try harder!!</strong>
-                        </div>
-                      );
+                      // } else if (cheerMessage === 'No') {
+                      //   return (
+                      //     <div className="p-8 shadow-sm">
+                      //       <br />
+                      //       <h3 className="text-red-500 text-lg">
+                      //         Leaving a question unanswered decrease the chance of
+                      //         receiving bonus!
+                      //       </h3>
+                      //       <br />
+                      //       <span>
+                      //         You have enough time to solve each question.
+                      //       </span>
+                      //       <strong className="text-xl">Try harder!!</strong>
+                      //     </div>
+                      //   );
                     } else {
                       return (
                         <div className="p-10 text-sm shadow-sm">
