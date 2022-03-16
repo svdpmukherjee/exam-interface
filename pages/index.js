@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Timer from '../components/Timer';
 import Header from '../components/Header';
 import axios from 'axios';
-import Link from 'next/link';
+import { browserName, isMobile } from 'react-device-detect';
 
 const time = 90 * 60; // setting time limit as 1.5 hours
 // export const ApplicationContext = createContext();
@@ -26,6 +26,7 @@ export default function Home({ ip_address }) {
   let isAnswered = '';
   let nextSubmitColor = '';
   let nextSubmitText = '';
+  let deviceType = '';
 
   // const palette = {
   //   currentQuestion: currentQuestion,
@@ -54,6 +55,7 @@ export default function Home({ ip_address }) {
 
   // next button
   const handleNext = () => {
+    isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
     const nextQues = currentQuestion + 1;
     let date = new Date().toISOString();
     nextQues < questions.length && setCurrentQuestion(nextQues);
@@ -90,7 +92,15 @@ export default function Home({ ip_address }) {
         ]);
     }
     setDatabaseEntry([
-      { ip_address, question, enteredAnswer, timeTaken, date },
+      {
+        ip_address,
+        question,
+        enteredAnswer,
+        timeTaken,
+        date,
+        deviceType,
+        browserName,
+      },
     ]);
     setStateVar(stateVar + 1);
     setEnteredAnswer('');
@@ -98,6 +108,7 @@ export default function Home({ ip_address }) {
 
   // submit button
   const handleSubmitButton = () => {
+    isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
     let date = new Date().toISOString();
     if (window.confirm('You are about to submit the test. Want to Proceed?')) {
       submit = 1;
@@ -110,7 +121,15 @@ export default function Home({ ip_address }) {
       let question = currentQuestion + 1;
 
       setDatabaseEntry([
-        { ip_address, question, enteredAnswer, timeTaken, date },
+        {
+          ip_address,
+          question,
+          enteredAnswer,
+          timeTaken,
+          date,
+          deviceType,
+          browserName,
+        },
       ]);
       setShowScore(true);
 
