@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 61 * 60; // setting time limit as 1.5 hours
+const time = 90 * 60; // setting time limit as 1.5 hours
 // export const ApplicationContext = createContext();
 export default function Home({ ip_address }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -59,7 +59,7 @@ export default function Home({ ip_address }) {
     const intervalId = setInterval(() => {
       setTimeLeftCheck(timeLeftCheck - 1);
     }, 1000);
-    if (timeLeftCheck <= 3600) setShowScore(true);
+    if (timeLeftCheck <= 0) setShowScore(true);
     return () => clearTimeout(intervalId);
   }, [timeLeftCheck]);
 
