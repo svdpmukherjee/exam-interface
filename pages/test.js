@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 90 * 60; // setting time limit as 1.5 hours
+const time = 61 * 60; // setting time limit as 1.5 hours
 // export const ApplicationContext = createContext();
 export default function Home({ ip_address }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -21,6 +21,7 @@ export default function Home({ ip_address }) {
   const [time_3, setTime_3] = useState(time_2);
   const [colorAnswer, setColorAnswer] = useState([]);
   const [cheerMessage, setCheerMessage] = useState('');
+  const [timeLeftCheck, setTimeLeftCheck] = useState(time);
   const router = useRouter();
 
   let submit = 0;
@@ -53,6 +54,14 @@ export default function Home({ ip_address }) {
       setStateVar(stateVar - 1);
     }
   }, [databaseEntry]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimeLeftCheck(timeLeftCheck - 1);
+    }, 1000);
+    if (timeLeftCheck <= 3600) setShowScore(true);
+    return () => clearTimeout(intervalId);
+  }, [timeLeftCheck]);
 
   // next button
   const handleNext = () => {
@@ -326,8 +335,8 @@ export default function Home({ ip_address }) {
                         <div className="p-8 shadow-sm">
                           <br />
                           <h3 className="text-red-500 text-lg">
-                            Leaving a question unanswered decrease the chance of
-                            receiving bonus!
+                            Leaving a question unanswered decreases the chance
+                            of receiving bonus!
                           </h3>
                           <br />
                           <span>

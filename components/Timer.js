@@ -20,9 +20,13 @@ const Timer = ({ time }) => {
 
   // calculate and return time left
   function getRemainingTime(timeLeft) {
+    let minutes = 0;
     const hours = Math.floor(timeLeft / 3600).toString();
-    const minutes = Math.floor((timeLeft - 3600) / 60).toString();
+    if (timeLeft < 3600)
+      minutes = Math.floor(60 - Math.abs(timeLeft - 3600) / 60).toString();
+    else minutes = Math.floor(Math.abs(timeLeft - 3600) / 60).toString();
     let seconds = (timeLeft % 60).toString();
+
     setTimeLeft(timeLeft - 1);
 
     return {
@@ -44,15 +48,32 @@ const Timer = ({ time }) => {
     return '0'.repeat(minLength - numberString.length) + numberString;
   }
 
+  const runCallback = (cb) => {
+    return cb();
+  };
+
   // JSX
   return (
-    <div className="countdown-timer">
-      <span className="two-numbers">{remainingTime.hours}</span>
-      <span>:</span>
-      <span className="two-numbers">{remainingTime.minutes}</span>
-      <span>:</span>
-      <span className="two-numbers">{remainingTime.seconds}</span>
-    </div>
+    <>
+      {/* <div>
+        {runCallback(() => {
+          return timeLeft;
+        })}
+        {(() => {
+          if (timeLeft < 3600) {
+            //setShowScore(true);
+            <Header showScore={true} />;
+          }
+        })()}
+      </div> */}
+      <div className="countdown-timer">
+        <span className="two-numbers">{remainingTime.hours}</span>
+        <span>:</span>
+        <span className="two-numbers">{remainingTime.minutes}</span>
+        <span>:</span>
+        <span className="two-numbers">{remainingTime.seconds}</span>
+      </div>
+    </>
   );
 };
 
