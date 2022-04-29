@@ -312,11 +312,13 @@ export default function Home({ ip_address }) {
                       return (
                         <div>
                           <img
-                            src="images/monitoring.gif"
+                            src="images/user_icon.gif"
                             alt="monitoring"
                             className="h-3/5 w-3/5 mx-auto"
                             on
                           />
+                          <br />
+                          <p>Your activities are now monitored</p>
                         </div>
                       );
                     } else if (currentQuestion > 4) {
@@ -332,35 +334,42 @@ export default function Home({ ip_address }) {
                       );
                     } else if (cheerMessage === 'No') {
                       return (
-                        <div className="p-8 shadow-sm">
+                        <div className="px-2 text-sm ">
                           <br />
-                          <h3 className="text-red-500 text-lg">
-                            Leaving a question unanswered decreases the chance
-                            of receiving bonus!
-                          </h3>
-                          <br />
-                          <span>
-                            You have enough time to solve each question.
-                          </span>
-                          <strong className="text-xl">Try harder!!</strong>
+                          <ul>
+                            <li className="text-red-500 text-base">
+                              Leaving a question unanswered decreases the chance
+                              of receiving bonus!
+                            </li>
+                            <br />
+                            <br />
+                            <li>
+                              You have enough time to answer each question.
+                            </li>
+                            <br />
+                            <li>
+                              <strong className="text-xl">Try harder!!</strong>
+                            </li>
+                          </ul>
                         </div>
                       );
                     } else {
                       return (
-                        <div className="p-10 text-sm shadow-sm">
+                        <div className="text-sm">
                           <br />
-                          <ul>
+                          <ol>
+                            <li className="text-xl">Note:</li>
+                            <br />
                             <li>
-                              1. The questions are of moderate to difficult
-                              level
+                              The questions are of moderate to difficult level
                             </li>
                             <br />
                             <li>
-                              2. You have enough time to answer each question
+                              You have enough time to answer each question
                             </li>
                             <br />
-                            <li>3. You cannot go back to previous questions</li>
-                          </ul>
+                            <li>You cannot go back to previous questions</li>
+                          </ol>
                         </div>
                       );
                     }
