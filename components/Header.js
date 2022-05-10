@@ -8,7 +8,10 @@ function Header(props) {
       ) : (
         <div className="grid grid-cols-9 text-xl text-white shadow-md  bg-violet-700 font-serif">
           <div className="col-span-3 text-right my-auto ">
-            <p>Current Test Statistics (% of test takers' scores) </p>
+            <p>
+              Current Test Statistics{' '}
+              <span className="text-sm italic">(% of test takers' scores)</span>{' '}
+            </p>
           </div>
           <div className="col-span-6 flex justify-center p-2 ">
             {/* <span className="text-black underline">bonus</span> is waiting for */}
