@@ -7,9 +7,10 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 90 * 60; // setting time limit as 1.5 hours
-// export const ApplicationContext = createContext();
+const time = 30 * 60; // setting time limit as 30 mins
+
 export default function Home({ ip_address }) {
+  const participant_id = useRouter().query.id;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
   const [showScore, setShowScore] = useState(false);
@@ -20,7 +21,6 @@ export default function Home({ ip_address }) {
   const [time_2, setTime_2] = useState(time);
   const [time_3, setTime_3] = useState(time_2);
   const [colorAnswer, setColorAnswer] = useState([]);
-  const [cheerMessage, setCheerMessage] = useState('');
   const [timeLeftCheck, setTimeLeftCheck] = useState(time);
   const router = useRouter();
 
@@ -29,12 +29,6 @@ export default function Home({ ip_address }) {
   let nextSubmitColor = '';
   let nextSubmitText = '';
   let deviceType = '';
-
-  // const palette = {
-  //   currentQuestion: currentQuestion,
-  //   totalQuestion: questions.length,
-  //   isAnswered: isAnswered,
-  // };
 
   // calculate time taken to solve each question
   useEffect(() => {
@@ -75,7 +69,7 @@ export default function Home({ ip_address }) {
 
     enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
     enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-    setCheerMessage(isAnswered);
+    // setCheerMessage(isAnswered);
     if (stateColor == 0) {
       if (isAnswered === 'Yes')
         setColorAnswer([
@@ -104,6 +98,7 @@ export default function Home({ ip_address }) {
     }
     setDatabaseEntry([
       {
+        participant_id,
         ip_address,
         question,
         enteredAnswer,
@@ -133,6 +128,7 @@ export default function Home({ ip_address }) {
 
       setDatabaseEntry([
         {
+          participant_id,
           ip_address,
           question,
           enteredAnswer,
@@ -146,7 +142,7 @@ export default function Home({ ip_address }) {
 
       enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
       enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-      setCheerMessage(isAnswered);
+      // setCheerMessage(isAnswered);
       setEnteredAnswer('');
     }
   };
@@ -187,7 +183,7 @@ export default function Home({ ip_address }) {
           <div className="grid grid-cols-7 gap-3">
             <div className="bg-blue-200 rounded-lg shadow-md">
               <div className=" flex items-center justify-center">
-                <div className="grid grid-cols-3 gap-3 py-24">
+                <div className="grid grid-cols-2 gap-6 py-24">
                   {runCallback(() => {
                     const row = [];
                     colorAnswer.map((colorAnswer) =>
@@ -200,7 +196,7 @@ export default function Home({ ip_address }) {
                         </div>
                       )
                     );
-                    for (var i = currentQuestion + 1; i <= 15; i++) {
+                    for (var i = currentQuestion + 1; i <= 10; i++) {
                       row.push(
                         <div
                           className="bg-blue-100 text-blue-700  text-center p-2 rounded-full"
@@ -235,7 +231,7 @@ export default function Home({ ip_address }) {
                 </div>
                 <div>
                   <input
-                    type="text "
+                    type="text"
                     value={enteredAnswer}
                     onChange={(event) => setEnteredAnswer(event.target.value)}
                     className=" w-25 h-10 border-2 border-gray shadow-md"
@@ -245,10 +241,10 @@ export default function Home({ ip_address }) {
                   <div className="flex justify-between mt-5">
                     {(() => {
                       if (currentQuestion + 1 === questions.length) {
-                        nextSubmitColor = 'bg-green-500';
+                        nextSubmitColor = 'bg-green-500 hover:bg-green-700';
                         nextSubmitText = 'text-white';
                       } else {
-                        nextSubmitColor = 'bg-indigo-500';
+                        nextSubmitColor = 'bg-indigo-500 hover:bg-indigo-700';
                         nextSubmitText = 'text-white';
                       }
                     })()}
@@ -270,14 +266,14 @@ export default function Home({ ip_address }) {
                           return (
                             <>
                               <button
-                                className="w-20 my-6 p-3 bg-green-500 text-white rounded-lg shadow-xl ml-4"
+                                className="w-20 my-6 p-3 bg-green-500 hover:bg-green-700 text-white rounded-lg shadow-xl ml-4"
                                 onClick={handleSubmitButton}
                               >
                                 Submit
                               </button>
 
                               <button
-                                className="w-20 my-6 p-3 bg-gray-500 text-white rounded-lg shadow-xl ml-4"
+                                className="w-20 my-6 p-3 bg-gray-500 hover:bg-gray-700 text-white rounded-lg shadow-xl ml-4"
                                 onClick={() => {
                                   if (
                                     window.confirm(
@@ -332,43 +328,20 @@ export default function Home({ ip_address }) {
                           />
                         </div>
                       );
-                    } else if (cheerMessage === 'No') {
-                      return (
-                        <div className="px-2 text-sm ">
-                          <br />
-                          <ul>
-                            <li className="text-red-500 text-base">
-                              Leaving a question unanswered decreases the chance
-                              of receiving bonus!
-                            </li>
-                            <br />
-                            <br />
-                            <li>
-                              You have enough time to answer each question.
-                            </li>
-                            <br />
-                            <li>
-                              <strong className="text-xl">Try harder!!</strong>
-                            </li>
-                          </ul>
-                        </div>
-                      );
                     } else {
                       return (
-                        <div className="text-sm">
+                        <div className="flex  p-5 text-sm justify-center text-justify">
+                          <br />
                           <br />
                           <ol>
-                            <li className="text-xl">Note:</li>
-                            <br />
-                            <li>
-                              The questions are of moderate to difficult level
+                            <li className="">
+                              {'•'} You have enough time to solve each question
                             </li>
                             <br />
-                            <li>
-                              You have enough time to answer each question
+                            <li className="">
+                              {'•'} Leaving a question unanswered decreases the
+                              chance of receiving bonus
                             </li>
-                            <br />
-                            <li>You cannot go back to previous questions</li>
                           </ol>
                         </div>
                       );

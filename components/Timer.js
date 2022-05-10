@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const defaultRemainingTime = {
-  hours: '01',
+  hours: '00',
   minutes: '30',
   seconds: '00',
 };
@@ -48,9 +48,9 @@ const Timer = ({ time }) => {
     return '0'.repeat(minLength - numberString.length) + numberString;
   }
 
-  const runCallback = (cb) => {
-    return cb();
-  };
+  // const runCallback = (cb) => {
+  //   return cb();
+  // };
 
   // JSX
   return (
