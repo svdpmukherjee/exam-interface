@@ -10,12 +10,11 @@ const time = 30 * 60; // setting time limit as 30 mins
 
 export default function Home({ ip_address }) {
   const participant_id = useRouter().query.id;
-  const [designNumber, setDesignNumber] = useState(0);
+  const [designElem, setDesignElem] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
   const [showScore, setShowScore] = useState(false);
-  // const [databaseEntry, setDatabaseEntry] = useState([]);
-  // const [stateVar, setStateVar] = useState(0);
+  const [stateVar, setStateVar] = useState(0);
   const [stateColor, setStateColor] = useState(0);
   const [answered, setAnswered] = useState(0);
   const [time_2, setTime_2] = useState(time);
@@ -29,6 +28,7 @@ export default function Home({ ip_address }) {
   let nextSubmitColor = '';
   let nextSubmitText = '';
   let deviceType = '';
+  let designNumber = 0;
 
   // calculate time taken to solve each question
   useEffect(() => {
@@ -37,17 +37,6 @@ export default function Home({ ip_address }) {
     }, 1000);
     return () => clearTimeout(intervalId);
   });
-
-  // user input added to the database
-  // useEffect(async () => {
-  //   if (stateVar == 1) {
-  //     let response = await fetch('/api/add-database', {
-  //       method: 'POST',
-  //       body: JSON.stringify(databaseEntry),
-  //     });
-  //     setStateVar(stateVar - 1);
-  //   }
-  // }, [databaseEntry]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -101,21 +90,22 @@ export default function Home({ ip_address }) {
       method: 'GET',
     });
     let data = await response_design.json();
-    console.log(data);
-    setDesignNumber(parseInt(data.message));
+    // console.log(data);
+    if (stateVar == 0) {
+      console.log('only once');
+      designNumber = parseInt(data.message);
+      setStateVar(1);
+      let response_design = await fetch('/api/add-database', {
+        method: 'PUT',
+        body: ++designNumber % 4,
+      });
+      --designNumber;
+    } else {
+      if (data.message == 0) designNumber = 3;
+      else designNumber = parseInt(data.message) - 1;
+    }
+    setDesignElem(designNumber);
 
-    // setDatabaseEntry([
-    //   {
-    //     participant_id,
-    //     ip_address,
-    //     question,
-    //     enteredAnswer,
-    //     timeTaken,
-    //     date,
-    //     deviceType,
-    //     browserName,
-    //   },
-    // ]);
     let databaseEntry = {
       participant_id: participant_id,
       design_element: designNumber,
@@ -132,7 +122,6 @@ export default function Home({ ip_address }) {
       method: 'POST',
       body: JSON.stringify(databaseEntry),
     });
-    // setStateVar(stateVar + 1);
     setEnteredAnswer('');
   };
 
@@ -145,23 +134,16 @@ export default function Home({ ip_address }) {
     } else submit = 0;
 
     if (submit == 1) {
-      // setStateVar(1);
       let timeTaken = time_2 - time_3;
       setTime_2(time_3);
       let question = currentQuestion + 1;
 
-      // setDatabaseEntry([
-      //   {
-      //     participant_id,
-      //     ip_address,
-      //     question,
-      //     enteredAnswer,
-      //     timeTaken,
-      //     date,
-      //     deviceType,
-      //     browserName,
-      //   },
-      // ]);
+      let response_design = await fetch('/api/add-database', {
+        method: 'GET',
+      });
+      let data = await response_design.json();
+      designNumber = designElem;
+
       let databaseEntry = {
         participant_id: participant_id,
         design_element: designNumber,
@@ -178,15 +160,10 @@ export default function Home({ ip_address }) {
         body: JSON.stringify(databaseEntry),
       });
 
-      let response_design = await fetch('/api/add-database', {
-        method: 'PUT',
-        body: ++designNumber % 4,
-      });
       setShowScore(true);
 
       enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
       enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-      // setCheerMessage(isAnswered);
       setEnteredAnswer('');
     }
   };
@@ -342,49 +319,135 @@ export default function Home({ ip_address }) {
               <div className="row-span-4 my-20">
                 <div>
                   {(() => {
-                    if (currentQuestion > 4) {
-                      return (
-                        <div>
-                          <img
-                            src="images/user_icon.gif"
-                            alt="monitoring"
-                            className="h-3/5 w-3/5 mx-auto"
-                            on
-                          />
-                          <br />
-                          <p>Your activities are now monitored</p>
-                        </div>
-                      );
-                    } else if (currentQuestion > 4) {
-                      return (
-                        <div>
-                          <img
-                            src="images/warning.png"
-                            alt="warning"
-                            className=""
-                            ß
-                          />
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div className="flex  p-5 text-sm justify-center text-justify">
-                          <br />
-                          <br />
-                          <ol>
-                            <li className="">
-                              {'•'} You have enough time to solve each question
-                            </li>
+                    if (designElem == 0) {
+                      if (currentQuestion > 4) {
+                        return (
+                          <div>
+                            <img
+                              src="images/honor.png"
+                              alt="honor"
+                              className=""
+                            />
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div className="flex  p-5 text-sm justify-center text-justify">
                             <br />
-                            <li className="">
-                              {'•'} Leaving a question unanswered decreases the
-                              chance of receiving bonus
-                            </li>
-                          </ol>
-                        </div>
-                      );
+                            <br />
+                            <ol>
+                              <li className="">
+                                {'•'} You have enough time to solve each
+                                question
+                              </li>
+                              <br />
+                              <li className="">
+                                {'•'} Leaving a question unanswered decreases
+                                the chance of receiving bonus
+                              </li>
+                            </ol>
+                          </div>
+                        );
+                      }
+                    } else if (designElem == 1) {
+                      if (currentQuestion > 4) {
+                        return (
+                          <div>
+                            <img
+                              src="images/warning.png"
+                              alt="warning"
+                              className=""
+                            />
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div className="flex  p-5 text-sm justify-center text-justify">
+                            <br />
+                            <br />
+                            <ol>
+                              <li className="">
+                                {'•'} You have enough time to solve each
+                                question
+                              </li>
+                              <br />
+                              <li className="">
+                                {'•'} Leaving a question unanswered decreases
+                                the chance of receiving bonus
+                              </li>
+                            </ol>
+                          </div>
+                        );
+                      }
+                    } else if (designElem == 2) {
+                      if (currentQuestion > 4) {
+                        return (
+                          <div>
+                            <img
+                              src="images/user_icon.gif"
+                              alt="monitoring"
+                              className="h-3/5 w-3/5 mx-auto"
+                            />
+                            <br />
+                            <p className="text-white">
+                              Your activities are now monitored
+                            </p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div className="flex p-5 text-sm justify-center text-justify">
+                            <br />
+                            <br />
+                            <ol>
+                              <li className="">
+                                {'•'} You have enough time to solve each
+                                question
+                              </li>
+                              <br />
+                              <li className="">
+                                {'•'} Leaving a question unanswered decreases
+                                the chance of receiving bonus
+                              </li>
+                            </ol>
+                          </div>
+                        );
+                      }
+                    } else {
+                      if (currentQuestion > 4) {
+                        return (
+                          <div>
+                            <img
+                              src="images/user_icon.gif"
+                              alt="monitoring"
+                              className="h-3/5 w-3/5 mx-auto"
+                            />
+                            <br />
+                            <p>Your activities are now monitored</p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div className="flex  p-5 text-sm justify-center text-justify">
+                            <br />
+                            <br />
+                            <ol>
+                              <li className="">
+                                {'•'} You have enough time to solve each
+                                question
+                              </li>
+                              <br />
+                              <li className="">
+                                {'•'} Leaving a question unanswered decreases
+                                the chance of receiving bonus
+                              </li>
+                            </ol>
+                          </div>
+                        );
+                      }
                     }
-                  })()}
+                  })()}{' '}
+                  {/*dnfnd*/}
                 </div>
               </div>
             </div>
