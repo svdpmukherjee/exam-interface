@@ -304,7 +304,7 @@ export default function Home({ ip_address }) {
               <div className="row-span-4 my-20">
                 <div>
                   {(() => {
-                    if (currentQuestion > 9) {
+                    if (currentQuestion > 4) {
                       return (
                         <div>
                           <img
