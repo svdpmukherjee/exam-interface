@@ -1,10 +1,9 @@
 import questions from '../questions.json';
 import Head from 'next/head';
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Timer from '../components/Timer';
 import Header from '../components/Header';
-import axios from 'axios';
 import { browserName, isMobile } from 'react-device-detect';
 
 const time = 30 * 60; // setting time limit as 30 mins
@@ -69,7 +68,7 @@ export default function Home({ ip_address }) {
 
     enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
     enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-    // setCheerMessage(isAnswered);
+
     if (stateColor == 0) {
       if (isAnswered === 'Yes')
         setColorAnswer([
@@ -238,12 +237,6 @@ export default function Home({ ip_address }) {
                     return row;
                   })}
                 </div>
-
-                {/* <ApplicationContext.Provider
-                  value={{ togglePalette, setTogglePalette }}
-                > */}
-                {/* <QuestionPalette palette={palette} /> */}
-                {/* </ApplicationContext.Provider> */}
               </div>
             </div>
 
