@@ -5,25 +5,29 @@ export default async function handler(req, res) {
   // switch the methods
   switch (req.method) {
     case 'GET': {
-      return getPosts(req, res);
+      console.log(req.method);
+      return getDesign(req, res);
     }
 
     case 'POST': {
-      // console.log(req.method);
+      console.log(req.method);
       return addEntry(req, res);
     }
 
     case 'PUT': {
-      return updateEntry(req, res);
+      console.log(req.method);
+      return updateDesign(req, res);
     }
 
-    case 'DELETE': {
-      return deleteEntry(req, res);
-    }
+    // case 'UPDATE_DESIGN': {
+    //   console.log(req.method);
+    //   return updateDesign(req, res);
+    // }
 
-    case 'TRACK': {
-      return trackEntry(req, res);
-    }
+    // case 'GET_DESIGN': {
+    //   console.log(req.method);
+    //   return getDesign(req, res);
+    // }
   }
 }
 
@@ -31,15 +35,8 @@ async function addEntry(req, res) {
   const data = JSON.parse(req.body);
   try {
     let { db } = await connectToDatabase();
-    //  console.log(req.body);
-    //  console.log(JSON.parse(req.body));
-
-    // data.map((curElem) => {
     console.log(data);
     db.collection('exam_interface').insertOne(data);
-    // });
-
-    //  db.collection('exam_interface').insertOne(JSON.parse(req.body));
 
     return res.json({
       message: 'Entry added successfully',
@@ -53,35 +50,42 @@ async function addEntry(req, res) {
   }
 }
 
-async function trackEntry(req, res) {
-  //const data = JSON.parse(req.body);
-  // console.log(data);
+async function getDesign(req, res) {
   try {
     let { db } = await connectToDatabase();
-    const data = await db.collection('tracking_db').updateOne({
-      $inc: {
-        // answer: (parseFloat(answer.toFixed(3)) + 0.001).toString(),
-        participant_id: 1,
-      },
-      $mod: {
-        design_number: [$design_number, 4],
-      },
-    });
-    // console.log(answer);
-    // data.answer = parseFloat(answer.answer);
-    // console.log(data);
-    //db.collection('honeypot_website').insertOne(data);
+    const data = await db.collection('tracking_db').findOne();
+    // console.log(data.design_number);
 
-    //  db.collection('exam_interface').insertOne(JSON.parse(req.body));
-    // await db.collection('tracking_db').updateOne({
-    //   $inc: {
-    //     // answer: (parseFloat(answer.toFixed(3)) + 0.001).toString(),
-    //     participant_id: 1,
-    //     design_number: 1,
-    //   },
-    // });
     return res.json({
-      message: data,
+      message: data.design_number,
+      success: true,
+    });
+  } catch (error) {
+    return res.json({
+      message: new Error(error).message,
+      success: false,
+    });
+  }
+}
+
+async function updateDesign(req, res) {
+  const data = JSON.parse(req.body);
+  // const data = req.body;
+  // console.log(typeof data);
+
+  try {
+    let { db } = await connectToDatabase();
+    await db.collection('tracking_db').updateOne(
+      { design_number: { $lt: 5 } },
+      {
+        $set: {
+          design_number: data,
+        },
+      }
+    );
+
+    return res.json({
+      message: 'updated successfully',
       success: true,
     });
   } catch (error) {

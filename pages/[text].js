@@ -10,6 +10,7 @@ const time = 30 * 60; // setting time limit as 30 mins
 
 export default function Home({ ip_address }) {
   const participant_id = useRouter().query.id;
+  const [designNumber, setDesignNumber] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
   const [showScore, setShowScore] = useState(false);
@@ -95,6 +96,14 @@ export default function Home({ ip_address }) {
           { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
         ]);
     }
+
+    let response_design = await fetch('/api/add-database', {
+      method: 'GET',
+    });
+    let data = await response_design.json();
+    console.log(data);
+    setDesignNumber(parseInt(data.message));
+
     // setDatabaseEntry([
     //   {
     //     participant_id,
@@ -109,6 +118,7 @@ export default function Home({ ip_address }) {
     // ]);
     let databaseEntry = {
       participant_id: participant_id,
+      design_element: designNumber,
       ip_address: ip_address,
       questionNo: question,
       enteredAnswer: enteredAnswer,
@@ -154,6 +164,7 @@ export default function Home({ ip_address }) {
       // ]);
       let databaseEntry = {
         participant_id: participant_id,
+        design_element: designNumber,
         ip_address: ip_address,
         questionNo: question,
         enteredAnswer: enteredAnswer,
@@ -165,6 +176,11 @@ export default function Home({ ip_address }) {
       let response = await fetch('/api/add-database', {
         method: 'POST',
         body: JSON.stringify(databaseEntry),
+      });
+
+      let response_design = await fetch('/api/add-database', {
+        method: 'PUT',
+        body: ++designNumber % 4,
       });
       setShowScore(true);
 
