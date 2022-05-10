@@ -28,15 +28,16 @@ export default async function handler(req, res) {
 }
 
 async function addEntry(req, res) {
+  const data = JSON.parse(req.body);
   try {
     let { db } = await connectToDatabase();
     //  console.log(req.body);
     //  console.log(JSON.parse(req.body));
-    let data = JSON.parse(req.body);
-    data.map((curElem) => {
-      console.log(curElem);
-      db.collection('exam_interface').insertOne(curElem);
-    });
+
+    // data.map((curElem) => {
+    console.log(data);
+    db.collection('exam_interface').insertOne(data);
+    // });
 
     //  db.collection('exam_interface').insertOne(JSON.parse(req.body));
 

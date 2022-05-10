@@ -14,8 +14,8 @@ export default function Home({ ip_address }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
   const [showScore, setShowScore] = useState(false);
-  const [databaseEntry, setDatabaseEntry] = useState([]);
-  const [stateVar, setStateVar] = useState(0);
+  // const [databaseEntry, setDatabaseEntry] = useState([]);
+  // const [stateVar, setStateVar] = useState(0);
   const [stateColor, setStateColor] = useState(0);
   const [answered, setAnswered] = useState(0);
   const [time_2, setTime_2] = useState(time);
@@ -39,15 +39,15 @@ export default function Home({ ip_address }) {
   });
 
   // user input added to the database
-  useEffect(async () => {
-    if (stateVar == 1) {
-      let response = await fetch('/api/add-database', {
-        method: 'POST',
-        body: JSON.stringify(databaseEntry),
-      });
-      setStateVar(stateVar - 1);
-    }
-  }, [databaseEntry]);
+  // useEffect(async () => {
+  //   if (stateVar == 1) {
+  //     let response = await fetch('/api/add-database', {
+  //       method: 'POST',
+  //       body: JSON.stringify(databaseEntry),
+  //     });
+  //     setStateVar(stateVar - 1);
+  //   }
+  // }, [databaseEntry]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -58,7 +58,7 @@ export default function Home({ ip_address }) {
   }, [timeLeftCheck]);
 
   // next button
-  const handleNext = () => {
+  const handleNext = async () => {
     isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
     const nextQues = currentQuestion + 1;
     let date = new Date().toISOString();
@@ -96,24 +96,39 @@ export default function Home({ ip_address }) {
           { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
         ]);
     }
-    setDatabaseEntry([
-      {
-        participant_id,
-        ip_address,
-        question,
-        enteredAnswer,
-        timeTaken,
-        date,
-        deviceType,
-        browserName,
-      },
-    ]);
-    setStateVar(stateVar + 1);
+    // setDatabaseEntry([
+    //   {
+    //     participant_id,
+    //     ip_address,
+    //     question,
+    //     enteredAnswer,
+    //     timeTaken,
+    //     date,
+    //     deviceType,
+    //     browserName,
+    //   },
+    // ]);
+    let databaseEntry = {
+      participant_id: participant_id,
+      ip_address: ip_address,
+      questionNo: question,
+      enteredAnswer: enteredAnswer,
+      timeTaken: timeTaken,
+      date: date,
+      deviceType: deviceType,
+      browser: browserName,
+    };
+    console.log(databaseEntry);
+    let response = await fetch('/api/add-database', {
+      method: 'POST',
+      body: JSON.stringify(databaseEntry),
+    });
+    // setStateVar(stateVar + 1);
     setEnteredAnswer('');
   };
 
   // submit button
-  const handleSubmitButton = () => {
+  const handleSubmitButton = async () => {
     isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
     let date = new Date().toISOString();
     if (window.confirm('You are about to submit the test. Want to Proceed?')) {
@@ -121,23 +136,37 @@ export default function Home({ ip_address }) {
     } else submit = 0;
 
     if (submit == 1) {
-      setStateVar(1);
+      // setStateVar(1);
       let timeTaken = time_2 - time_3;
       setTime_2(time_3);
       let question = currentQuestion + 1;
 
-      setDatabaseEntry([
-        {
-          participant_id,
-          ip_address,
-          question,
-          enteredAnswer,
-          timeTaken,
-          date,
-          deviceType,
-          browserName,
-        },
-      ]);
+      // setDatabaseEntry([
+      //   {
+      //     participant_id,
+      //     ip_address,
+      //     question,
+      //     enteredAnswer,
+      //     timeTaken,
+      //     date,
+      //     deviceType,
+      //     browserName,
+      //   },
+      // ]);
+      let databaseEntry = {
+        participant_id: participant_id,
+        ip_address: ip_address,
+        questionNo: question,
+        enteredAnswer: enteredAnswer,
+        timeTaken: timeTaken,
+        date: date,
+        deviceType: deviceType,
+        browser: browserName,
+      };
+      let response = await fetch('/api/add-database', {
+        method: 'POST',
+        body: JSON.stringify(databaseEntry),
+      });
       setShowScore(true);
 
       enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
