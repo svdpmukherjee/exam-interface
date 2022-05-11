@@ -195,7 +195,11 @@ export default function Home({ ip_address }) {
           </h1>
           <div className="container m-auto py-10  bg-red-100">
             <div className="text-3xl text-center">
-              You have completed the test. You may close the window now.
+              You have completed the test. You may now proceed with the{' '}
+              <a href="http://ulsurvey.uni.lu/index.php/745225?lang=en">
+                <span className="bg-blue-500 text-white p-2">survey</span>{' '}
+                (click)
+              </a>
             </div>
           </div>
         </>
