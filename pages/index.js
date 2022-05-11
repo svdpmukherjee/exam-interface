@@ -72,7 +72,7 @@ export default function Home() {
           <ul>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>1. There are{' '}
-              <strong>10 quantitative aptitude questions</strong> you will have
+              <strong>8 quantitative aptitude questions</strong> you will have
               to answer
             </li>
             <li>
@@ -82,7 +82,7 @@ export default function Home() {
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>3. You have total{' '}
-              <strong>30 mins</strong> of time to answer them
+              <strong>15 mins</strong> of time to answer them
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>4. You{' '}
@@ -90,8 +90,8 @@ export default function Home() {
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>5. If you can answer{' '}
-              <strong>7 questions correctly</strong>, you will receive a{' '}
-              <strong>bonus</strong> along with your compensation
+              <strong>6 questions correctly</strong>, you will receive a{' '}
+              <strong>bonus (£1) </strong> along with your compensation
             </li>
           </ul>
           <br />
