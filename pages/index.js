@@ -151,6 +151,7 @@ export default function Home() {
             </li>
           </ul> */}
           <br />
+          <br />
           {/* <input
             type="text"
             value={oath}
@@ -165,7 +166,7 @@ export default function Home() {
             name="check"
             onChange={(event) => setChecked(!checked)}
           />
-          <label for="check">
+          <label for="check" className="text-blue-700">
             {' '}
             I affirm that I will NOT take any unauthorized help during this
             test, and that all work will be my own

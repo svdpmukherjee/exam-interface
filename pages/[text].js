@@ -6,7 +6,7 @@ import Timer from '../components/Timer';
 import Header from '../components/Header';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 30 * 60; // setting time limit as 30 mins
+const time = 15 * 60; // setting time limit as 30 mins
 
 export default function Home({ ip_address }) {
   const participant_id = useRouter().query.id;
@@ -207,24 +207,24 @@ export default function Home({ ip_address }) {
         <div className="container py-8 mx-auto h-full">
           <div className="grid grid-cols-7 gap-3">
             <div className="bg-blue-200 rounded-lg shadow-md">
-              <div className=" flex items-center justify-center">
-                <div className="grid grid-cols-2 gap-6 py-24">
+              <div className=" flex items-center justify-center pt-16 pb-10">
+                <div className="grid grid-cols-2 gap-6 ">
                   {runCallback(() => {
                     const row = [];
                     colorAnswer.map((colorAnswer) =>
                       row.push(
                         <div
-                          className={`${colorAnswer.circleColor} text-blue-700 text-center p-2 rounded-full`}
+                          className={`${colorAnswer.circleColor} text-blue-700 text-center p-3 rounded-full`}
                           key={colorAnswer.currentQuestion}
                         >
                           {colorAnswer.currentQuestion}
                         </div>
                       )
                     );
-                    for (var i = currentQuestion + 1; i <= 10; i++) {
+                    for (var i = currentQuestion + 1; i <= 8; i++) {
                       row.push(
                         <div
-                          className="bg-blue-100 text-blue-700  text-center p-2 rounded-full"
+                          className="bg-blue-100 text-blue-700  text-center p-3 rounded-full"
                           key={i}
                         >
                           {i}
@@ -234,6 +234,13 @@ export default function Home({ ip_address }) {
                     return row;
                   })}
                 </div>
+              </div>
+              <div>
+                <img
+                  src="images/legends.png"
+                  alt="legends"
+                  className="h-3/5 w-3/5 mx-auto shadow-lg rounded-md"
+                />
               </div>
             </div>
 
@@ -324,7 +331,7 @@ export default function Home({ ip_address }) {
                 <div>
                   {(() => {
                     if (designElem == 0) {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
@@ -354,7 +361,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 1) {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
@@ -384,7 +391,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 2) {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
@@ -418,7 +425,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
