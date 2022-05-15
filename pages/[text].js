@@ -363,7 +363,7 @@ export default function Home({ ip_address }) {
                         );
                       } else {
                         return (
-                          <div className="flex  p-5 text-sm justify-center text-justify">
+                          <div className="flex p-5 text-sm justify-center text-justify">
                             <br />
                             <br />
                             <ol>
@@ -393,7 +393,7 @@ export default function Home({ ip_address }) {
                         );
                       } else {
                         return (
-                          <div className="flex  p-5 text-sm justify-center text-justify">
+                          <div className="flex p-5 text-sm justify-center text-justify">
                             <br />
                             <br />
                             <ol>
@@ -459,7 +459,7 @@ export default function Home({ ip_address }) {
                         );
                       } else {
                         return (
-                          <div className="flex  p-5 text-sm justify-center text-justify">
+                          <div className="flex p-5 text-sm justify-center text-justify">
                             <br />
                             <br />
                             <ol>
