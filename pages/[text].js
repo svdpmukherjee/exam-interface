@@ -381,7 +381,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 1) {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img
@@ -411,7 +411,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 2) {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img
@@ -445,7 +445,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img
