@@ -6,7 +6,7 @@ import Timer from '../components/Timer';
 import Header from '../components/Header';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 15 * 60; // setting time limit as 30 mins
+const time = 16 * 60; // setting time limit as 30 mins
 
 export default function Home({ ip_address }) {
   const participant_id = useRouter().query.id;
@@ -27,6 +27,7 @@ export default function Home({ ip_address }) {
   let isAnswered = '';
   let nextSubmitColor = '';
   let nextSubmitText = '';
+  let timeColor = '';
   let deviceType = '';
   let designNumber = 0;
 
@@ -48,6 +49,9 @@ export default function Home({ ip_address }) {
 
   // next button
   const handleNext = async () => {
+    if ((currentQuestion == 0) & (enteredAnswer != '13')) {
+      router.push('/disqualified');
+    }
     isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
     const nextQues = currentQuestion + 1;
     let date = new Date().toISOString();
@@ -85,26 +89,27 @@ export default function Home({ ip_address }) {
           { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
         ]);
     }
-
-    let response_design = await fetch('/api/add-database', {
-      method: 'GET',
-    });
-    let data = await response_design.json();
-    // console.log(data);
-    if (stateVar == 0) {
-      console.log('only once');
-      designNumber = parseInt(data.message);
-      setStateVar(1);
+    if (currentQuestion > 0) {
       let response_design = await fetch('/api/add-database', {
-        method: 'PUT',
-        body: ++designNumber % 4,
+        method: 'GET',
       });
-      --designNumber;
-    } else {
-      if (data.message == 0) designNumber = 3;
-      else designNumber = parseInt(data.message) - 1;
+      let data = await response_design.json();
+      // console.log(data);
+      if (stateVar == 0) {
+        console.log('only once');
+        designNumber = parseInt(data.message);
+        setStateVar(1);
+        let response_design = await fetch('/api/add-database', {
+          method: 'PUT',
+          body: ++designNumber % 4,
+        });
+        --designNumber;
+      } else {
+        if (data.message == 0) designNumber = 3;
+        else designNumber = parseInt(data.message) - 1;
+      }
+      setDesignElem(designNumber);
     }
-    setDesignElem(designNumber);
 
     let databaseEntry = {
       participant_id: participant_id,
@@ -117,12 +122,12 @@ export default function Home({ ip_address }) {
       deviceType: deviceType,
       browser: browserName,
     };
+    setEnteredAnswer('');
     console.log(databaseEntry);
     let response = await fetch('/api/add-database', {
       method: 'POST',
       body: JSON.stringify(databaseEntry),
     });
-    setEnteredAnswer('');
   };
 
   // submit button
@@ -167,7 +172,12 @@ export default function Home({ ip_address }) {
       setEnteredAnswer('');
     }
   };
-
+  // const checkEnteredAnswer = (answer) => {
+  //   if (currentQuestion == 0) {
+  //     if (answer == '12, NE') setEnteredAnswer(answer);
+  //     else router.push('/quit');
+  //   }
+  // };
   const runCallback = (cb) => {
     return cb();
   };
@@ -182,23 +192,22 @@ export default function Home({ ip_address }) {
       <Header showScore={showScore} />
       {showScore ? (
         <>
-          <h1 className="text-3xl font-medium text-center py-20">
-            <ul>
-              <li>You Answered {answered} out of 15 questions</li>
-              <li>Nice Attempt!</li>
-              <li></li>
-              <li className="py-20">
-                Your final score is: {((answered / 15) * 100).toFixed(3)}%
-              </li>
-            </ul>
-            <br />
+          <h1 className="text-2xl font-medium font-serif text-center pt-20 underline">
+            Summary of your test:
           </h1>
+          <div className="text-center text-lg">
+            <li>You Answered {answered} out of 6 questions</li>
+            <li>Your final score is: {((answered / 6) * 100).toFixed(2)}%</li>
+          </div>
+          <br />
           <div className="container m-auto py-10  bg-red-100">
-            <div className="text-3xl text-center">
-              You have completed the test. You may now proceed with the{' '}
+            <div className="text-3xl text-center font-serif">
+              To complete the rest of study, please{' '}
               <a href="http://ulsurvey.uni.lu/index.php/745225?lang=en">
-                <span className="bg-blue-500 text-white p-2">survey</span>{' '}
-                (click)
+                <span className="bg-blue-500 text-white p-2">
+                  click on the survey
+                </span>{' '}
+                to proceed
               </a>
             </div>
           </div>
@@ -207,7 +216,11 @@ export default function Home({ ip_address }) {
         <div className="container py-8 mx-auto h-full">
           <div className="grid grid-cols-7 gap-3">
             <div className="bg-blue-200 rounded-lg shadow-md">
-              <div className=" flex items-center justify-center pt-16 pb-10">
+              <div className="flex justify-center py-5 text-xl font-serif rounded-t-md bg-blue-300">
+                {' '}
+                Question Status
+              </div>
+              <div className=" flex items-center justify-center pt-5 pb-5">
                 <div className="grid grid-cols-2 gap-6 ">
                   {runCallback(() => {
                     const row = [];
@@ -221,7 +234,7 @@ export default function Home({ ip_address }) {
                         </div>
                       )
                     );
-                    for (var i = currentQuestion + 1; i <= 8; i++) {
+                    for (var i = currentQuestion + 1; i <= 9; i++) {
                       row.push(
                         <div
                           className="bg-blue-100 text-blue-700  text-center p-3 rounded-full"
@@ -239,7 +252,7 @@ export default function Home({ ip_address }) {
                 <img
                   src="images/legends.png"
                   alt="legends"
-                  className="h-3/5 w-3/5 mx-auto shadow-lg rounded-md"
+                  className="h-3/5 w-3/5 mx-auto pb-5"
                 />
               </div>
             </div>
@@ -247,7 +260,7 @@ export default function Home({ ip_address }) {
             <div className=" shadow-md col-span-4 p-3">
               <div className="grid grid-rows-3">
                 <div className="row-span-2">
-                  <h4 className="mt-5 text-xl">
+                  <h4 className="mt-5 text-lg">
                     Question {currentQuestion + 1} of {questions.length}
                   </h4>
                   <br />
@@ -260,8 +273,8 @@ export default function Home({ ip_address }) {
                     type="text"
                     value={enteredAnswer}
                     onChange={(event) => setEnteredAnswer(event.target.value)}
-                    className=" w-25 h-10 border-2 border-gray shadow-md"
-                    placeholder="Type your answer"
+                    className="w-72 h-12 border-2 border-blue-500 shadow-md"
+                    placeholder="Type only numeric part of answer"
                   />
 
                   <div className="flex justify-between mt-5">
@@ -321,9 +334,16 @@ export default function Home({ ip_address }) {
               </div>
             </div>
             <div className="grid grid-rows-5 col-span-2 justify-items-center shadow-md">
-              <div className="w-full bg-red-400 p-5 rounded-2xl">
-                <div className="text-center text-white">
-                  <strong> Time left </strong>
+              <div className="w-full bg-red-100 p-5 rounded-sm text-center">
+                <strong> Time left </strong>
+                {(() => {
+                  if (timeLeftCheck <= 180) {
+                    timeColor = 'text-red-500';
+                  } else {
+                    timeColor = 'text-black';
+                  }
+                })()}
+                <div className={`text-lg ${timeColor}`}>
                   <Timer time={time} />
                 </div>
               </div>
@@ -331,7 +351,7 @@ export default function Home({ ip_address }) {
                 <div>
                   {(() => {
                     if (designElem == 0) {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img
@@ -361,7 +381,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 1) {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img
@@ -391,7 +411,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 2) {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img
@@ -425,7 +445,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else {
-                      if (currentQuestion > 3) {
+                      if (currentQuestion > 4) {
                         return (
                           <div>
                             <img

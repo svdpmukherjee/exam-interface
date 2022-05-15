@@ -1,26 +1,29 @@
 [
   {
-    "question": "Guess the next number in the series: 21, 26, 34, 45, __?"
-  },
-  {
-    "question": "Two cars begin 450 miles apart and begin driving directly toward each other. One car proceeds at a rate of 60 miles per hour, while the other proceeds at a rate of 45 miles per hour. Rounding down, many minutes will it take for the two drivers to be 150 miles apart?"
-  },
-  {
-    "question": "A lady decided to treat her neighbours in the manner that she gives one-third of his total stock of candies and one extra to the first neighbour, and then the one-third of the remaining stock along with one extra to the second and continues giving away in this fashion. Her total stock exhausted after she gave away to 6 neighbours. How many candies were there in her stock initially?"
+    "question": "Asgard city is 12 Km. towards the East of Vormir city. A bus starts from Vormir travels 8 Km. towards West and takes a right turn. After taking the right turn, it travels 5 Km. and reaches Titan city. From Titan the bus takes a right turn again, travels 20 Km. and stops. What is the distance of the bus from Vormir?"
   },
   {
     "question": "Vincent and Rosetta finally started their long planned farming business. Vincent invested $4332 for 18 months and Rosetta invested $3000 for 13 months. If both of them earned a profit of $2500 after 18 months then what is the profit share of Vincent?"
   },
   {
-    "question": "Asgard city is 13 Km. towards the East of Vormir city. A bus starts from Vormir travels 8 Km. towards West and takes a right turn. After taking the right turn, it travels 4.5 Km. and reaches Titan city. From Titan the bus takes a right turn again, travels 21 Km. and stops. How far and towards which direction must the travel to reach Asgard?"
+    "question": "What should be the next number (in place of ?) in the series: 37, 64, -61, 282, -447, ?"
+  },
+  {
+    "question": "Stevan is thrice as old as David. He will be thrice as old as Martin in 10 years. If Martin is 11 years and 6 months old, what will be the sum of their ages after 20 years?"
+  },
+  {
+    "question": "Mrs. Romi Lancer decided to treat her neighbours in the manner that she gives one-third of his total stock of candies and one extra to the first neighbour, and then the one-third of the remaining stock along with one extra to the second and continues giving away in this fashion. Her total stock exhausted after she gave away to 4 neighbours. How many candies were there in her stock initially?"
+  },
+  {
+    "question": "Students in a college have to choose at least two subjects from chemistry, mathematics and physics. The number of students choosing all three subjects is 18, choosing physics as one of their subjects is 23 and choosing mathematics as one of their subjects is 25. The smallest possible number of students who could choose chemistry as one of their subjects is?"
+  },
+  {
+    "question": "Alina and Luce can do a piece of work in 36 days and 81 days respectively. Both together work for 5 days and then Alina leaves off. How many days will Luce take to finish the remaining work?"
   },
   {
     "question": "The number of solutions (a, b, c) to the equation a - b - c = 37, where a, b, and c are positive integers such that a≤43, b≤10, and c≤10 is?"
   },
   {
-    "question": "Stevan is twice as old as David. He will be twice as old as Martin in 10 years. If Martin is 2 years old, how old is David?"
-  },
-  {
-    "question": "What should be the next number (in place of ?) in the series: 37, 64, -61, 282, -447, ?"
+    "question": "The number of solutions (a, b, c) to the equation a - b - c = 37, where a, b, and c are positive integers such that a≤43, b≤10, and c≤10 is?"
   }
 ]

@@ -2,18 +2,18 @@ function Header(props) {
   return (
     <>
       {props.showScore ? (
-        <div className="p-10 text-3xl text-center text-sky-700 shadow-md rounded-lg">
-          Thank you for taking the test! You have done a good job...
+        <div className="p-10 text-3xl text-center font-serif text-sky-700 shadow-md rounded-lg">
+          Thank you for taking the test!
         </div>
       ) : (
         <div className="grid grid-cols-12 text-2xl text-white shadow-md  bg-violet-700 font-serif">
           <div className="col-span-6 text-right my-auto">
             <p>Current Test Statistics</p>
           </div>
-          <div className="col-span-1 flex justify-end p-2 ">
+          <div className="col-span-1 flex justify-end p-2">
             <svg
               role="status"
-              class="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              className="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -28,12 +28,9 @@ function Header(props) {
               />
             </svg>
           </div>
-          <div className="col-span-5 flex p-2 ">
+          <div className="col-span-5 flex ">
             {/* <span className="text-black underline">bonus</span> is waiting for */}
-            <img
-              src="images/test_stats.png"
-              className="w-5/6 shadow-lg rounded-lg animate-pulse"
-            />
+            <img src="images/test_stats.png" className="w-2/3 rounded-sm" />
           </div>
         </div>
       )}

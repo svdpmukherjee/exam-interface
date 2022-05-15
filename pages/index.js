@@ -27,11 +27,11 @@ export default function Home() {
       </Head>
 
       <div className="grid grid-cols-7">
-        <div className="font-serif col-span-5 p-5 text-4xl text-center text-white bg-blue-500 ">
+        <div className="font-serif col-span-4 p-5 text-4xl text-center text-white bg-blue-500 ">
           Welcome to the Online Test
         </div>
-        <div className="col-span-2 p-5 text-center text-white bg-blue-500 ">
-          Participant ID: <span> </span>
+        <div className="col-span-3 p-5 text-center text-white bg-blue-500 ">
+          Enter Your Profilic ID: <span> </span>
           {(() => {
             if (id == '') {
               return (
@@ -40,7 +40,7 @@ export default function Home() {
                     type="text"
                     onChange={(event) => setID(event.target.value)}
                     className="p-2 text-black shadow-md rounded-lg border-red-500 border-2"
-                    placeholder="Enter your Prolific ID"
+                    placeholder="Prolific ID"
                   />
                 </>
               );
@@ -67,13 +67,17 @@ export default function Home() {
             the test -
           </p>
           <br />
-          <br />
+
           <strong className="text-violet-800"> About the exam:</strong>
           <ul>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>1. There are{' '}
-              <strong>8 quantitative aptitude questions</strong> you will have
-              to answer
+              <strong>9 quantitative aptitude questions</strong> you will have
+              to answer.{' '}
+              <span className="bg-indigo-600 text-white">
+                First question is of <strong>"qualifying nature" </strong>. You
+                cannot proceed if you answer incorrectly
+              </span>
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>2. The questions are of{' '}
@@ -82,7 +86,7 @@ export default function Home() {
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>3. You have total{' '}
-              <strong>15 mins</strong> of time to answer them
+              <strong>16 mins</strong> of time to answer them
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>4. You{' '}
@@ -90,12 +94,13 @@ export default function Home() {
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>5. If you can answer{' '}
-              <strong>6 questions correctly</strong>, you will receive a{' '}
-              <strong>bonus (£1) </strong> along with your compensation
+              <strong>6 questions correctly (including 1st question) </strong>,
+              you will receive a <strong>bonus (£1) </strong> along with your
+              compensation
             </li>
           </ul>
           <br />
-          <br />
+
           <strong className="text-violet-800"> Additional Instructions:</strong>
           <ul>
             <li>
@@ -108,18 +113,20 @@ export default function Home() {
               <strong>
                 visit other websites or take help from other people
               </strong>{' '}
-              during the test
+              during the test.{' '}
+              <span className="underline">
+                However, you can use calculator if required
+              </span>
             </li>
             <li>
-              <span> &nbsp; &nbsp; &nbsp; </span>3. If we discover you doing any
-              of the above activities, we may <strong> cancel your exam</strong>{' '}
-              immediately, or <strong>cancel your compensation</strong> for
-              participating
+              <span> &nbsp; &nbsp; &nbsp; </span>3. If we discover you doing the
+              above mentioned unauthorized activities, we may <strong> </strong>{' '}
+              <strong>deduct a fine (50 pence) </strong> from your compensation
             </li>
             <li>
               <span> &nbsp; &nbsp; &nbsp; </span>4. You are asked to read out
               the <strong>Honor Code Pledge </strong> below and{' '}
-              <strong> click the box </strong> to start with the test
+              <strong> click the box </strong> to start with the question
             </li>
           </ul>
           {/* <ul>
