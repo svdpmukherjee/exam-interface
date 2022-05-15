@@ -196,7 +196,7 @@ export default function Home({ ip_address }) {
             Summary of your test:
           </h1>
           <div className="text-center text-lg">
-            <li>You Answered {answered} out of 6 questions</li>
+            <li>You Answered {answered} out of 9 questions</li>
             <li>Your final score is: {((answered / 6) * 100).toFixed(2)}%</li>
           </div>
           <br />
@@ -381,7 +381,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 1) {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
@@ -411,7 +411,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else if (designElem == 2) {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
@@ -445,7 +445,7 @@ export default function Home({ ip_address }) {
                         );
                       }
                     } else {
-                      if (currentQuestion > 4) {
+                      if (currentQuestion > 3) {
                         return (
                           <div>
                             <img
