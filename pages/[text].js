@@ -101,11 +101,11 @@ export default function Home({ ip_address }) {
         setStateVar(1);
         let response_design = await fetch('/api/add-database', {
           method: 'PUT',
-          body: ++designNumber % 4,
+          body: ++designNumber % 5,
         });
         --designNumber;
       } else {
-        if (data.message == 0) designNumber = 3;
+        if (data.message == 0) designNumber = 4;
         else designNumber = parseInt(data.message) - 1;
       }
       setDesignElem(designNumber);
@@ -334,7 +334,7 @@ export default function Home({ ip_address }) {
               </div>
             </div>
             <div className="grid grid-rows-5 col-span-2 justify-items-center shadow-md">
-              <div className="w-full bg-red-100 p-5 rounded-sm text-center">
+              <div className="w-full bg-gray-200 p-5 rounded-sm text-center">
                 <strong> Time left </strong>
                 {(() => {
                   if (timeLeftCheck <= 180) {
@@ -351,6 +351,23 @@ export default function Home({ ip_address }) {
                 <div>
                   {(() => {
                     if (designElem == 0) {
+                      return (
+                        <div className="flex p-5 text-sm justify-center text-justify">
+                          <br />
+                          <br />
+                          <ol>
+                            <li className="">
+                              {'•'} You have enough time to solve each question
+                            </li>
+                            <br />
+                            <li className="">
+                              {'•'} Leaving a question unanswered decreases the
+                              chance of receiving bonus
+                            </li>
+                          </ol>
+                        </div>
+                      );
+                    } else if (designElem == 1) {
                       if (currentQuestion > 3) {
                         return (
                           <div>
@@ -380,7 +397,7 @@ export default function Home({ ip_address }) {
                           </div>
                         );
                       }
-                    } else if (designElem == 1) {
+                    } else if (designElem == 2) {
                       if (currentQuestion > 3) {
                         return (
                           <div>
@@ -410,7 +427,7 @@ export default function Home({ ip_address }) {
                           </div>
                         );
                       }
-                    } else if (designElem == 2) {
+                    } else if (designElem == 3) {
                       if (currentQuestion > 3) {
                         return (
                           <div>
