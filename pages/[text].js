@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Timer from '../components/Timer';
-import Link from 'next/link';
 import { browserName, isMobile } from 'react-device-detect';
 
 const time = 16 * 60; // setting time limit as 30 mins
@@ -97,27 +96,27 @@ export default function Home({ ip_address }) {
             { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
           ]);
       }
-      if (currentQuestion > 0) {
+      // if (currentQuestion > 0) {
+      let response_design = await fetch('/api/add-database', {
+        method: 'GET',
+      });
+      let data = await response_design.json();
+      // console.log(data);
+      if (stateVar == 0) {
+        console.log('only once');
+        designNumber = parseInt(data.message);
+        setStateVar(1);
         let response_design = await fetch('/api/add-database', {
-          method: 'GET',
+          method: 'PUT',
+          body: ++designNumber % 4,
         });
-        let data = await response_design.json();
-        // console.log(data);
-        if (stateVar == 0) {
-          console.log('only once');
-          designNumber = parseInt(data.message);
-          setStateVar(1);
-          let response_design = await fetch('/api/add-database', {
-            method: 'PUT',
-            body: ++designNumber % 4,
-          });
-          --designNumber;
-        } else {
-          if (data.message == 0) designNumber = 3;
-          else designNumber = parseInt(data.message) - 1;
-        }
-        setDesignElem(designNumber);
+        --designNumber;
+      } else {
+        if (data.message == 0) designNumber = 3;
+        else designNumber = parseInt(data.message) - 1;
       }
+      setDesignElem(designNumber);
+      // }
 
       let databaseEntry = {
         participant_id: participant_id,
@@ -323,7 +322,7 @@ export default function Home({ ip_address }) {
                               );
                             } else {
                               return (
-                                <div className="my-auto text-gray-500">
+                                <div className="my-auto mx-auto text-gray-500">
                                   {' '}
                                   <span> Good going!</span> However, leaving a
                                   question unanswered decreases the chance of
@@ -369,7 +368,7 @@ export default function Home({ ip_address }) {
                             // } else
                             if ((designElem == 0) & (currentQuestion > 3)) {
                               return (
-                                <div className="flex p-5  justify-center m-auto mt-6">
+                                <div className="flex p-5 w-5/6 justify-center m-auto mt-6">
                                   <img src="images/honor.png"></img>
                                 </div>
                               );
