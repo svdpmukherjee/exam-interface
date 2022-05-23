@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Timer from '../components/Timer';
-import Header from '../components/Header';
+import Link from 'next/link';
 import { browserName, isMobile } from 'react-device-detect';
 
 const time = 16 * 60; // setting time limit as 30 mins
@@ -101,7 +101,7 @@ export default function Home({ ip_address }) {
         setStateVar(1);
         let response_design = await fetch('/api/add-database', {
           method: 'PUT',
-          body: ++designNumber % 5,
+          body: ++designNumber % 4,
         });
         --designNumber;
       } else {
@@ -185,323 +185,253 @@ export default function Home({ ip_address }) {
   // JSX
   return (
     <div>
-      <Head>
-        <title>Online test</title>
-      </Head>
+      <div className="grid grid-rows-8 h-screen">
+        <Head>
+          <title>Online test</title>
+        </Head>
 
-      <Header showScore={showScore} />
-      {showScore ? (
-        <>
-          <h1 className="text-2xl font-medium font-serif text-center pt-20 underline">
-            Summary of your test:
-          </h1>
-          <div className="text-center text-lg">
-            <li>You Answered {answered} out of 9 questions</li>
-            <li>Your final score is: {((answered / 6) * 100).toFixed(2)}%</li>
+        {/* <Header showScore={showScore} /> */}
+        {showScore ? (
+          <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-gray-100">
+            Thank you for taking the test!
           </div>
-          <br />
-          <div className="container m-auto py-10  bg-red-100">
-            <div className="text-3xl text-center font-serif">
-              To complete the rest of study, please{' '}
-              <a href="http://ulsurvey.uni.lu/index.php/745225?lang=en">
-                <span className="bg-blue-500 text-white p-2">
-                  click on the survey
-                </span>{' '}
-                to proceed
-              </a>
+        ) : (
+          // first row
+          <div className="grid grid-cols-8 px-10 py-5 row-span-1 bg-gray-100 ">
+            <div className="col-span-5 font-serif text-2xl ">
+              <p>Test Your Aptitude Skill</p>
             </div>
-          </div>
-        </>
-      ) : (
-        <div className="container py-8 mx-auto h-full">
-          <div className="grid grid-cols-7 gap-3">
-            <div className="bg-blue-200 rounded-lg shadow-md">
-              <div className="flex justify-center py-5 text-xl font-serif rounded-t-md bg-blue-300">
+            <div className="col-span-3 flex font-semibold justify-end text-lg my-auto">
+              {(() => {
+                if (timeLeftCheck <= 180) {
+                  timeColor = 'text-red-500';
+                } else {
+                  timeColor = 'text-sky-700';
+                }
+              })()}
+              <svg
+                class="h-8 w-8 text-blue-500 "
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 {' '}
-                Question Status
-              </div>
-              <div className=" flex items-center justify-center pt-5 pb-5">
-                <div className="grid grid-cols-2 gap-6 ">
-                  {runCallback(() => {
-                    const row = [];
-                    colorAnswer.map((colorAnswer) =>
-                      row.push(
-                        <div
-                          className={`${colorAnswer.circleColor} text-blue-700 text-center p-3 rounded-full`}
-                          key={colorAnswer.currentQuestion}
-                        >
-                          {colorAnswer.currentQuestion}
-                        </div>
-                      )
-                    );
-                    for (var i = currentQuestion + 1; i <= 9; i++) {
-                      row.push(
-                        <div
-                          className="bg-blue-100 text-blue-700  text-center p-3 rounded-full"
-                          key={i}
-                        >
-                          {i}
-                        </div>
-                      );
-                    }
-                    return row;
-                  })}
-                </div>
-              </div>
-              <div>
-                <img
-                  src="images/legends.png"
-                  alt="legends"
-                  className="h-3/5 w-3/5 mx-auto pb-5"
-                />
+                <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                <circle cx="12" cy="12" r="9" />{' '}
+                <polyline points="12 7 12 12 15 15" />
+              </svg>
+              <div className={`${timeColor}  flex my-auto`}>
+                &nbsp;Time left: &nbsp;
+                <Timer time={time} />
               </div>
             </div>
+          </div>
+        )}
 
-            <div className=" shadow-md col-span-4 p-3">
-              <div className="grid grid-rows-3">
-                <div className="row-span-2">
-                  <h4 className="mt-5 text-lg">
-                    Question {currentQuestion + 1} of {questions.length}
-                  </h4>
-                  <br />
-                  <p className="mt-4 py-3 text-lg">
-                    {questions[currentQuestion].question}
-                  </p>
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    value={enteredAnswer}
-                    onChange={(event) => setEnteredAnswer(event.target.value)}
-                    className="w-72 h-12 border-2 border-blue-500 shadow-md"
-                    placeholder="Type only numeric part of answer"
-                  />
-
-                  <div className="flex justify-between mt-5">
-                    {(() => {
-                      if (currentQuestion + 1 === questions.length) {
-                        nextSubmitColor = 'bg-green-500 hover:bg-green-700';
-                        nextSubmitText = 'text-white';
-                      } else {
-                        nextSubmitColor = 'bg-indigo-500 hover:bg-indigo-700';
-                        nextSubmitText = 'text-white';
-                      }
-                    })()}
-                    <button
-                      onClick={
-                        currentQuestion + 1 === questions.length
-                          ? handleSubmitButton
-                          : handleNext
-                      }
-                      className={`w-20 my-6 p-3 ${nextSubmitColor} ${nextSubmitText} rounded-lg shadow-xl`}
+        {showScore ? (
+          <>
+            <h1 className="text-2xl font-medium font-serif text-center pt-20 underline">
+              Summary of your test:
+            </h1>
+            <div className="text-center text-lg">
+              <li>You Answered {answered} out of 9 questions</li>
+              <li>Your final score is: {((answered / 6) * 100).toFixed(2)}%</li>
+            </div>
+            <br />
+            <div className="container m-auto py-10  bg-red-100">
+              <div className="text-3xl text-center font-serif">
+                To complete the rest of study, please{' '}
+                <a href="http://ulsurvey.uni.lu/index.php/745225?lang=en">
+                  <span className="bg-blue-500 text-white p-2">
+                    click on the survey
+                  </span>{' '}
+                  to proceed
+                </a>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className=" flex row-span-6">
+              {/* second row */}
+              <div className="grid grid-rows-6">
+                <div className="grid grid-cols-8 px-10 pt-2 row-span-1">
+                  <div className="col-span-5 font-serif text-2xl  flex my-auto">
+                    <svg
+                      class="h-8 w-8 text-black"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      {currentQuestion + 1 === questions.length
-                        ? 'Submit'
-                        : 'Next'}
-                    </button>
-                    <div>
-                      {(() => {
-                        if (currentQuestion + 1 < questions.length) {
-                          return (
-                            <>
-                              <button
-                                className="w-20 my-6 p-3 bg-green-500 hover:bg-green-700 text-white rounded-lg shadow-xl ml-4"
-                                onClick={handleSubmitButton}
-                              >
-                                Submit
-                              </button>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      />
+                    </svg>
+                    &nbsp;&nbsp;
+                    <h3 className="text-lg">
+                      QUESTION {currentQuestion + 1} of {questions.length}
+                    </h3>
+                  </div>
+                  <div className="col-span-3 flex font-semibold justify-end "></div>
+                </div>
 
-                              <button
-                                className="w-20 my-6 p-3 bg-gray-500 hover:bg-gray-700 text-white rounded-lg shadow-xl ml-4"
-                                onClick={() => {
-                                  if (
-                                    window.confirm(
-                                      'You are about to quit the test. Want to Proceed?'
-                                    )
-                                  )
-                                    router.push('/quit');
-                                }}
-                              >
-                                Quit
-                              </button>
-                            </>
-                          );
-                        }
-                      })()}
+                <div className=" pt-4 mx-auto h-full row-span-5  ">
+                  <div className="grid grid-cols-7 ">
+                    <div className=" col-span-5 pl-10 ">
+                      <div className="grid grid-rows-4 gap-5">
+                        <div className="row-span-1  bg-gray-100 p-2">
+                          <svg
+                            class="h-8 w-8 text-blue-500 my-2 mx-4"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            {' '}
+                            <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" />{' '}
+                            <line x1="12" y1="8" x2="12" y2="12" />{' '}
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                          </svg>
+                        </div>
+                        <div className="row-span-2 ">
+                          <p className="mt-4 text-lg">
+                            {questions[currentQuestion].question}
+                          </p>
+                        </div>
+
+                        <div className="row-span-1 my-3">
+                          My Answer:&nbsp;
+                          <input
+                            type="text"
+                            value={enteredAnswer}
+                            onChange={(event) =>
+                              setEnteredAnswer(event.target.value)
+                            }
+                            className="w-48 h-12 border-blue-500 border-2 shadow-md rounded-md"
+                            placeholder="Type only the number"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid grid-rows-5 col-span-2 justify-items-center ">
+                      <div className="row-span-4 ">
+                        <div>
+                          {(() => {
+                            if (currentQuestion <= 3) {
+                              return (
+                                <div className="flex p-5 justify-center m-auto mt-6">
+                                  <img src="images/control.png"></img>
+                                </div>
+                              );
+                            } else if (designElem == 0) {
+                              return (
+                                <div className="flex p-5  justify-center m-auto mt-6">
+                                  <img src="images/honor.png"></img>
+                                </div>
+                              );
+                            } else if (designElem == 1) {
+                              return (
+                                <div className="flex justify-center  h-2/3 w-2/3 m-auto mt-6">
+                                  <img src="images/warning.png"></img>
+                                </div>
+                              );
+                            } else if (designElem == 2) {
+                              return (
+                                <div className=" mt-6">
+                                  <img
+                                    src="images/user_icon.gif"
+                                    alt="monitoring"
+                                    className="h-1/2 m-auto"
+                                  />
+                                  <br />
+                                  <p className="">
+                                    Your activities are now monitored
+                                  </p>
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div>
+                                  <img
+                                    src="images/user_icon.gif"
+                                    alt="monitoring"
+                                    className="h-1/2 m-auto"
+                                  />
+                                  <br />
+                                  <p className="text-white">
+                                    Your activities are now monitored
+                                  </p>
+                                </div>
+                              );
+                            }
+                          })()}{' '}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="grid grid-rows-5 col-span-2 justify-items-center shadow-md">
-              <div className="w-full bg-gray-200 p-5 rounded-sm text-center">
-                <strong> Time left </strong>
-                {(() => {
-                  if (timeLeftCheck <= 180) {
-                    timeColor = 'text-red-500';
-                  } else {
-                    timeColor = 'text-black';
-                  }
-                })()}
-                <div className={`text-lg ${timeColor}`}>
-                  <Timer time={time} />
+            <div className=" px-4 bg-gray-100 row-span-1">
+              <div className="grid grid-cols-8">
+                <div className="col-span-4 flex">
+                  <svg
+                    class="h-8 w-8 text-black my-auto"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    {' '}
+                    <circle cx="12" cy="12" r="10" />{' '}
+                    <line x1="15" y1="9" x2="9" y2="15" />{' '}
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                  &nbsp;
+                  <div className="underline my-auto">
+                    <Link href="/quit">Quit the test</Link>
+                  </div>
                 </div>
-              </div>
-              <div className="row-span-4 my-20">
-                <div>
-                  {(() => {
-                    if (designElem == 0) {
-                      return (
-                        <div className="flex p-5 text-sm justify-center text-justify">
-                          <br />
-                          <br />
-                          <ol>
-                            <li className="">
-                              {'•'} You have enough time to solve each question
-                            </li>
-                            <br />
-                            <li className="">
-                              {'•'} Leaving a question unanswered decreases the
-                              chance of receiving bonus
-                            </li>
-                          </ol>
-                        </div>
-                      );
-                    } else if (designElem == 1) {
-                      if (currentQuestion > 3) {
-                        return (
-                          <div>
-                            <img
-                              src="images/honor.png"
-                              alt="honor"
-                              className=""
-                            />
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div className="flex p-5 text-sm justify-center text-justify">
-                            <br />
-                            <br />
-                            <ol>
-                              <li className="">
-                                {'•'} You have enough time to solve each
-                                question
-                              </li>
-                              <br />
-                              <li className="">
-                                {'•'} Leaving a question unanswered decreases
-                                the chance of receiving bonus
-                              </li>
-                            </ol>
-                          </div>
-                        );
-                      }
-                    } else if (designElem == 2) {
-                      if (currentQuestion > 3) {
-                        return (
-                          <div>
-                            <img
-                              src="images/warning.png"
-                              alt="warning"
-                              className=""
-                            />
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div className="flex p-5 text-sm justify-center text-justify">
-                            <br />
-                            <br />
-                            <ol>
-                              <li className="">
-                                {'•'} You have enough time to solve each
-                                question
-                              </li>
-                              <br />
-                              <li className="">
-                                {'•'} Leaving a question unanswered decreases
-                                the chance of receiving bonus
-                              </li>
-                            </ol>
-                          </div>
-                        );
-                      }
-                    } else if (designElem == 3) {
-                      if (currentQuestion > 3) {
-                        return (
-                          <div>
-                            <img
-                              src="images/user_icon.gif"
-                              alt="monitoring"
-                              className="h-3/5 w-3/5 mx-auto"
-                            />
-                            <br />
-                            <p className="text-white">
-                              Your activities are now monitored
-                            </p>
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div className="flex p-5 text-sm justify-center text-justify">
-                            <br />
-                            <br />
-                            <ol>
-                              <li className="">
-                                {'•'} You have enough time to solve each
-                                question
-                              </li>
-                              <br />
-                              <li className="">
-                                {'•'} Leaving a question unanswered decreases
-                                the chance of receiving bonus
-                              </li>
-                            </ol>
-                          </div>
-                        );
-                      }
-                    } else {
-                      if (currentQuestion > 3) {
-                        return (
-                          <div>
-                            <img
-                              src="images/user_icon.gif"
-                              alt="monitoring"
-                              className="h-3/5 w-3/5 mx-auto"
-                            />
-                            <br />
-                            <p>Your activities are now monitored</p>
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div className="flex p-5 text-sm justify-center text-justify">
-                            <br />
-                            <br />
-                            <ol>
-                              <li className="">
-                                {'•'} You have enough time to solve each
-                                question
-                              </li>
-                              <br />
-                              <li className="">
-                                {'•'} Leaving a question unanswered decreases
-                                the chance of receiving bonus
-                              </li>
-                            </ol>
-                          </div>
-                        );
-                      }
+                <div className="col-span-2 justify-end flex my-auto">
+                  <img src="images/bonus.png" className="w-2/3  "></img>
+                </div>
+                <div className="col-span-2 justify-end flex">
+                  {/* <button
+                    className=" px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
+                    onClick={() => router.push('/info-page')}
+                  >
+                    Go to next question
+                  </button> */}
+                  <button
+                    onClick={
+                      currentQuestion + 1 === questions.length
+                        ? handleSubmitButton
+                        : handleNext
                     }
-                  })()}{' '}
-                  {/*dnfnd*/}
+                    className=" px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
+                  >
+                    {currentQuestion + 1 === questions.length
+                      ? 'Submit your test'
+                      : 'Go to next question'}
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

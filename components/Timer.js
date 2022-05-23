@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 const defaultRemainingTime = {
-  hours: '00',
   minutes: '16',
   seconds: '00',
 };
@@ -67,8 +66,8 @@ const Timer = ({ time }) => {
         })()}
       </div> */}
       <div className="countdown-timer">
-        <span className="two-numbers">{remainingTime.hours}</span>
-        <span>:</span>
+        {/* <span className="two-numbers">{remainingTime.hours}</span>
+        <span>:</span> */}
         <span className="two-numbers">{remainingTime.minutes}</span>
         <span>:</span>
         <span className="two-numbers">{remainingTime.seconds}</span>

@@ -6,9 +6,9 @@ function Header(props) {
           Thank you for taking the test!
         </div>
       ) : (
-        <div className="grid grid-cols-12 text-2xl text-white shadow-md  bg-violet-700 font-serif">
-          <div className="col-span-6 text-right my-auto">
-            <p>Current Test Statistics</p>
+        <div className="grid grid-cols-8 font-serif px-10 py-7 text-2xl  font-semibold row-span-1 bg-gray-100 ">
+          <div className="col-span-6 ">
+            <p>Test Your Aptitude Skill</p>
           </div>
           <div className="col-span-1 flex justify-end p-2">
             <svg
