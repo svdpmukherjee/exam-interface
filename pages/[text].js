@@ -126,7 +126,6 @@ export default function Home({ ip_address }) {
           else designNumber = parseInt(data.message) - 1;
         }
         setDesignElem(designNumber);
-        // }
 
         let databaseEntry = {
           participant_id: participant_id,
@@ -214,7 +213,7 @@ export default function Home({ ip_address }) {
 
         {/* <Header showScore={showScore} /> */}
         {showScore ? (
-          <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-gray-100">
+          <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-gray-100 m-auto">
             Thank you for taking the test!
           </div>
         ) : (
@@ -268,7 +267,7 @@ export default function Home({ ip_address }) {
             <div className="container m-auto py-10  bg-red-100">
               <div className="text-3xl text-center font-serif">
                 To complete the rest of study, please{' '}
-                <a href="https://ulsurvey.uni.lu/index.php/893662?lang=en">
+                <a href="http://ulsurvey.uni.lu/index.php/814471?lang=en">
                   <span className="bg-blue-500 text-white p-2">
                     click on the survey
                   </span>{' '}
@@ -382,7 +381,7 @@ export default function Home({ ip_address }) {
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                           if (currentQuestion >= 8) {
                             return (
-                              <div className="  my-auto">
+                              <div className="my-auto">
                                 <img
                                   src="images/monitoring.png"
                                   className="m-auto"
