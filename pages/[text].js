@@ -49,85 +49,94 @@ export default function Home({ ip_address }) {
 
   // next button
   const handleNext = async () => {
-    if ((currentQuestion == 0) & (enteredAnswer != '13')) {
-      router.push('/disqualified');
-    }
-    isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
-    const nextQues = currentQuestion + 1;
-    let date = new Date().toISOString();
-    nextQues < questions.length && setCurrentQuestion(nextQues);
-    let timeTaken = time_2 - time_3;
-    setTime_2(time_3);
-    let question = currentQuestion + 1;
-
-    enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-    enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-
-    if (stateColor == 0) {
-      if (isAnswered === 'Yes')
-        setColorAnswer([
-          { currentQuestion: currentQuestion + 1, circleColor: 'bg-green-300' },
-        ]);
-      else
-        setColorAnswer([
-          { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
-        ]);
-
-      setStateColor(stateColor + 1);
+    if (isNaN(enteredAnswer)) {
+      alert('Please type the number only');
+      setEnteredAnswer('');
     } else {
-      if (isAnswered === 'Yes')
-        setColorAnswer([
-          ...colorAnswer,
-          {
-            currentQuestion: currentQuestion + 1,
-            circleColor: 'bg-green-300',
-          },
-        ]);
-      else
-        setColorAnswer([
-          ...colorAnswer,
-          { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
-        ]);
-    }
-    if (currentQuestion > 0) {
-      let response_design = await fetch('/api/add-database', {
-        method: 'GET',
-      });
-      let data = await response_design.json();
-      // console.log(data);
-      if (stateVar == 0) {
-        console.log('only once');
-        designNumber = parseInt(data.message);
-        setStateVar(1);
-        let response_design = await fetch('/api/add-database', {
-          method: 'PUT',
-          body: ++designNumber % 4,
-        });
-        --designNumber;
-      } else {
-        if (data.message == 0) designNumber = 4;
-        else designNumber = parseInt(data.message) - 1;
+      if ((currentQuestion == 0) & (enteredAnswer != '4.5')) {
+        router.push('/disqualified');
       }
-      setDesignElem(designNumber);
-    }
 
-    let databaseEntry = {
-      participant_id: participant_id,
-      design_element: designNumber,
-      ip_address: ip_address,
-      questionNo: question,
-      enteredAnswer: enteredAnswer,
-      timeTaken: timeTaken,
-      date: date,
-      deviceType: deviceType,
-      browser: browserName,
-    };
-    setEnteredAnswer('');
-    console.log(databaseEntry);
-    let response = await fetch('/api/add-database', {
-      method: 'POST',
-      body: JSON.stringify(databaseEntry),
-    });
+      isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
+      const nextQues = currentQuestion + 1;
+      let date = new Date().toISOString();
+      nextQues < questions.length && setCurrentQuestion(nextQues);
+      let timeTaken = time_2 - time_3;
+      setTime_2(time_3);
+      let question = currentQuestion + 1;
+
+      enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
+      enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+
+      if (stateColor == 0) {
+        if (isAnswered === 'Yes')
+          setColorAnswer([
+            {
+              currentQuestion: currentQuestion + 1,
+              circleColor: 'bg-green-300',
+            },
+          ]);
+        else
+          setColorAnswer([
+            { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
+          ]);
+
+        setStateColor(stateColor + 1);
+      } else {
+        if (isAnswered === 'Yes')
+          setColorAnswer([
+            ...colorAnswer,
+            {
+              currentQuestion: currentQuestion + 1,
+              circleColor: 'bg-green-300',
+            },
+          ]);
+        else
+          setColorAnswer([
+            ...colorAnswer,
+            { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
+          ]);
+      }
+      if (currentQuestion > 0) {
+        let response_design = await fetch('/api/add-database', {
+          method: 'GET',
+        });
+        let data = await response_design.json();
+        // console.log(data);
+        if (stateVar == 0) {
+          console.log('only once');
+          designNumber = parseInt(data.message);
+          setStateVar(1);
+          let response_design = await fetch('/api/add-database', {
+            method: 'PUT',
+            body: ++designNumber % 4,
+          });
+          --designNumber;
+        } else {
+          if (data.message == 0) designNumber = 3;
+          else designNumber = parseInt(data.message) - 1;
+        }
+        setDesignElem(designNumber);
+      }
+
+      let databaseEntry = {
+        participant_id: participant_id,
+        design_element: designNumber,
+        ip_address: ip_address,
+        questionNo: question,
+        enteredAnswer: enteredAnswer,
+        timeTaken: timeTaken,
+        date: date,
+        deviceType: deviceType,
+        browser: browserName,
+      };
+      setEnteredAnswer('');
+      console.log(databaseEntry);
+      let response = await fetch('/api/add-database', {
+        method: 'POST',
+        body: JSON.stringify(databaseEntry),
+      });
+    }
   };
 
   // submit button
@@ -283,13 +292,13 @@ export default function Home({ ip_address }) {
                   <div className="col-span-3 flex font-semibold justify-end "></div>
                 </div>
 
-                <div className=" pt-4 mx-auto h-full row-span-5  ">
+                <div className=" pt-4  h-full row-span-5  ">
                   <div className="grid grid-cols-7 ">
                     <div className=" col-span-5 pl-10 ">
-                      <div className="grid grid-rows-4 gap-5">
-                        <div className="row-span-1  bg-gray-100 p-2">
+                      <div className="grid grid-rows-4 gap-5 border-r-2 border-gray-100">
+                        <div className="row-span-1  bg-gray-100 p-2 flex">
                           <svg
-                            class="h-8 w-8 text-blue-500 my-2 mx-4"
+                            class="h-8 w-8 text-blue-500  mx-4 my-auto"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -302,64 +311,87 @@ export default function Home({ ip_address }) {
                             <line x1="12" y1="8" x2="12" y2="12" />{' '}
                             <line x1="12" y1="16" x2="12.01" y2="16" />
                           </svg>
+                          {(() => {
+                            if (currentQuestion == 0) {
+                              return (
+                                <div className="my-auto text-gray-500">
+                                  {' '}
+                                  This question is a qualifying one. You can
+                                  only see next questions once you solve it
+                                  correctly
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div className="my-auto text-gray-500">
+                                  {' '}
+                                  <span> Good going!</span> However, leaving a
+                                  question unanswered decreases the chance of
+                                  receiving a bonus
+                                </div>
+                              );
+                            }
+                          })()}
                         </div>
                         <div className="row-span-2 ">
-                          <p className="mt-4 text-lg">
+                          <p className="mt-4 text-md pr-3">
                             {questions[currentQuestion].question}
                           </p>
                         </div>
 
-                        <div className="row-span-1 my-3">
+                        <div className="row-span-1 my-3 text-md">
                           My Answer:&nbsp;
                           <input
                             type="text"
                             value={enteredAnswer}
-                            onChange={(event) =>
-                              setEnteredAnswer(event.target.value)
-                            }
+                            onChange={(event) => {
+                              // if (isNaN(event.target.value)) {
+                              //   window.confirm('Please type the number only');
+                              // }
+                              setEnteredAnswer(event.target.value);
+                            }}
                             className="w-48 h-12 border-blue-500 border-2 shadow-md rounded-md"
                             placeholder="Type only the number"
                           />
                         </div>
                       </div>
                     </div>
-                    <div className="grid grid-rows-5 col-span-2 justify-items-center ">
+                    <div className="grid grid-rows-5 col-span-2 justify-items-center m-auto">
                       <div className="row-span-4 ">
                         <div>
                           {(() => {
-                            if (currentQuestion <= 3) {
-                              return (
-                                <div className="flex p-5 justify-center m-auto mt-6">
-                                  <img src="images/control.png"></img>
-                                </div>
-                              );
-                            } else if (designElem == 0) {
+                            // if (currentQuestion > 3) {
+                            //   return (
+                            //     <div className="flex p-5 justify-center m-auto mt-6">
+                            //       <img src="images/control.png"></img>
+                            //     </div>
+                            //   );
+                            // } else
+                            if ((designElem == 0) & (currentQuestion > 3)) {
                               return (
                                 <div className="flex p-5  justify-center m-auto mt-6">
                                   <img src="images/honor.png"></img>
                                 </div>
                               );
-                            } else if (designElem == 1) {
+                            } else if (
+                              (designElem == 1) &
+                              (currentQuestion > 3)
+                            ) {
                               return (
                                 <div className="flex justify-center  h-2/3 w-2/3 m-auto mt-6">
                                   <img src="images/warning.png"></img>
                                 </div>
                               );
-                            } else if (designElem == 2) {
+                            } else if (
+                              (designElem == 2) &
+                              (currentQuestion > 3)
+                            ) {
                               return (
-                                <div className=" mt-6">
-                                  <img
-                                    src="images/user_icon.gif"
-                                    alt="monitoring"
-                                    className="h-1/2 m-auto"
-                                  />
-                                  <br />
-                                  <p className="">
-                                    Your activities are now monitored
-                                  </p>
+                                <div className="flex justify-center  h-2/3 w-2/3 m-auto mt-6">
+                                  <img src="images/monitoring.png"></img>
                                 </div>
                               );
-                            } else {
+                            } else if (currentQuestion > 3) {
                               return (
                                 <div>
                                   <img
@@ -368,7 +400,7 @@ export default function Home({ ip_address }) {
                                     className="h-1/2 m-auto"
                                   />
                                   <br />
-                                  <p className="text-white">
+                                  <p className="">
                                     Your activities are now monitored
                                   </p>
                                 </div>
@@ -384,7 +416,7 @@ export default function Home({ ip_address }) {
             </div>
             <div className=" px-4 bg-gray-100 row-span-1">
               <div className="grid grid-cols-8">
-                <div className="col-span-4 flex">
+                <div className="col-span-4 flex pl-4">
                   <svg
                     class="h-8 w-8 text-black my-auto"
                     viewBox="0 0 24 24"
@@ -401,7 +433,21 @@ export default function Home({ ip_address }) {
                   </svg>
                   &nbsp;
                   <div className="underline my-auto">
-                    <Link href="/quit">Quit the test</Link>
+                    {/* <Link href=""> */}
+                    <a
+                      className="cursor-pointer"
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            'You are about to quit the test. Want to Proceed?'
+                          )
+                        )
+                          router.push('/quit');
+                      }}
+                    >
+                      Quit the test
+                    </a>
+                    {/* </Link> */}
                   </div>
                 </div>
                 <div className="col-span-2 justify-end flex my-auto">
