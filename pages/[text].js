@@ -53,7 +53,7 @@ export default function Home({ ip_address }) {
       setEnteredAnswer('');
     } else {
       if (
-        ((currentQuestion == 0) & (enteredAnswer == '4.5')) |
+        ((currentQuestion == 0) & (enteredAnswer == '6')) |
         (currentQuestion > 0)
       ) {
         // router.push('/disqualified');
