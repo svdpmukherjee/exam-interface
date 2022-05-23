@@ -66,7 +66,7 @@ export default function Home() {
                 IMPORTANT INFO
               </span>
               <div className="mx-auto px-5 space-y-4">
-                <ul className="border-b-2 py-5">
+                <ul className="border-b-2 py-5 space-y-4">
                   <li>
                     -<span className="text-blue-700"> &nbsp; BONUS: </span> If
                     you can answer <strong>6 questions correctly</strong>{' '}

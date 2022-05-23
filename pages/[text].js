@@ -52,89 +52,103 @@ export default function Home({ ip_address }) {
       alert('Please type the number only');
       setEnteredAnswer('');
     } else {
-      if ((currentQuestion == 0) & (enteredAnswer != '4.5')) {
-        router.push('/disqualified');
-      }
+      if (
+        ((currentQuestion == 0) & (enteredAnswer == '4.5')) |
+        (currentQuestion > 0)
+      ) {
+        // router.push('/disqualified');
 
-      isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
-      const nextQues = currentQuestion + 1;
-      let date = new Date().toISOString();
-      nextQues < questions.length && setCurrentQuestion(nextQues);
-      let timeTaken = time_2 - time_3;
-      setTime_2(time_3);
-      let question = currentQuestion + 1;
+        isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
+        const nextQues = currentQuestion + 1;
+        let date = new Date().toISOString();
+        nextQues < questions.length && setCurrentQuestion(nextQues);
+        let timeTaken = time_2 - time_3;
+        setTime_2(time_3);
+        let question = currentQuestion + 1;
 
-      enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-      enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+        enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
+        enteredAnswer === ''
+          ? setAnswered(answered)
+          : setAnswered(answered + 1);
 
-      if (stateColor == 0) {
-        if (isAnswered === 'Yes')
-          setColorAnswer([
-            {
-              currentQuestion: currentQuestion + 1,
-              circleColor: 'bg-green-300',
-            },
-          ]);
-        else
-          setColorAnswer([
-            { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
-          ]);
+        if (stateColor == 0) {
+          if (isAnswered === 'Yes')
+            setColorAnswer([
+              {
+                currentQuestion: currentQuestion + 1,
+                circleColor: 'bg-green-300',
+              },
+            ]);
+          else
+            setColorAnswer([
+              {
+                currentQuestion: currentQuestion + 1,
+                circleColor: 'bg-red-300',
+              },
+            ]);
 
-        setStateColor(stateColor + 1);
-      } else {
-        if (isAnswered === 'Yes')
-          setColorAnswer([
-            ...colorAnswer,
-            {
-              currentQuestion: currentQuestion + 1,
-              circleColor: 'bg-green-300',
-            },
-          ]);
-        else
-          setColorAnswer([
-            ...colorAnswer,
-            { currentQuestion: currentQuestion + 1, circleColor: 'bg-red-300' },
-          ]);
-      }
-      // if (currentQuestion > 0) {
-      let response_design = await fetch('/api/add-database', {
-        method: 'GET',
-      });
-      let data = await response_design.json();
-      // console.log(data);
-      if (stateVar == 0) {
-        console.log('only once');
-        designNumber = parseInt(data.message);
-        setStateVar(1);
+          setStateColor(stateColor + 1);
+        } else {
+          if (isAnswered === 'Yes')
+            setColorAnswer([
+              ...colorAnswer,
+              {
+                currentQuestion: currentQuestion + 1,
+                circleColor: 'bg-green-300',
+              },
+            ]);
+          else
+            setColorAnswer([
+              ...colorAnswer,
+              {
+                currentQuestion: currentQuestion + 1,
+                circleColor: 'bg-red-300',
+              },
+            ]);
+        }
+        // if (currentQuestion > 0) {
         let response_design = await fetch('/api/add-database', {
-          method: 'PUT',
-          body: ++designNumber % 4,
+          method: 'GET',
         });
-        --designNumber;
-      } else {
-        if (data.message == 0) designNumber = 3;
-        else designNumber = parseInt(data.message) - 1;
-      }
-      setDesignElem(designNumber);
-      // }
+        let data = await response_design.json();
+        // console.log(data);
+        if (stateVar == 0) {
+          console.log('only once');
+          designNumber = parseInt(data.message);
+          setStateVar(1);
+          let response_design = await fetch('/api/add-database', {
+            method: 'PUT',
+            body: ++designNumber % 3,
+          });
+          --designNumber;
+        } else {
+          if (data.message == 0) designNumber = 2;
+          else designNumber = parseInt(data.message) - 1;
+        }
+        setDesignElem(designNumber);
+        // }
 
-      let databaseEntry = {
-        participant_id: participant_id,
-        design_element: designNumber,
-        ip_address: ip_address,
-        questionNo: question,
-        enteredAnswer: enteredAnswer,
-        timeTaken: timeTaken,
-        date: date,
-        deviceType: deviceType,
-        browser: browserName,
-      };
-      setEnteredAnswer('');
-      console.log(databaseEntry);
-      let response = await fetch('/api/add-database', {
-        method: 'POST',
-        body: JSON.stringify(databaseEntry),
-      });
+        let databaseEntry = {
+          participant_id: participant_id,
+          design_element: designNumber,
+          ip_address: ip_address,
+          questionNo: question,
+          enteredAnswer: enteredAnswer,
+          timeTaken: timeTaken,
+          date: date,
+          deviceType: deviceType,
+          browser: browserName,
+        };
+        setEnteredAnswer('');
+        console.log(databaseEntry);
+        let response = await fetch('/api/add-database', {
+          method: 'POST',
+          body: JSON.stringify(databaseEntry),
+        });
+      } else {
+        alert('Wrong answer! Please try again');
+        setEnteredAnswer('');
+      }
     }
   };
 
@@ -206,7 +220,7 @@ export default function Home({ ip_address }) {
         ) : (
           // first row
           <div className="grid grid-cols-8 px-10 py-5 row-span-1 bg-gray-100 ">
-            <div className="col-span-5 font-serif text-2xl ">
+            <div className="col-span-5 font-serif text-2xl my-auto">
               <p>Test Your Aptitude Skill</p>
             </div>
             <div className="col-span-3 flex font-semibold justify-end text-lg my-auto">
@@ -248,13 +262,13 @@ export default function Home({ ip_address }) {
             </h1>
             <div className="text-center text-lg">
               <li>You Answered {answered} out of 9 questions</li>
-              <li>Your final score is: {((answered / 6) * 100).toFixed(2)}%</li>
+              <li>Your final score is: {((answered / 9) * 100).toFixed(2)}%</li>
             </div>
             <br />
             <div className="container m-auto py-10  bg-red-100">
               <div className="text-3xl text-center font-serif">
                 To complete the rest of study, please{' '}
-                <a href="http://ulsurvey.uni.lu/index.php/745225?lang=en">
+                <a href="https://ulsurvey.uni.lu/index.php/893662?lang=en">
                   <span className="bg-blue-500 text-white p-2">
                     click on the survey
                   </span>{' '}
@@ -265,9 +279,9 @@ export default function Home({ ip_address }) {
           </>
         ) : (
           <>
-            <div className=" flex row-span-6">
+            <div className=" my-auto row-span-6">
               {/* second row */}
-              <div className="grid grid-rows-6">
+              <div className="grid grid-rows-6 ">
                 <div className="grid grid-cols-8 px-10 pt-2 row-span-1">
                   <div className="col-span-5 font-serif text-2xl  flex my-auto">
                     <svg
@@ -294,7 +308,7 @@ export default function Home({ ip_address }) {
                 <div className=" pt-4  h-full row-span-5  ">
                   <div className="grid grid-cols-7 ">
                     <div className=" col-span-5 pl-10 ">
-                      <div className="grid grid-rows-4 gap-5 border-r-2 border-gray-100">
+                      <div className="grid grid-rows-4 gap-5 border-gray-100">
                         <div className="row-span-1  bg-gray-100 p-2 flex">
                           <svg
                             class="h-8 w-8 text-blue-500  mx-4 my-auto"
@@ -322,7 +336,7 @@ export default function Home({ ip_address }) {
                               );
                             } else {
                               return (
-                                <div className="my-auto mx-auto text-gray-500">
+                                <div className="my-auto  text-gray-500">
                                   {' '}
                                   <span> Good going!</span> However, leaving a
                                   question unanswered decreases the chance of
@@ -355,66 +369,73 @@ export default function Home({ ip_address }) {
                         </div>
                       </div>
                     </div>
-                    <div className="grid grid-rows-5 col-span-2 justify-items-center m-auto">
-                      <div className="row-span-4 ">
-                        <div>
-                          {(() => {
-                            // if (currentQuestion > 3) {
-                            //   return (
-                            //     <div className="flex p-5 justify-center m-auto mt-6">
-                            //       <img src="images/control.png"></img>
-                            //     </div>
-                            //   );
-                            // } else
-                            if ((designElem == 0) & (currentQuestion > 3)) {
-                              return (
-                                <div className="flex p-5 w-5/6 justify-center m-auto mt-6">
-                                  <img src="images/honor.png"></img>
-                                </div>
-                              );
-                            } else if (
-                              (designElem == 1) &
-                              (currentQuestion > 3)
-                            ) {
-                              return (
-                                <div className="flex justify-center  h-2/3 w-2/3 m-auto mt-6">
-                                  <img src="images/warning.png"></img>
-                                </div>
-                              );
-                            } else if (
-                              (designElem == 2) &
-                              (currentQuestion > 3)
-                            ) {
-                              return (
-                                <div className="flex justify-center  h-2/3 w-2/3 m-auto mt-6">
-                                  <img src="images/monitoring.png"></img>
-                                </div>
-                              );
-                            } else if (currentQuestion > 3) {
-                              return (
-                                <div>
-                                  <img
-                                    src="images/user_icon.gif"
-                                    alt="monitoring"
-                                    className="h-1/2 m-auto"
-                                  />
-                                  <br />
-                                  <p className="">
-                                    Your activities are now monitored
-                                  </p>
-                                </div>
-                              );
-                            }
-                          })()}{' '}
-                        </div>
+                    <div className="grid grid-rows-5 col-span-2  ">
+                      <div className="row-span-4 flex justify-center my-auto">
+                        {(() => {
+                          // if (currentQuestion > 3) {
+                          //   return (
+                          //     <div className="flex p-5 justify-center m-auto mt-6">
+                          //       <img src="images/control.png"></img>
+                          //     </div>
+                          //   );
+                          // } else
+                          // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
+                          if (currentQuestion >= 8) {
+                            return (
+                              <div className="  my-auto">
+                                <img
+                                  src="images/monitoring.png"
+                                  className="m-auto"
+                                />
+                                <br />{' '}
+                                <p className="font-serif">
+                                  Your activities are now monitored
+                                </p>
+                              </div>
+                            );
+                          } else if (currentQuestion >= 7) {
+                            return (
+                              <div className="flex justify-center h-2/3 w-2/3  my-auto">
+                                <img
+                                  src="images/warning.png"
+                                  className="flex justify-center h-2/3 w-2/3  my-auto"
+                                ></img>
+                              </div>
+                            );
+                          } else if (currentQuestion >= 6) {
+                            return (
+                              <div className="flex p-5 w-5/6 justify-center mx-auto my-auto">
+                                <img src="images/honor.png"></img>
+                              </div>
+                            );
+                            // } else if (                                            // to be replaced with the below statement
+                            //   (designElem == 1) &
+                            //   (currentQuestion >= 7)
+                          }
+                          // else if (currentQuestion > 3) {
+                          //   return (
+                          //     <div>
+                          //       <img
+                          //         src="images/user_icon.gif"
+                          //         alt="monitoring"
+                          //         className="h-1/2 m-auto"
+                          //       />
+                          //       <br />
+                          //       <p className="">
+                          //         Your activities are now monitored
+                          //       </p>
+                          //     </div>
+                          //   );
+                          // }
+                        })()}{' '}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" px-4 bg-gray-100 row-span-1">
-              <div className="grid grid-cols-8">
+            <div className=" px-4 bg-gray-100 row-span-1 my-auto">
+              <div className="grid grid-cols-8 ">
                 <div className="col-span-4 flex pl-4">
                   <svg
                     class="h-8 w-8 text-black my-auto"
@@ -453,12 +474,6 @@ export default function Home({ ip_address }) {
                   <img src="images/bonus.png" className="w-2/3  "></img>
                 </div>
                 <div className="col-span-2 justify-end flex">
-                  {/* <button
-                    className=" px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
-                    onClick={() => router.push('/info-page')}
-                  >
-                    Go to next question
-                  </button> */}
                   <button
                     onClick={
                       currentQuestion + 1 === questions.length
