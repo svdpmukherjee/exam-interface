@@ -6,11 +6,15 @@ const defaultRemainingTime = {
 };
 
 const Timer = ({ time }) => {
+  // const { time, stopTimer } = props;
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [timeLeft, setTimeLeft] = useState(time - 1);
+  // let timerStatus = stopTimer;
+  // console.log(stopTimer);
 
   // useEffect with interval
   useEffect(() => {
+    // console.log(stopTimer, timerStatus);
     const intervalId = setInterval(() => {
       updateRemainingTime(timeLeft);
     }, 1000);
@@ -25,11 +29,11 @@ const Timer = ({ time }) => {
       minutes = Math.floor(60 - Math.abs(timeLeft - 3600) / 60).toString();
     else minutes = Math.floor(Math.abs(timeLeft - 3600) / 60).toString();
     let seconds = (timeLeft % 60).toString();
+    // console.log(timeLeft);
 
     setTimeLeft(timeLeft - 1);
 
     return {
-      hours: padWithZeros(hours, 2),
       minutes: padWithZeros(minutes, 2),
       seconds: padWithZeros(seconds, 2),
     };

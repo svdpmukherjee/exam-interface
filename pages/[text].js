@@ -20,6 +20,8 @@ export default function Home({ ip_address }) {
   const [time_3, setTime_3] = useState(time_2);
   const [colorAnswer, setColorAnswer] = useState([]);
   const [timeLeftCheck, setTimeLeftCheck] = useState(time);
+  // const [stopTimer, setStopTimer] = useState(false);
+  // const [timerButtonText, setTimerButtonText] = useState('Stop Timer');
   const router = useRouter();
 
   let submit = 0;
@@ -29,6 +31,11 @@ export default function Home({ ip_address }) {
   let timeColor = '';
   let deviceType = '';
   let designNumber = 0;
+
+  // let selfControlTimer = {
+  //   time: time,
+  //   stopTimer: stopTimer,
+  // };
 
   // calculate time taken to solve each question
   useEffect(() => {
@@ -51,13 +58,14 @@ export default function Home({ ip_address }) {
     if (isNaN(enteredAnswer)) {
       alert('Please type the number only');
       setEnteredAnswer('');
-    } else {
-      if (
-        ((currentQuestion == 0) & (enteredAnswer == '6')) |
-        (currentQuestion > 0)
-      ) {
+    } else if ((currentQuestion == 0) & (enteredAnswer == ''))
+      alert('You have to correctly answer it to proceed');
+    else {
+      if ((currentQuestion == 0) & (enteredAnswer != '6')) {
+        alert('Wrong answer! Please try again');
+        setEnteredAnswer('');
+      } else {
         // router.push('/disqualified');
-
         isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
         const nextQues = currentQuestion + 1;
         let date = new Date().toISOString();
@@ -65,68 +73,35 @@ export default function Home({ ip_address }) {
         let timeTaken = time_2 - time_3;
         setTime_2(time_3);
         let question = currentQuestion + 1;
-
+        console.log('reaching 1');
         enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
         enteredAnswer === ''
           ? setAnswered(answered)
           : setAnswered(answered + 1);
-
-        if (stateColor == 0) {
-          if (isAnswered === 'Yes')
-            setColorAnswer([
-              {
-                currentQuestion: currentQuestion + 1,
-                circleColor: 'bg-green-300',
-              },
-            ]);
-          else
-            setColorAnswer([
-              {
-                currentQuestion: currentQuestion + 1,
-                circleColor: 'bg-red-300',
-              },
-            ]);
-
-          setStateColor(stateColor + 1);
-        } else {
-          if (isAnswered === 'Yes')
-            setColorAnswer([
-              ...colorAnswer,
-              {
-                currentQuestion: currentQuestion + 1,
-                circleColor: 'bg-green-300',
-              },
-            ]);
-          else
-            setColorAnswer([
-              ...colorAnswer,
-              {
-                currentQuestion: currentQuestion + 1,
-                circleColor: 'bg-red-300',
-              },
-            ]);
-        }
-        // if (currentQuestion > 0) {
-        let response_design = await fetch('/api/add-database', {
-          method: 'GET',
-        });
-        let data = await response_design.json();
-        // console.log(data);
-        if (stateVar == 0) {
-          console.log('only once');
-          designNumber = parseInt(data.message);
-          setStateVar(1);
+        if (currentQuestion > 0) {
           let response_design = await fetch('/api/add-database', {
-            method: 'PUT',
-            body: ++designNumber % 3,
+            method: 'GET',
           });
-          --designNumber;
-        } else {
-          if (data.message == 0) designNumber = 2;
-          else designNumber = parseInt(data.message) - 1;
+          let data = await response_design.json();
+          // console.log(data);
+          console.log('reaching 2');
+          if (stateVar == 0) {
+            console.log('only once');
+            designNumber = parseInt(data.message);
+            setStateVar(1);
+            let response_design = await fetch('/api/add-database', {
+              method: 'PUT',
+              body: ++designNumber % 3,
+            });
+            --designNumber;
+          } else {
+            if (data.message == 0) designNumber = 2;
+            else designNumber = parseInt(data.message) - 1;
+          }
+          setDesignElem(designNumber);
         }
-        setDesignElem(designNumber);
 
+        console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
           design_element: designNumber,
@@ -138,18 +113,23 @@ export default function Home({ ip_address }) {
           deviceType: deviceType,
           browser: browserName,
         };
-        setEnteredAnswer('');
-        console.log(databaseEntry);
+
+        console.log(enteredAnswer);
         let response = await fetch('/api/add-database', {
           method: 'POST',
           body: JSON.stringify(databaseEntry),
         });
-      } else {
-        alert('Wrong answer! Please try again');
+        console.log('reaching 3');
         setEnteredAnswer('');
       }
     }
   };
+  // const controlTimer = async () => {
+  //   if (stopTimer === false) setTimerButtonText('Start Timer');
+  //   else setTimerButtonText('Stop Timer');
+  //   setStopTimer(!stopTimer);
+  //   // console.log(stopTimer);
+  // };
 
   // submit button
   const handleSubmitButton = async () => {
@@ -213,40 +193,57 @@ export default function Home({ ip_address }) {
 
         {/* <Header showScore={showScore} /> */}
         {showScore ? (
-          <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-gray-100 m-auto">
+          <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-slate-100 m-auto">
             Thank you for taking the test!
           </div>
         ) : (
           // first row
-          <div className="grid grid-cols-8 px-10 py-5 row-span-1 bg-gray-100 ">
-            <div className="col-span-5 font-serif text-2xl my-auto">
-              <p>Test Your Aptitude Skill</p>
+          <div className="grid grid-cols-8 row-span-1 pr-10 bg-slate-100 ">
+            <div className="col-span-5 font-serif text-2xl flex text-slate-700 ">
+              <div className=" p-3 pr-7 my-auto ">
+                <p className="">Test Your Aptitude Skill</p>
+              </div>
             </div>
             <div className="col-span-3 flex font-semibold justify-end text-lg my-auto">
               {(() => {
                 if (timeLeftCheck <= 180) {
                   timeColor = 'text-red-500';
                 } else {
-                  timeColor = 'text-sky-700';
+                  timeColor = 'text-sky-800';
                 }
               })()}
-              <svg
-                class="h-8 w-8 text-blue-500 "
+              {/* <svg
+                className="h-8 w-8 text-blue-500 "
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {' '}
                 <path stroke="none" d="M0 0h24v24H0z" />{' '}
                 <circle cx="12" cy="12" r="9" />{' '}
                 <polyline points="12 7 12 12 15 15" />
+              </svg> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="26"
+                viewBox="0 0 18 23"
+                className="my-auto"
+              >
+                <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
+                  <g fill="#075985" transform="translate(-87 -209)">
+                    <g transform="translate(87 209.5)">
+                      <path d="M12 0H6v2h6V0zM8 13h2V7H8v6zm8-6.6L17.5 5c-.5-.5-1-1-1.5-1.4L14.6 5C13.1 3.8 11.1 3 9 3c-5 0-9 4-9 9s4 9 9 9 9-4 9-9c0-2.1-.7-4.1-2-5.6zM9 19c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z"></path>
+                    </g>
+                  </g>
+                </g>
               </svg>
-              <div className={`${timeColor}  flex my-auto`}>
+              <div className={`${timeColor} flex my-auto`}>
                 &nbsp;Time left: &nbsp;
                 <Timer time={time} />
               </div>
@@ -281,42 +278,61 @@ export default function Home({ ip_address }) {
             <div className=" my-auto row-span-6">
               {/* second row */}
               <div className="grid grid-rows-6 ">
-                <div className="grid grid-cols-8 px-10 pt-2 row-span-1">
-                  <div className="col-span-5 font-serif text-2xl  flex my-auto">
-                    <svg
-                      class="h-8 w-8 text-black"
+                <div className="grid grid-cols-8 px-10 pt-2 row-span-1 mb-16">
+                  <div className="col-span-5 font-serif text-2xl flex my-auto">
+                    {/* <svg
+                      className="h-8 w-8 text-black"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                       />
+                    </svg> */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      className="my-auto"
+                    >
+                      <path
+                        fill="#"
+                        d="M14.77 5.87a1 1 0 001.36-.37A1 1 0 0118 6a1 1 0 01-1 1 1 1 0 000 2 3 3 0 10-2.6-4.5 1 1 0 00.37 1.37zm4.3 7.13a1 1 0 00-1.12.86A7 7 0 0111 20H5.41l.65-.65a1 1 0 000-1.41A7 7 0 0111 6a1 1 0 000-2 9 9 0 00-7 14.61l-1.71 1.68a1 1 0 00-.21 1.09A1 1 0 003 22h8a9 9 0 008.93-7.87 1 1 0 00-.86-1.13zm-1.69-2.93a1 1 0 00-.58-.07l-.18.06-.18.09-.15.13a1 1 0 00-.21.32.84.84 0 00-.08.4 1 1 0 00.07.39 1 1 0 00.22.32A1 1 0 0017 12a1 1 0 001-1 .84.84 0 00-.08-.38 1.07 1.07 0 00-.54-.54z"
+                      ></path>
                     </svg>
                     &nbsp;&nbsp;
-                    <h3 className="text-lg">
+                    <h3 className="text-xl">
                       QUESTION {currentQuestion + 1} of {questions.length}
                     </h3>
                   </div>
-                  <div className="col-span-3 flex font-semibold justify-end "></div>
+                  {/* <div className="col-span-3 flex font-semibold justify-end ">
+                    <button
+                      className=" px-5 py-3 bg-green-300 hover:bg-green-500  rounded-lg shadow-2xl my-auto text-sm"
+                      onClick={controlTimer}
+                    >
+                      {timerButtonText}
+                    </button>
+                  </div> */}
                 </div>
 
                 <div className=" pt-4  h-full row-span-5  ">
-                  <div className="grid grid-cols-7 ">
-                    <div className=" col-span-5 pl-10 ">
-                      <div className="grid grid-rows-4 gap-5 border-gray-100">
-                        <div className="row-span-1  bg-gray-100 p-2 flex">
+                  <div className="grid grid-cols-7">
+                    <div className=" col-span-5 pl-10">
+                      <div className="grid grid-rows-4 gap-5  border-gray-100">
+                        <div className="row-span-1  bg-gray-100  flex mb-10 p-5">
                           <svg
-                            class="h-8 w-8 text-blue-500  mx-4 my-auto"
+                            className="h-8 w-8 text-blue-500  mx-4 my-auto"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           >
                             {' '}
                             <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" />{' '}
@@ -326,32 +342,39 @@ export default function Home({ ip_address }) {
                           {(() => {
                             if (currentQuestion == 0) {
                               return (
-                                <div className="my-auto text-gray-500">
+                                <div className="my-auto text-gray-500 text-sm">
                                   {' '}
                                   This question is a qualifying one. You can
                                   only see next questions once you solve it
                                   correctly
                                 </div>
                               );
+                            } else if (answered == 0) {
+                              return (
+                                <div className="my-auto text-gray-500 text-sm">
+                                  {' '}
+                                  Leaving a question unanswered may decrease the
+                                  chance of receiving a bonus
+                                </div>
+                              );
                             } else {
                               return (
-                                <div className="my-auto  text-gray-500">
+                                <div className="my-auto  text-gray-500 text-sm">
                                   {' '}
-                                  <span> Good going!</span> However, leaving a
-                                  question unanswered decreases the chance of
-                                  receiving a bonus
+                                  <span> Good going!</span> Please remember that
+                                  you cannot go back
                                 </div>
                               );
                             }
                           })()}
                         </div>
                         <div className="row-span-2 ">
-                          <p className="mt-4 text-md pr-3">
+                          <p className="mt-10 text-md pr-3">
                             {questions[currentQuestion].question}
                           </p>
                         </div>
 
-                        <div className="row-span-1 my-3 text-md">
+                        <div className="row-span-1 mt-5 text-md">
                           My Answer:&nbsp;
                           <input
                             type="text"
@@ -379,7 +402,7 @@ export default function Home({ ip_address }) {
                           //   );
                           // } else
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
-                          if (currentQuestion >= 8) {
+                          if (currentQuestion == 6) {
                             return (
                               <div className="my-auto">
                                 <img
@@ -392,7 +415,7 @@ export default function Home({ ip_address }) {
                                 </p>
                               </div>
                             );
-                          } else if (currentQuestion >= 7) {
+                          } else if (currentQuestion == 4) {
                             return (
                               <div className="flex justify-center h-2/3 w-2/3  my-auto">
                                 <img
@@ -401,7 +424,7 @@ export default function Home({ ip_address }) {
                                 ></img>
                               </div>
                             );
-                          } else if (currentQuestion >= 6) {
+                          } else if (currentQuestion == 2) {
                             return (
                               <div className="flex p-5 w-5/6 justify-center mx-auto my-auto">
                                 <img src="images/honor.png"></img>
@@ -433,17 +456,17 @@ export default function Home({ ip_address }) {
                 </div>
               </div>
             </div>
-            <div className=" px-4 bg-gray-100 row-span-1 my-auto">
+            <div className=" px-4 bg-slate-100 row-span-1 my-auto">
               <div className="grid grid-cols-8 ">
                 <div className="col-span-4 flex pl-4">
                   <svg
-                    class="h-8 w-8 text-black my-auto"
+                    className="h-8 w-8 text-black my-auto"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     {' '}
                     <circle cx="12" cy="12" r="10" />{' '}
@@ -479,11 +502,23 @@ export default function Home({ ip_address }) {
                         ? handleSubmitButton
                         : handleNext
                     }
-                    className=" px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
+                    className="flex px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
                   >
                     {currentQuestion + 1 === questions.length
                       ? 'Submit your test'
                       : 'Go to next question'}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="26"
+                      height="26"
+                      fill="#FFFFFF"
+                      enableBackground="new 0 0 512 512"
+                      version="1.1"
+                      viewBox="0 0 512 512"
+                      xmlSpace="preserve"
+                    >
+                      <path d="M160 115.4L180.7 96 352 256 180.7 416 160 396.7 310.5 256z"></path>
+                    </svg>
                   </button>
                 </div>
               </div>

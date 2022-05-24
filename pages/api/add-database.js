@@ -54,7 +54,7 @@ async function getDesign(req, res) {
   try {
     let { db } = await connectToDatabase();
     const data = await db.collection('tracking_db').findOne();
-    // console.log(data.design_number);
+    console.log(data.design_number);
 
     return res.json({
       message: data.design_number,
@@ -76,7 +76,7 @@ async function updateDesign(req, res) {
   try {
     let { db } = await connectToDatabase();
     await db.collection('tracking_db').updateOne(
-      { design_number: { $lt: 5 } },
+      { design_number: { $lt: 4 } },
       {
         $set: {
           design_number: data,
