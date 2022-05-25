@@ -186,7 +186,7 @@ export default function Home({ ip_address }) {
   // JSX
   return (
     <div>
-      <div className="grid grid-rows-8 h-screen">
+      <div className="h-screen grid grid-rows-8 ">
         <Head>
           <title>Online test</title>
         </Head>
@@ -198,9 +198,9 @@ export default function Home({ ip_address }) {
           </div>
         ) : (
           // first row
-          <div className="grid grid-cols-8 row-span-1 pr-10 bg-slate-100 ">
+          <div className="grid grid-cols-8 row-span-2 pr-10 bg-slate-100 ">
             <div className="col-span-5 font-serif text-2xl flex text-slate-700 ">
-              <div className=" p-3 pr-7 my-auto ">
+              <div className=" p-3 pr-7 my-auto">
                 <p className="">Test Your Aptitude Skill</p>
               </div>
             </div>
@@ -275,11 +275,12 @@ export default function Home({ ip_address }) {
           </>
         ) : (
           <>
-            <div className=" my-auto row-span-6">
+            {/* main body */}
+            <div className="row-span-5 my-auto">
               {/* second row */}
               <div className="grid grid-rows-6 ">
-                <div className="grid grid-cols-8 px-10 pt-2 row-span-1 mb-16">
-                  <div className="col-span-5 font-serif text-2xl flex my-auto">
+                <div className="grid grid-cols-8 px-5  row-span-1 ">
+                  <div className="col-span-5 font-serif text-2xl flex  ">
                     {/* <svg
                       className="h-8 w-8 text-black"
                       fill="none"
@@ -298,7 +299,7 @@ export default function Home({ ip_address }) {
                       width="30"
                       height="30"
                       viewBox="0 0 24 24"
-                      className="my-auto"
+                      className=""
                     >
                       <path
                         fill="#"
@@ -320,11 +321,11 @@ export default function Home({ ip_address }) {
                   </div> */}
                 </div>
 
-                <div className=" pt-4  h-full row-span-5  ">
-                  <div className="grid grid-cols-7">
-                    <div className=" col-span-5 pl-10">
-                      <div className="grid grid-rows-4 gap-5  border-gray-100">
-                        <div className="row-span-1  bg-gray-100  flex mb-10 p-5">
+                <div className="row-span-5  ">
+                  <div className="grid grid-cols-7 pl-2">
+                    <div className=" col-span-5 px-10 border-gray-100 border-1 shadow-md py-10">
+                      <div className="grid grid-rows-4 gap-4  ">
+                        <div className="row-span-1  bg-gray-100  flex ">
                           <svg
                             className="h-8 w-8 text-blue-500  mx-4 my-auto"
                             viewBox="0 0 24 24"
@@ -368,8 +369,8 @@ export default function Home({ ip_address }) {
                             }
                           })()}
                         </div>
-                        <div className="row-span-2 ">
-                          <p className="mt-10 text-md pr-3">
+                        <div className="row-span-2 my-auto">
+                          <p className="text-md">
                             {questions[currentQuestion].question}
                           </p>
                         </div>
@@ -391,8 +392,8 @@ export default function Home({ ip_address }) {
                         </div>
                       </div>
                     </div>
-                    <div className="grid grid-rows-5 col-span-2  ">
-                      <div className="row-span-4 flex justify-center my-auto">
+                    <div className="grid  col-span-2 ">
+                      <div className=" flex justify-center my-auto">
                         {(() => {
                           // if (currentQuestion > 3) {
                           //   return (
@@ -404,7 +405,7 @@ export default function Home({ ip_address }) {
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                           if (currentQuestion == 6) {
                             return (
-                              <div className="my-auto">
+                              <div className="">
                                 <img
                                   src="images/monitoring.png"
                                   className="m-auto"
@@ -420,13 +421,13 @@ export default function Home({ ip_address }) {
                               <div className="flex justify-center h-2/3 w-2/3  my-auto">
                                 <img
                                   src="images/warning.png"
-                                  className="flex justify-center h-2/3 w-2/3  my-auto"
+                                  className="flex justify-center h-3/4 w-3/4 shadow-md"
                                 ></img>
                               </div>
                             );
                           } else if (currentQuestion == 2) {
                             return (
-                              <div className="flex p-5 w-5/6 justify-center mx-auto my-auto">
+                              <div className="flex  w-3/4 ">
                                 <img src="images/honor.png"></img>
                               </div>
                             );
@@ -456,7 +457,7 @@ export default function Home({ ip_address }) {
                 </div>
               </div>
             </div>
-            <div className=" px-4 bg-slate-100 row-span-1 my-auto">
+            <div className=" px-4 bg-slate-100 row-span-1 my-auto ">
               <div className="grid grid-cols-8 ">
                 <div className="col-span-4 flex pl-4">
                   <svg
