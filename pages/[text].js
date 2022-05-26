@@ -503,7 +503,7 @@ export default function Home({ ip_address }) {
                         ? handleSubmitButton
                         : handleNext
                     }
-                    className="flex px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
+                    className="flex px-5 py-2 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
                   >
                     {currentQuestion + 1 === questions.length
                       ? 'Submit your test'
