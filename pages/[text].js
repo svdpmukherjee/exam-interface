@@ -29,6 +29,9 @@ export default function Home({ ip_address }) {
   let nextSubmitColor = '';
   let nextSubmitText = '';
   let timeColor = '';
+  let timerIconColor = '';
+  let infoIconColor = '';
+  let bonusBorder = '';
   let deviceType = '';
   let designNumber = 0;
 
@@ -42,6 +45,7 @@ export default function Home({ ip_address }) {
     const intervalId = setInterval(() => {
       setTime_3(time_3 - 1);
     }, 1000);
+    console.log(time_2, time_3);
     return () => clearTimeout(intervalId);
   });
 
@@ -200,34 +204,21 @@ export default function Home({ ip_address }) {
           // first row
           <div className="grid grid-cols-8 row-span-2 pr-10 bg-slate-100 ">
             <div className="col-span-5 font-serif text-2xl flex text-slate-700 ">
-              <div className=" p-3 pr-7 my-auto">
+              <div className=" p-3 pl-5 pr-7 my-auto">
                 <p className="">Test Your Aptitude Skill</p>
               </div>
             </div>
             <div className="col-span-3 flex font-semibold justify-end text-lg my-auto">
               {(() => {
-                if (timeLeftCheck <= 180) {
+                if (timeLeftCheck <= 300) {
                   timeColor = 'text-red-500';
+                  timerIconColor = '#ef4444';
                 } else {
                   timeColor = 'text-sky-800';
+                  timerIconColor = '#075985';
                 }
               })()}
-              {/* <svg
-                className="h-8 w-8 text-blue-500 "
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {' '}
-                <path stroke="none" d="M0 0h24v24H0z" />{' '}
-                <circle cx="12" cy="12" r="9" />{' '}
-                <polyline points="12 7 12 12 15 15" />
-              </svg> */}
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -236,7 +227,8 @@ export default function Home({ ip_address }) {
                 className="my-auto"
               >
                 <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
-                  <g fill="#075985" transform="translate(-87 -209)">
+                  {/* <g fill="#075985" transform="translate(-87 -209)"> */}
+                  <g fill={`${timerIconColor}`} transform="translate(-87 -209)">
                     <g transform="translate(87 209.5)">
                       <path d="M12 0H6v2h6V0zM8 13h2V7H8v6zm8-6.6L17.5 5c-.5-.5-1-1-1.5-1.4L14.6 5C13.1 3.8 11.1 3 9 3c-5 0-9 4-9 9s4 9 9 9 9-4 9-9c0-2.1-.7-4.1-2-5.6zM9 19c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z"></path>
                     </g>
@@ -281,19 +273,6 @@ export default function Home({ ip_address }) {
               <div className="grid grid-rows-6 ">
                 <div className="grid grid-cols-8 px-5  row-span-1 ">
                   <div className="col-span-5 font-serif text-2xl flex  ">
-                    {/* <svg
-                      className="h-8 w-8 text-black"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                      />
-                    </svg> */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="30"
@@ -311,23 +290,21 @@ export default function Home({ ip_address }) {
                       QUESTION {currentQuestion + 1} of {questions.length}
                     </h3>
                   </div>
-                  {/* <div className="col-span-3 flex font-semibold justify-end ">
-                    <button
-                      className=" px-5 py-3 bg-green-300 hover:bg-green-500  rounded-lg shadow-2xl my-auto text-sm"
-                      onClick={controlTimer}
-                    >
-                      {timerButtonText}
-                    </button>
-                  </div> */}
                 </div>
-
+                {(() => {
+                  if ((time_2 - time_3 >= 120) & (currentQuestion > 0)) {
+                    infoIconColor = 'text-red-500';
+                  } else {
+                    infoIconColor = 'text-blue-500';
+                  }
+                })()}
                 <div className="row-span-5  ">
                   <div className="grid grid-cols-7 pl-2">
                     <div className=" col-span-5 px-10 border-gray-100 border-1 shadow-md py-10">
                       <div className="grid grid-rows-4 gap-4  ">
                         <div className="row-span-1  bg-gray-100  flex ">
                           <svg
-                            className="h-8 w-8 text-blue-500  mx-4 my-auto"
+                            className={`${infoIconColor} h-8 w-8  mx-4 my-auto`}
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -350,20 +327,20 @@ export default function Home({ ip_address }) {
                                   correctly
                                 </div>
                               );
-                            } else if (answered == 0) {
-                              return (
-                                <div className="my-auto text-gray-500 text-sm">
-                                  {' '}
-                                  Leaving a question unanswered may decrease the
-                                  chance of receiving a bonus
-                                </div>
-                              );
-                            } else {
+                            } else if (time_2 - time_3 < 120) {
                               return (
                                 <div className="my-auto  text-gray-500 text-sm">
                                   {' '}
                                   <span> Good going!</span> Please remember that
                                   you cannot go back
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div className="my-auto  text-red-500 text-sm">
+                                  {' '}
+                                  You should not spend much time on a single
+                                  question
                                 </div>
                               );
                             }
@@ -381,9 +358,6 @@ export default function Home({ ip_address }) {
                             type="text"
                             value={enteredAnswer}
                             onChange={(event) => {
-                              // if (isNaN(event.target.value)) {
-                              //   window.confirm('Please type the number only');
-                              // }
                               setEnteredAnswer(event.target.value);
                             }}
                             className="w-48 h-12 border-blue-500 border-2 shadow-md rounded-md"
@@ -392,7 +366,7 @@ export default function Home({ ip_address }) {
                         </div>
                       </div>
                     </div>
-                    <div className="grid  col-span-2 ">
+                    <div className="grid col-span-2 ">
                       <div className=" flex justify-center my-auto">
                         {(() => {
                           // if (currentQuestion > 3) {
@@ -403,12 +377,16 @@ export default function Home({ ip_address }) {
                           //   );
                           // } else
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
-                          if (currentQuestion == 6) {
+                          if (
+                            ((currentQuestion == 5) & (time_2 - time_3 > 6)) |
+                            (currentQuestion == 6) |
+                            ((currentQuestion == 7) & (time_2 - time_3 < 6))
+                          ) {
                             return (
                               <div className="">
                                 <img
-                                  src="images/monitoring.png"
-                                  className="m-auto"
+                                  src="images/user_1.png"
+                                  className="w-24 h-30 m-auto"
                                 />
                                 <br />{' '}
                                 <p className="font-serif">
@@ -416,18 +394,24 @@ export default function Home({ ip_address }) {
                                 </p>
                               </div>
                             );
-                          } else if (currentQuestion == 4) {
+                          } else if (
+                            (currentQuestion == 3) &
+                            (time_2 - time_3 > 6)
+                          ) {
                             return (
-                              <div className="flex justify-center h-2/3 w-2/3  my-auto">
+                              <div className="flex justify-center h-2/3 w-4/5  my-auto">
                                 <img
                                   src="images/warning.png"
-                                  className="flex justify-center h-3/4 w-3/4 shadow-md"
+                                  className="flex justify-center h-4/5 w-4/5 shadow-sm"
                                 ></img>
                               </div>
                             );
-                          } else if (currentQuestion == 2) {
+                          } else if (
+                            (currentQuestion == 2) &
+                            (time_2 - time_3 > 6)
+                          ) {
                             return (
-                              <div className="flex  w-3/4 ">
+                              <div className="flex  w-5/6 ">
                                 <img src="images/honor.png"></img>
                               </div>
                             );
@@ -457,9 +441,9 @@ export default function Home({ ip_address }) {
                 </div>
               </div>
             </div>
-            <div className=" px-4 bg-slate-100 row-span-1 my-auto ">
+            <div className=" px-4 bg-slate-100 row-span-1 my-auto">
               <div className="grid grid-cols-8 ">
-                <div className="col-span-4 flex pl-4">
+                <div className="col-span-4 flex pl-4 ">
                   <svg
                     className="h-8 w-8 text-black my-auto"
                     viewBox="0 0 24 24"
@@ -493,8 +477,19 @@ export default function Home({ ip_address }) {
                     {/* </Link> */}
                   </div>
                 </div>
+                {(() => {
+                  if (currentQuestion == 0) {
+                    bonusBorder =
+                      'border-dashed border border-red-300 rounded-sm shadow-md';
+                  } else {
+                    bonusBorder = 'border-none';
+                  }
+                })()}
                 <div className="col-span-2 justify-end flex my-auto">
-                  <img src="images/bonus.png" className="w-2/3  "></img>
+                  <img
+                    src="images/bonus.png"
+                    className={`${bonusBorder} w-3/4 `}
+                  ></img>
                 </div>
                 <div className="col-span-2 justify-end flex">
                   <button
@@ -503,7 +498,7 @@ export default function Home({ ip_address }) {
                         ? handleSubmitButton
                         : handleNext
                     }
-                    className="flex px-5 py-2 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
+                    className="flex px-5 py-3 bg-blue-700 hover:bg-sky-800 text-white rounded-lg shadow-2xl my-auto"
                   >
                     {currentQuestion + 1 === questions.length
                       ? 'Submit your test'

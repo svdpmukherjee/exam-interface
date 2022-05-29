@@ -51,8 +51,9 @@ export default function Home() {
                 <strong>You cannot go back to the previous questions</strong>
               </li>
               <li>
-                <span> &nbsp; &nbsp; &nbsp; </span>If you can answer You should
-                not spend too much time on a single question
+                <span> &nbsp; &nbsp; &nbsp; </span>You{' '}
+                <strong>should not spend too much time</strong> on a single
+                question
               </li>
             </div>
           </div>

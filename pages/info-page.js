@@ -76,8 +76,8 @@ export default function Home() {
                 &nbsp;&nbsp;
                 <div className="my-auto">IMPORTANT INFO</div>
               </div>
-              <div className="mx-auto px-5 space-y-4">
-                <ul className="border-b-2 py-5 space-y-4">
+              <div className="mx-auto px-5">
+                <ul className="border-b-2 py-3 space-y-4 ">
                   <li>
                     -<span className="text-blue-700"> &nbsp; BONUS: </span> If
                     you can answer <strong>6 questions correctly</strong>{' '}
@@ -96,45 +96,48 @@ export default function Home() {
                   <li>
                     -<span> &nbsp; </span>If we discover you doing the above
                     mentioned unauthorized activities,
-                    <strong> there would be a possible consequences </strong>
+                    <strong> there would be possible consequences </strong>
                   </li>
                 </ul>
+                <div className="space-y-6 pt-3">
+                  <p className="pt-3 text-sm text-gray-500">
+                    Please read out the Honor Code Pledge below and{' '}
+                    <strong> click the box </strong> to start with the test
+                  </p>
 
-                <p className="pt-3">
-                  You are asked to read out the Honor Code Pledge below and{' '}
-                  <strong> click the box </strong> to start with the question
-                </p>
-                <input
-                  type="checkbox"
-                  id="check"
-                  name="check"
-                  onChange={(event) => setChecked(!checked)}
-                />
-                <label for="check" className="">
-                  {' '}
-                  <span className="text-blue-800">
-                    Honor Code Pledge:{' '}
-                  </span>{' '}
-                  <strong>
-                    "I affirm that I will NOT take any unauthorized help during
-                    this test, and that all work will be my own"
-                  </strong>
-                </label>
+                  <input
+                    type="checkbox"
+                    id="check"
+                    name="check"
+                    onChange={(event) => setChecked(!checked)}
+                  />
+                  <label for="check" className="">
+                    {' '}
+                    <span className="text-green-600 text-lg">
+                      Honor Code Pledge:{' '}
+                    </span>{' '}
+                    <strong className="text-blue-800">
+                      "I affirm that I will NOT take any unauthorized help
+                      during this test, and that all work will be my own"
+                    </strong>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
           <p>
-            When you are ready, click the Start Test and the timer will begin.{' '}
-            Good Luck!
+            When you are ready, click the{' '}
+            <span className="text-sky-600">Start Test</span> below and the timer
+            will begin. Good Luck!
           </p>
         </div>
 
-        <div className="flex py-5 pr-4 justify-end bg-gray-100 row-span-1">
+        <div className="flex py-5 pr-4 justify-center bg-gray-100 row-span-1">
           <button
-            className="px-5 py-2 bg-sky-800 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
+            className="px-5 py-2 bg-sky-700 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
             onClick={checkInfo}
           >
-            Start the test
+            Start test
           </button>
         </div>
       </div>
