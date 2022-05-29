@@ -59,7 +59,7 @@ export default function Home() {
           })()}
         </div>
         {/* </div> */}
-        <div class="container mx-auto px-20 row-span-5">
+        <div class="container mx-auto px-16 row-span-5">
           <div className="py-10">
             <div class="relative flex flex-col flex-wrap p-8 bg-opacity-75 border border-gray-500 ">
               <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
@@ -99,8 +99,8 @@ export default function Home() {
                     <strong> there would be possible consequences </strong>
                   </li>
                 </ul>
-                <div className="space-y-6 pt-3">
-                  <p className="pt-3 text-sm text-gray-500">
+                <div className="space-y-8 pt-3">
+                  <p className="pt-3 text-sm text-gray-400">
                     Please read out the Honor Code Pledge below and{' '}
                     <strong> click the box </strong> to start with the test
                   </p>
