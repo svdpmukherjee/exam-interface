@@ -51,10 +51,8 @@ export default function Home() {
                 <strong>You cannot go back to the previous questions</strong>
               </li>
               <li>
-                <span> &nbsp; &nbsp; &nbsp; </span>If you can answer{' '}
-                <strong>6 questions correctly (including 1st question) </strong>
-                , you will receive a <strong>bonus (£1) </strong> along with
-                your compensation
+                <span> &nbsp; &nbsp; &nbsp; </span>If you can answer You should
+                not spend too much time on a single question
               </li>
             </div>
           </div>
