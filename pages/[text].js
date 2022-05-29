@@ -327,20 +327,23 @@ export default function Home({ ip_address }) {
                                   correctly
                                 </div>
                               );
-                            } else if (time_2 - time_3 < 120) {
-                              return (
-                                <div className="my-auto  text-gray-500 text-sm">
-                                  {' '}
-                                  <span> Good going!</span> Please remember that
-                                  you cannot go back
-                                </div>
-                              );
-                            } else {
+                            } else if (
+                              (currentQuestion < 8) &
+                              (time_2 - time_3 > 120)
+                            ) {
                               return (
                                 <div className="my-auto  text-red-500 text-sm">
                                   {' '}
                                   You should not spend much time on a single
                                   question
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div className="my-auto  text-gray-500 text-sm">
+                                  {' '}
+                                  <span> Good going!</span> Please remember that
+                                  you cannot go back
                                 </div>
                               );
                             }
@@ -378,7 +381,7 @@ export default function Home({ ip_address }) {
                           // } else
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                           if (
-                            ((currentQuestion == 5) & (time_2 - time_3 > 6)) |
+                            ((currentQuestion == 5) & (time_2 - time_3 > 10)) |
                             (currentQuestion == 6) |
                             ((currentQuestion == 7) & (time_2 - time_3 < 6))
                           ) {
