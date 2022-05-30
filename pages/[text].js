@@ -292,7 +292,11 @@ export default function Home({ ip_address }) {
                   </div>
                 </div>
                 {(() => {
-                  if ((time_2 - time_3 >= 120) & (currentQuestion > 0)) {
+                  if (
+                    (time_2 - time_3 >= 120) &
+                    (currentQuestion > 0) &
+                    (currentQuestion < 8)
+                  ) {
                     infoIconColor = 'text-red-500';
                   } else {
                     infoIconColor = 'text-blue-500';
@@ -383,7 +387,8 @@ export default function Home({ ip_address }) {
                           if (
                             ((currentQuestion == 5) & (time_2 - time_3 > 10)) |
                             (currentQuestion == 6) |
-                            ((currentQuestion == 7) & (time_2 - time_3 < 6))
+                            ((currentQuestion == 7) & (time_2 - time_3 < 6)) |
+                            ((currentQuestion == 8) & (time_2 - time_3 > 4))
                           ) {
                             return (
                               <div className="">
@@ -483,7 +488,7 @@ export default function Home({ ip_address }) {
                 {(() => {
                   if (currentQuestion == 0) {
                     bonusBorder =
-                      'border-dashed border border-red-300 rounded-sm shadow-md';
+                      'border-none border-red-300 rounded-sm shadow-2xl';
                   } else {
                     bonusBorder = 'border-none';
                   }
@@ -491,7 +496,7 @@ export default function Home({ ip_address }) {
                 <div className="col-span-2 justify-end flex my-auto">
                   <img
                     src="images/bonus.png"
-                    className={`${bonusBorder} w-3/4 `}
+                    className={`${bonusBorder} w-3/4 border-2`}
                   ></img>
                 </div>
                 <div className="col-span-2 justify-end flex">
