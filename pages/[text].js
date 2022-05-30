@@ -297,7 +297,7 @@ export default function Home({ ip_address }) {
                     (currentQuestion > 0) &
                     (currentQuestion < 8)
                   ) {
-                    infoIconColor = 'text-amber-500';
+                    infoIconColor = 'text-amber-600';
                   } else {
                     infoIconColor = 'text-blue-500';
                   }
@@ -336,7 +336,7 @@ export default function Home({ ip_address }) {
                               (time_2 - time_3 >= 120)
                             ) {
                               return (
-                                <div className="my-auto  text-amber-500 text-sm">
+                                <div className="my-auto  text-amber-600 text-sm">
                                   {' '}
                                   You should not spend much time on a single
                                   question
