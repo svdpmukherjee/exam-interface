@@ -1,6 +1,6 @@
 [
   {
-    "question": "A boy starting from his home, travels 6 km towards east, then turning to his left he travels 6 km. After this he again turns left and travels 6 km. How far is the boy now from his home?"
+    "question": "A boy starting from his home, travels 6 km towards east, then turning to his left he travels 6 km in that direction. After this he again turns left and travels 6 km. How far is the boy now from his home?"
   },
   {
     "question": "What should be the next number (in place of ?) in the series: 2, 3, 7, 16, 32, ?"
@@ -22,7 +22,7 @@
     "question": "Stevan is 2-times as old as David. Stevan will be 3-times as old as Martin in 2 years. If Martin is 10 years old currently, what will be the summation of their ages (all three) after 10 years?"
   },
   {
-    "question": "Mrs. Romi Lancer decided to treat her neighbours in the manner that she gives one-third of his total stock of candies and one extra to the first neighbour, and then the one-third of the remaining stock along with one extra to the second and continues giving away in this fashion. Her total stock exhausted after she gave away to 4 neighbours. How many candies were there in her stock initially?"
+    "question": "A gentleman decided to treat a few children in the following manner. He gives half of his total stock of toffees and one extra to the first child, and then the half of the remaining stock along with one extra to the second and continues giving away in this fashion. His total stock exhausts after he takes care of 5 children. How many toffees were there in his stock initially?"
   },
   {
     "question": "The word DAF is coded as 614 in a specific code language. In the same language, HIG will be coded as ___?"
