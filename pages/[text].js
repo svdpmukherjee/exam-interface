@@ -297,7 +297,7 @@ export default function Home({ ip_address }) {
                     (currentQuestion > 0) &
                     (currentQuestion < 8)
                   ) {
-                    infoIconColor = 'text-red-500';
+                    infoIconColor = 'text-amber-500';
                   } else {
                     infoIconColor = 'text-blue-500';
                   }
@@ -306,7 +306,7 @@ export default function Home({ ip_address }) {
                   <div className="grid grid-cols-7 pl-2">
                     <div className=" col-span-5 px-10 border-gray-100 border-1 shadow-md py-10">
                       <div className="grid grid-rows-4 gap-4  ">
-                        <div className="row-span-1  bg-gray-100  flex ">
+                        <div className="row-span-1  bg-slate-100  flex ">
                           <svg
                             className={`${infoIconColor} h-8 w-8  mx-4 my-auto`}
                             viewBox="0 0 24 24"
@@ -333,10 +333,10 @@ export default function Home({ ip_address }) {
                               );
                             } else if (
                               (currentQuestion < 8) &
-                              (time_2 - time_3 > 120)
+                              (time_2 - time_3 >= 120)
                             ) {
                               return (
-                                <div className="my-auto  text-red-500 text-sm">
+                                <div className="my-auto  text-amber-500 text-sm">
                                   {' '}
                                   You should not spend much time on a single
                                   question
@@ -354,7 +354,7 @@ export default function Home({ ip_address }) {
                           })()}
                         </div>
                         <div className="row-span-2 my-auto">
-                          <p className="text-md">
+                          <p className="text-lg text-justify">
                             {questions[currentQuestion].question}
                           </p>
                         </div>
@@ -385,7 +385,7 @@ export default function Home({ ip_address }) {
                           // } else
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                           if (
-                            ((currentQuestion == 5) & (time_2 - time_3 > 10)) |
+                            ((currentQuestion == 5) & (time_2 - time_3 >= 20)) |
                             (currentQuestion == 6) |
                             ((currentQuestion == 7) & (time_2 - time_3 < 6)) |
                             ((currentQuestion == 8) & (time_2 - time_3 > 4))
@@ -404,7 +404,7 @@ export default function Home({ ip_address }) {
                             );
                           } else if (
                             (currentQuestion == 3) &
-                            (time_2 - time_3 > 6)
+                            (time_2 - time_3 > 35)
                           ) {
                             return (
                               <div className="flex justify-center h-2/3 w-4/5  my-auto">
@@ -416,7 +416,7 @@ export default function Home({ ip_address }) {
                             );
                           } else if (
                             (currentQuestion == 2) &
-                            (time_2 - time_3 > 6)
+                            (time_2 - time_3 > 30)
                           ) {
                             return (
                               <div className="flex  w-5/6 ">
