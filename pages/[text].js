@@ -293,7 +293,7 @@ export default function Home({ ip_address }) {
                 </div>
                 {(() => {
                   if (
-                    (time_2 - time_3 >= 120) &
+                    (time_2 - time_3 >= 150) &
                     (currentQuestion > 0) &
                     (currentQuestion < 8)
                   ) {
@@ -333,7 +333,7 @@ export default function Home({ ip_address }) {
                               );
                             } else if (
                               (currentQuestion < 8) &
-                              (time_2 - time_3 >= 120)
+                              (time_2 - time_3 >= 150)
                             ) {
                               return (
                                 <div className="my-auto  text-amber-600 text-sm">
