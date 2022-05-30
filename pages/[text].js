@@ -488,15 +488,15 @@ export default function Home({ ip_address }) {
                 {(() => {
                   if (currentQuestion == 0) {
                     bonusBorder =
-                      'border-none border-red-300 rounded-sm shadow-2xl';
+                      'border-none border-red-300 rounded-sm shadow-2xl rounded-lg';
                   } else {
-                    bonusBorder = 'border-none';
+                    bonusBorder = 'border-none shadow-2xl rounded-lg';
                   }
                 })()}
                 <div className="col-span-2 justify-end flex my-auto">
                   <img
                     src="images/bonus.png"
-                    className={`${bonusBorder} w-3/4 border-2`}
+                    className={`${bonusBorder} w-3/4 `}
                   ></img>
                 </div>
                 <div className="col-span-2 justify-end flex">
