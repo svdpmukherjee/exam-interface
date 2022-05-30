@@ -256,7 +256,7 @@ export default function Home({ ip_address }) {
             <div className="container m-auto py-10  bg-red-100">
               <div className="text-3xl text-center font-serif">
                 To complete the rest of study, please{' '}
-                <a href="http://ulsurvey.uni.lu/index.php/397955?lang=en">
+                <a href="http://ulsurvey.uni.lu/index.php/635786?lang=en">
                   <span className="bg-blue-500 text-white p-2">
                     click on the survey
                   </span>{' '}
