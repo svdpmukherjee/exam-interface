@@ -385,7 +385,7 @@ export default function Home({ ip_address }) {
                           // } else
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                           if (
-                            ((currentQuestion == 5) & (time_2 - time_3 >= 20)) |
+                            ((currentQuestion == 5) & (time_2 - time_3 >= 10)) |
                             (currentQuestion == 6) |
                             ((currentQuestion == 7) & (time_2 - time_3 < 6)) |
                             ((currentQuestion == 8) & (time_2 - time_3 > 4))
@@ -404,7 +404,7 @@ export default function Home({ ip_address }) {
                             );
                           } else if (
                             (currentQuestion == 3) &
-                            (time_2 - time_3 > 35)
+                            (time_2 - time_3 > 15)
                           ) {
                             return (
                               <div className="flex justify-center h-2/3 w-4/5  my-auto">
@@ -416,7 +416,7 @@ export default function Home({ ip_address }) {
                             );
                           } else if (
                             (currentQuestion == 2) &
-                            (time_2 - time_3 > 30)
+                            (time_2 - time_3 > 10)
                           ) {
                             return (
                               <div className="flex  w-5/6 ">
