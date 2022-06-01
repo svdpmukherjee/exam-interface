@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Timer from '../components/Timer';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 16 * 60; // setting time limit as 30 mins
+const time = 18 * 60; // setting time limit as 30 mins
 
 export default function Home({ ip_address }) {
   const participant_id = useRouter().query.id;
@@ -204,25 +204,25 @@ export default function Home({ ip_address }) {
           // first row
           <div className="grid grid-cols-8 row-span-2 pr-10 bg-slate-100 ">
             <div className="col-span-5 font-serif text-2xl flex text-slate-700 ">
-              <div className=" p-3 pl-5 pr-7 my-auto">
+              <div className=" p-3 pl-10 pr-7 my-auto">
                 <p className="">Test Your Aptitude Skill</p>
               </div>
             </div>
-            <div className="col-span-3 flex font-semibold justify-end text-lg my-auto">
+            <div className="col-span-3 flex font-semibold justify-end text-lg my-auto mr-24">
               {(() => {
                 if (timeLeftCheck <= 300) {
                   timeColor = 'text-red-500';
                   timerIconColor = '#ef4444';
                 } else {
-                  timeColor = 'text-sky-800';
-                  timerIconColor = '#075985';
+                  timeColor = 'text-fuchsia-800';
+                  timerIconColor = '#86198f';
                 }
               })()}
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="26"
+                width="30"
+                height="35"
                 viewBox="0 0 18 23"
                 className="my-auto"
               >
@@ -235,7 +235,7 @@ export default function Home({ ip_address }) {
                   </g>
                 </g>
               </svg>
-              <div className={`${timeColor} flex my-auto`}>
+              <div className={`${timeColor} flex my-auto text-xl`}>
                 &nbsp;Time left: &nbsp;
                 <Timer time={time} />
               </div>
@@ -271,7 +271,7 @@ export default function Home({ ip_address }) {
             <div className="row-span-5 my-auto">
               {/* second row */}
               <div className="grid grid-rows-6 ">
-                <div className="grid grid-cols-8 px-5  row-span-1 ">
+                <div className="grid grid-cols-8 px-10  row-span-1 ">
                   <div className="col-span-5 font-serif text-2xl flex  ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -292,7 +292,9 @@ export default function Home({ ip_address }) {
                   </div>
                 </div>
                 {(() => {
-                  if (
+                  if ((timeLeftCheck <= 60) & (currentQuestion > 0)) {
+                    infoIconColor = 'text-red-400';
+                  } else if (
                     (time_2 - time_3 >= 120) &
                     (currentQuestion > 0) &
                     (currentQuestion < 8)
@@ -329,6 +331,13 @@ export default function Home({ ip_address }) {
                                   This question is a qualifying one. You can
                                   only see next questions once you solve it
                                   correctly
+                                </div>
+                              );
+                            } else if (timeLeftCheck <= 60) {
+                              return (
+                                <div className="my-auto  text-red-400 text-sm">
+                                  {' '}
+                                  Last few seconds remaining
                                 </div>
                               );
                             } else if (
@@ -385,8 +394,10 @@ export default function Home({ ip_address }) {
                           // } else
                           // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                           if (
-                            ((currentQuestion == 5) & (time_2 - time_3 >= 10)) |
-                            (currentQuestion == 6) |
+                            ((currentQuestion == 4) &
+                              (time_2 - time_3 >= 7) &
+                              (time_2 - time_3 <= 35)) |
+                            ((currentQuestion == 6) & (time_2 - time_3 >= 10)) |
                             ((currentQuestion == 7) & (time_2 - time_3 < 6)) |
                             ((currentQuestion == 8) & (time_2 - time_3 > 4))
                           ) {
@@ -404,7 +415,7 @@ export default function Home({ ip_address }) {
                             );
                           } else if (
                             (currentQuestion == 3) &
-                            (time_2 - time_3 > 15)
+                            (time_2 - time_3 > 20)
                           ) {
                             return (
                               <div className="flex justify-center h-2/3 w-4/5  my-auto">
@@ -415,8 +426,8 @@ export default function Home({ ip_address }) {
                               </div>
                             );
                           } else if (
-                            (currentQuestion == 2) &
-                            (time_2 - time_3 > 10)
+                            (currentQuestion == 1) &
+                            (time_2 - time_3 > 15)
                           ) {
                             return (
                               <div className="flex  w-5/6 ">
