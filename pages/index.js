@@ -44,7 +44,7 @@ export default function Home() {
               </li>
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>You have total{' '}
-                <strong>16 mins</strong> of time to answer them
+                <strong>18 mins</strong> of time to answer them
               </li>
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>
