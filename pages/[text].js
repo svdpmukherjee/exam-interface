@@ -7,7 +7,8 @@ import { browserName, isMobile } from 'react-device-detect';
 
 const time = 18 * 60; // setting time limit as 30 mins
 
-export default function Home({ ip_address }) {
+export default function Home(props) {
+  const { ip_address_1, ip_address_2 } = props;
   const participant_id = useRouter().query.id;
   const [designElem, setDesignElem] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -45,7 +46,7 @@ export default function Home({ ip_address }) {
     const intervalId = setInterval(() => {
       setTime_3(time_3 - 1);
     }, 1000);
-    console.log(time_2, time_3);
+    // console.log(time_2, time_3);
     return () => clearTimeout(intervalId);
   });
 
@@ -77,7 +78,7 @@ export default function Home({ ip_address }) {
         let timeTaken = time_2 - time_3;
         setTime_2(time_3);
         let question = currentQuestion + 1;
-        console.log('reaching 1');
+        // console.log('reaching 1');
         enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
         enteredAnswer === ''
           ? setAnswered(answered)
@@ -88,7 +89,7 @@ export default function Home({ ip_address }) {
           });
           let data = await response_design.json();
           // console.log(data);
-          console.log('reaching 2');
+          // console.log('reaching 2');
           if (stateVar == 0) {
             console.log('only once');
             designNumber = parseInt(data.message);
@@ -104,27 +105,28 @@ export default function Home({ ip_address }) {
           }
           setDesignElem(designNumber);
         }
-
-        console.log(enteredAnswer);
+        const answerWritten = enteredAnswer;
+        setEnteredAnswer('');
+        // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
           design_element: designNumber,
-          ip_address: ip_address,
+          ip_address_1: ip_address_1,
+          ip_address_2: ip_address_2,
           questionNo: question,
-          enteredAnswer: enteredAnswer,
+          enteredAnswer: answerWritten,
           timeTaken: timeTaken,
           date: date,
           deviceType: deviceType,
           browser: browserName,
         };
-
-        console.log(enteredAnswer);
+        // setEnteredAnswer('');
+        // console.log(enteredAnswer);
         let response = await fetch('/api/add-database', {
           method: 'POST',
           body: JSON.stringify(databaseEntry),
         });
-        console.log('reaching 3');
-        setEnteredAnswer('');
+        // console.log('reaching 3');
       }
     }
   };
@@ -157,7 +159,8 @@ export default function Home({ ip_address }) {
       let databaseEntry = {
         participant_id: participant_id,
         design_element: designNumber,
-        ip_address: ip_address,
+        ip_address_1: ip_address_1,
+        ip_address_2: ip_address_2,
         questionNo: question,
         enteredAnswer: enteredAnswer,
         timeTaken: timeTaken,
@@ -499,9 +502,9 @@ export default function Home({ ip_address }) {
                 {(() => {
                   if (currentQuestion == 0) {
                     bonusBorder =
-                      'border-none border-red-300 rounded-sm shadow-2xl rounded-lg';
+                      'border-none border-red-300 rounded-sm  rounded-lg';
                   } else {
-                    bonusBorder = 'border-none shadow-2xl rounded-lg';
+                    bonusBorder = 'border-none  rounded-lg';
                   }
                 })()}
                 <div className="col-span-2 justify-end flex my-auto">
@@ -547,25 +550,36 @@ export default function Home({ ip_address }) {
 
 export async function getServerSideProps({ req }) {
   // console.log(req.headers);
-  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  const ip_1 = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  const ip_2 = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
   // console.log(JSON.stringify(ip));
   // console.log(ip);
 
   // const res = await axios.get('https://geolocation-db.com/json');
   // const ip = res.data.IPv4;
-  const ip_segments = ip.split('.');
-  let ip_segments_int = ip_segments.map((item) => parseInt(item, 10));
+  const ip_segments_1 = ip_1.split('.');
+  const ip_segments_2 = ip_2.split('.');
+  let ip_segments_int_1 = ip_segments_1.map((item) => parseInt(item, 10));
+  let ip_segments_int_2 = ip_segments_2.map((item) => parseInt(item, 10));
 
   // transforming IP addresses
-  ip_segments_int[0] = ip_segments_int[0] * Math.pow(2, 2) + 5 * 5;
-  ip_segments_int[1] = ip_segments_int[1] * Math.pow(3, 3) + 4 * 4;
-  ip_segments_int[2] = ip_segments_int[2] * Math.pow(4, 4) + 3 * 3;
-  ip_segments_int[3] = ip_segments_int[3] * Math.pow(5, 5) + 2 * 2;
-  const ip_address = ip_segments_int.join('.').toString();
+  ip_segments_int_1[0] = ip_segments_int_1[0] * Math.pow(2, 2) + 5 * 5;
+  ip_segments_int_1[1] = ip_segments_int_1[1] * Math.pow(3, 3) + 4 * 4;
+  ip_segments_int_1[2] = ip_segments_int_1[2] * Math.pow(4, 4) + 3 * 3;
+  ip_segments_int_1[3] = ip_segments_int_1[3] * Math.pow(5, 5) + 2 * 2;
+  const ip_address_1 = ip_segments_int_1.join('.').toString();
+
+  ip_segments_int_2[0] = ip_segments_int_2[0] * Math.pow(2, 2) + 5 * 5;
+  ip_segments_int_2[1] = ip_segments_int_2[1] * Math.pow(3, 3) + 4 * 4;
+  ip_segments_int_2[2] = ip_segments_int_2[2] * Math.pow(4, 4) + 3 * 3;
+  ip_segments_int_2[3] = ip_segments_int_2[3] * Math.pow(5, 5) + 2 * 2;
+  const ip_address_2 = ip_segments_int_2.join('.').toString();
 
   return {
     props: {
-      ip_address,
+      ip_address_1,
+      ip_address_2,
     }, // will be passed to the page component as props
   };
 }
