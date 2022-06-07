@@ -21,7 +21,7 @@ export default function Home() {
           Welcome to the Online Test
         </div>
 
-        <div className="container mx-auto h-full row-span-6">
+        <div className="container mx-auto h-full row-span-6 flex justify-center">
           <div className="pt-20">
             <p className="font-serif pb-10 text-lg">
               Hi There! <br /> <br />
@@ -31,16 +31,12 @@ export default function Home() {
             <div className="mx-auto px-5 space-y-4">
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>There are{' '}
-                <strong>9 quantitative aptitude questions</strong> you will have
-                to answer -{' '}
-                <span className="underline">
-                  1st question is a qualifying one
-                </span>
+                <strong>9 general aptitude questions</strong> that you will have
+                to answer <span className="underline"></span>
               </li>
               <li>
-                <span> &nbsp; &nbsp; &nbsp; </span>The questions are of{' '}
-                <strong> numeric entry types</strong>, where you will have to
-                write the answers in the box
+                <span> &nbsp; &nbsp; &nbsp; </span>You will have to write the
+                answers in the box provided with each question
               </li>
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>You have total{' '}

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 // export const ApplicationContext = createContext();
 export default function Home() {
-  const [checked, setChecked] = useState(false);
+  const [trialAnswer, setTrialAnswer] = useState('');
   const [id, setID] = useState('');
 
   const router = useRouter();
@@ -12,9 +12,17 @@ export default function Home() {
   // Proceed with test
   const checkInfo = () => {
     console.log(id);
-    if (checked) {
-      router.push('/trial-page');
-    } else alert('Click the box to pledge and proceed');
+    if (id == '') {
+      alert('Please enter your ID');
+    } else if (isNaN(trialAnswer)) {
+      alert('Please type the number only');
+      setTrialAnswer('');
+    } else if (trialAnswer == '2') {
+      router.push('test?id=' + id);
+    } else {
+      alert('You should spend 2 mins on average');
+      setTrialAnswer('');
+    }
   };
 
   // JSX
@@ -28,7 +36,7 @@ export default function Home() {
         <div className="font-serif px-10 py-7 text-2xl text-center font-semibold row-span-1 bg-gray-100 ">
           Welcome to the Online Test
         </div>
-        {/* <div className="px-10 py-5 row-span-1 border-b-2 ">
+        <div className="px-10 py-5 row-span-1 border-b-2 ">
           Enter Your Profilic ID: <span> </span>
           {(() => {
             if (id == '') {
@@ -37,7 +45,7 @@ export default function Home() {
                   <input
                     type="text"
                     onChange={(event) => setID(event.target.value)}
-                    className="p-2 text-black shadow-md rounded-lg border-blue-500 border-2"
+                    className="p-2 text-black shadow-md rounded-lg border-teal-500 border-2"
                     placeholder="Prolific ID"
                   />
                 </>
@@ -55,12 +63,12 @@ export default function Home() {
               );
             }
           })()}
-        </div> */}
+        </div>
         {/* </div> */}
-        <div class="container mx-auto px-16 pt-10 row-span-5">
+        <div class="container mx-auto px-16 row-span-5">
           <div className="py-10">
-            <div class="relative flex flex-col flex-wrap p-8 bg-opacity-75 border border-gray-300 ">
-              <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
+            <div class="relative flex  p-8 bg-opacity-75 border border-gray-300 ">
+              {/* <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-8 h-8 my-auto"
@@ -73,60 +81,54 @@ export default function Home() {
                 </svg>
                 &nbsp;&nbsp;
                 <div className="my-auto">IMPORTANT INFO</div>
-              </div>
-              <div className="mx-auto px-5">
-                <ul className=" py-3 space-y-4">
+              </div> */}
+              <div className="mx-auto px-5 border-r-2">
+                <ul className=" py-3 space-y-4 ">
                   <li>
-                    -<span className="text-blue-700"> &nbsp; BONUS: </span> If
-                    you can answer <strong>6 questions correctly</strong>{' '}
-                    (including 1st question),{' '}
-                    <strong>you will receive a bonus (£1) </strong> along with
-                    your compensation
+                    &#8226;&nbsp; Number of questions: <strong>9</strong>
                   </li>
                   <li>
-                    -<span> &nbsp; </span>You are <strong>NOT </strong> supposed
-                    to visit other websites or take help from other people
-                    during the test.{' '}
+                    &#8226;&nbsp; Total time: <strong>18 mins</strong>
+                  </li>
+                  <li>
+                    &#8226;&nbsp; You{' '}
                     <span className="underline">
-                      However, you can use calculator if required
-                    </span>
-                  </li>
-                  <li>
-                    -<span> &nbsp; </span>If we discover you doing the above
-                    mentioned unauthorized activities,
-                    <strong> there would be possible consequences </strong>
+                      should not spend much time
+                    </span>{' '}
+                    on a single question
                   </li>
                 </ul>
-                <div className="space-y-8 p-3 border-2 border-black mt-16">
-                  <p className="text-sm text-gray-400">
-                    Please read out the Honor Code Pledge below and{' '}
-                    <strong> click the box </strong> to start with the test
-                  </p>
-
-                  <input
-                    type="checkbox"
-                    id="check"
-                    name="check"
-                    onChange={(event) => setChecked(!checked)}
-                  />
-                  <label for="check" className="">
-                    {' '}
-                    <span className="text-green-600 text-lg">
-                      Honor Code Pledge:{' '}
-                    </span>{' '}
-                    <strong className="text-blue-800">
-                      "I affirm that I will NOT take any unauthorized help
-                      during this test, and that all work will be my own"
-                    </strong>
-                  </label>
-                </div>
+              </div>
+              <div className="mx-auto px-5">
+                <ul className=" py-3 space-y-4 ">
+                  <li className="text-lg ">
+                    "How much time on average you should spend on each
+                    question?"
+                  </li>
+                  <li>
+                    <div className="row-span-1 mt-5 text-md">
+                      My Answer:&nbsp;
+                      <input
+                        type="text"
+                        value={trialAnswer}
+                        onChange={(event) => {
+                          setTrialAnswer(event.target.value);
+                        }}
+                        className="w-48 h-12 border-blue-500 border-2 shadow-md rounded-md"
+                        placeholder="Type only the number"
+                      />{' '}
+                      mins
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-          {/* <p>
+          <p className="mt-6">
             When you are ready, click the{' '}
-            <span className="text-sky-600">Start Test</span> below. Good Luck!
-          </p> */}
+            <span className="text-sky-600">Start Test</span> below and the timer
+            will begin. Good Luck!
+          </p>
         </div>
 
         <div className="flex py-5 pr-4 justify-center bg-gray-100 row-span-1">
@@ -134,7 +136,7 @@ export default function Home() {
             className="px-5 py-2 bg-sky-700 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
             onClick={checkInfo}
           >
-            Next Page
+            Start test
           </button>
         </div>
       </div>
