@@ -85,10 +85,10 @@ export default function Home() {
               <div className="mx-auto px-5 border-r-2">
                 <ul className=" py-3 space-y-4 ">
                   <li>
-                    &#8226;&nbsp; Number of questions: <strong>9</strong>
+                    &#8226;&nbsp; Number of questions: <strong>6</strong>
                   </li>
                   <li>
-                    &#8226;&nbsp; Total time: <strong>18 mins</strong>
+                    &#8226;&nbsp; Total time: <strong>12 mins</strong>
                   </li>
                   <li>
                     &#8226;&nbsp; You{' '}
@@ -102,7 +102,7 @@ export default function Home() {
               <div className="mx-auto px-5">
                 <ul className=" py-3 space-y-4 ">
                   <li className="text-lg ">
-                    "How much time on average you should spend on each
+                    "How much time on average should you spend on each
                     question?"
                   </li>
                   <li>

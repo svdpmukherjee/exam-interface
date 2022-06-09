@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const defaultRemainingTime = {
-  minutes: '18',
+  minutes: '12',
   seconds: '00',
 };
 

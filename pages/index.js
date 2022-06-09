@@ -31,16 +31,20 @@ export default function Home() {
             <div className="mx-auto px-5 space-y-4">
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>There are{' '}
-                <strong>9 general aptitude questions</strong> that you will have
+                <strong>
+                  6{' '}
+                  <span className="text-violet-700">quantitative aptitude</span>{' '}
+                  questions{' '}
+                </strong>
                 to answer <span className="underline"></span>
               </li>
               <li>
-                <span> &nbsp; &nbsp; &nbsp; </span>You will have to write the
-                answers in the box provided with each question
+                <span> &nbsp; &nbsp; &nbsp; </span>You shall write the answers
+                in the box provided with each question
               </li>
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>You have total{' '}
-                <strong>18 mins</strong> of time to answer them
+                <strong>12 mins</strong> of time to answer them all
               </li>
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>

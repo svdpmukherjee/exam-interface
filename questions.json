@@ -1,29 +1,20 @@
 [
   {
-    "question": "A boy starting from his home, travels 6 km towards east, then turning to his left he travels 6 km in that direction. After this he again turns left and travels 6 km in the new direction. How far is the boy now from his home?"
-  },
-  {
-    "question": "Stevan is 2-times older than David. Stevan is also 4-times older than Martin. If Martin is 10 years old currently, how old is David?"
-  },
-  {
-    "question": "What should be the next number (in place of ?) in the series: 2, 3, 6, 11, 18, 27, ?"
-  },
-  {
-    "question": "Alina and Luce can do a piece of work in 36 days and 81 days respectively. Both together work for 5 days and then Alina leaves off. How many days will Luce take to finish the remaining work?"
-  },
-  {
-    "question": "While going on vacation by car, Adam travels the first 4 hours at 50mph speed and the remaining 6 hours at 25mph. Calculate the average speed of Adam in mph?"
-  },
-  {
-    "question": "A gentleman decided to treat a few children in the following manner. He gives half of his total stock of toffees and one extra to the first child, and then the half of the remaining stock along with one extra to the second and continues giving away in this fashion. His total stock exhausts after he takes care of 5 children. How many toffees were there in his stock initially?"
+    "question": "During the Christmas vacation in Uganda, Samuel travels the first 7 hours at 190 miles/hour speed in a highway and the remaining 11 hours at 34 miles/hour in a hilly road. Calculate the average speed of Samuel in miles/hour?"
   },
   {
     "question": "Vincent and Rosetta finally started their long planned farming business. Vincent invested $4332 for 18 months and Rosetta invested $3000 for 13 months. If both of them earned a profit of $2500 after 18 months then what is the share (approx.) of Vincent in that profit?"
   },
   {
-    "question": "Students in a college have to choose at least two subjects from chemistry, mathematics and physics. The number of students choosing all three subjects is 18, choosing physics as one of their subjects is 23 and choosing mathematics as one of their subjects is 25. The smallest possible number of students who could choose chemistry as one of their subjects is?"
+    "question": "In Thanksgiving, Mr Larry Bowden decided to distribute some candies among his friends in a manner that he gives half of his total stock of candies and one extra to the first friend, and then the half of the remaining stock along with one extra to the second and continues giving away in this fashion. His total stock exhausted after he gave away to 4 friends. How many candies were there in his stock initially?"
   },
   {
     "question": "The word DAF is coded as 614 in a specific code language. In the same language, HIG will be coded as ___?"
+  },
+  {
+    "question": "Alina and Luce can do a piece of work in 36 days and 81 days respectively. Both worked for 5 days together and then Alina left off. How many days will Luce take to finish the remaining work?"
+  },
+  {
+    "question": "Xiaowei is double Andrea's age. Xiaowei will be triple Sofia's age in 2 years. If Sofia is 14 years old currently, what will be the summation of their ages (all three) after 20 years?"
   }
 ]

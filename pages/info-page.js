@@ -75,11 +75,10 @@ export default function Home() {
                 <div className="my-auto">IMPORTANT INFO</div>
               </div>
               <div className="mx-auto px-5">
-                <ul className=" py-3 space-y-4">
+                <ul className=" my-10 space-y-10">
                   <li>
                     -<span className="text-blue-700"> &nbsp; BONUS: </span> If
-                    you can answer <strong>6 questions correctly</strong>{' '}
-                    (including 1st question),{' '}
+                    you can answer <strong>5 questions correctly</strong>,{' '}
                     <strong>you will receive a bonus (£1) </strong> along with
                     your compensation
                   </li>
@@ -88,19 +87,14 @@ export default function Home() {
                     to visit other websites or take help from other people
                     during the test.{' '}
                     <span className="underline">
-                      However, you can use calculator if required
+                      However, you may use calculator if required
                     </span>
-                  </li>
-                  <li>
-                    -<span> &nbsp; </span>If we discover you doing the above
-                    mentioned unauthorized activities,
-                    <strong> there would be possible consequences </strong>
                   </li>
                 </ul>
                 <div className="space-y-8 p-3 border-2 border-black mt-16">
                   <p className="text-sm text-gray-400">
                     Please read out the Honor Code Pledge below and{' '}
-                    <strong> click the box </strong> to start with the test
+                    <strong> click the box </strong> to go to the next page
                   </p>
 
                   <input
@@ -115,7 +109,7 @@ export default function Home() {
                       Honor Code Pledge:{' '}
                     </span>{' '}
                     <strong className="text-blue-800">
-                      "I affirm that I will NOT take any unauthorized help
+                      "I affirm that I will NOT do any unauthorized activity
                       during this test, and that all work will be my own"
                     </strong>
                   </label>
