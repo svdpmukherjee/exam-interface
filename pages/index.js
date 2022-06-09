@@ -27,7 +27,7 @@ export default function Home() {
               Hi There! <br /> <br />
               These are the instructions to read before starting with the test -
             </p>
-            <br />
+
             <div className="mx-auto px-5 space-y-4">
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>There are{' '}
@@ -54,6 +54,11 @@ export default function Home() {
                 <span> &nbsp; &nbsp; &nbsp; </span>You{' '}
                 <strong>should not spend too much time</strong> on a single
                 question
+              </li>
+              <li>
+                <span> &nbsp; &nbsp; &nbsp; </span>Please use{' '}
+                <strong>your laptop or desktop</strong> to take this study for a
+                better view
               </li>
             </div>
           </div>
