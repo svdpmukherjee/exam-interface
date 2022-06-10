@@ -25,87 +25,87 @@ export default function Home() {
           Thank you for taking participation in the study
         </div>
 
-        <div className="container mx-auto h-full row-span-6 flex text-justify">
+        <div className="container mx-auto row-span-6 flex text-justify">
           <div className="">
             <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
             </p>
-
-            <div className="leading-10 mx-10">
-              <li>
-                {' '}
-                &nbsp; &nbsp; &nbsp;{' '}
-                <span className="underline">
-                  The entire study has 2 parts
-                </span>{' '}
-                which should take around 25 minutes in total -{' '}
-                <span className="bg-blue-600 text-white">
-                  In the first part
-                </span>
-                , you shall take an{' '}
-                <span className="underline">
-                  online test of some quantitative aptitude questions
-                </span>{' '}
-                in a time-bound manner.{' '}
-                <span className="bg-blue-600 text-white">
-                  In the second part
-                </span>
-                , you shall{' '}
-                <span className="underline">
-                  fill an online survey questionnaires up
-                </span>{' '}
-                right after the online test is submitted.
-              </li>
-            </div>
-
-            <div className="leading-10 mx-10">
-              {' '}
-              <li>
-                &nbsp; &nbsp; &nbsp; Please read the instructions carefully for
-                each part of the study before proceeding with them.
-              </li>
-            </div>
-
-            <div className="leading-10 mx-10">
-              {' '}
-              <li>
-                &nbsp; &nbsp; &nbsp; Please remember that we do NOT test you,{' '}
-                <span className="underline">
-                  we only evaluate your experience with the online test
-                  interface
-                </span>{' '}
-                and your perceptions about various criteria being asked in the
-                survey later.
-              </li>
-            </div>
-
-            <div className="leading-10 mx-10">
-              {' '}
-              <li>
-                {' '}
-                &nbsp; &nbsp; &nbsp; Please use{' '}
-                <strong>your laptop or desktop</strong> to take this study for a
-                better view.
-              </li>
-            </div>
-
-            <div className="leading-10 mx-10">
-              <li>
-                {' '}
-                &nbsp; &nbsp; &nbsp; You may go through the consent form and
-                information sheet by clicking here:{' '}
-                <a
-                  href="https://drive.google.com/drive/u/1/folders/1IUs0tUXan0M3tOExn8NhdAHGNC9yXTPV"
-                  target="_blank"
-                >
+            <div className="border-2 p-5 rounded-2xl">
+              <div className="leading-10 mx-10">
+                <li>
+                  {' '}
+                  &nbsp; &nbsp; &nbsp;{' '}
                   <span className="underline">
-                    google drive link to consent form and information sheet
+                    The entire study has 2 parts
+                  </span>{' '}
+                  which should take around 25 minutes in total -{' '}
+                  <span className="bg-blue-600 text-white">
+                    In the first part
                   </span>
-                </a>
-              </li>
-            </div>
+                  , you shall take an{' '}
+                  <span className="underline">
+                    online test of some quantitative aptitude questions
+                  </span>{' '}
+                  in a time-bound manner.{' '}
+                  <span className="bg-blue-600 text-white">
+                    In the second part
+                  </span>
+                  , you shall{' '}
+                  <span className="underline">
+                    fill an online survey questionnaires up
+                  </span>{' '}
+                  right after the online test is submitted.
+                </li>
+              </div>
 
+              <div className="leading-10 mx-10">
+                {' '}
+                <li>
+                  &nbsp; &nbsp; &nbsp; Please read the instructions carefully
+                  for each part of the study before proceeding with them.
+                </li>
+              </div>
+
+              <div className="leading-10 mx-10">
+                {' '}
+                <li>
+                  &nbsp; &nbsp; &nbsp; Please remember that we do NOT test you,{' '}
+                  <span className="underline">
+                    we only evaluate your experience with the online test
+                    interface
+                  </span>{' '}
+                  and your perceptions about various criteria being asked in the
+                  survey later.
+                </li>
+              </div>
+
+              <div className="leading-10 mx-10">
+                {' '}
+                <li>
+                  {' '}
+                  &nbsp; &nbsp; &nbsp; Please use{' '}
+                  <strong>your laptop or desktop</strong> to take this study for
+                  a better view.
+                </li>
+              </div>
+
+              <div className="leading-10 mx-10">
+                <li>
+                  {' '}
+                  &nbsp; &nbsp; &nbsp; You may go through the consent form and
+                  information sheet by clicking here:{' '}
+                  <a
+                    href="https://drive.google.com/drive/u/1/folders/1IUs0tUXan0M3tOExn8NhdAHGNC9yXTPV"
+                    target="_blank"
+                  >
+                    <span className="underline">
+                      google drive link to consent form and information sheet
+                    </span>
+                  </a>
+                </li>
+              </div>
+            </div>
             <div className="mt-10 mx-5 flex justify-center">
               <input
                 type="checkbox"
@@ -115,7 +115,7 @@ export default function Home() {
               />
               <label for="check" className="">
                 {' '}
-                <strong className="text-blue-800">
+                <strong className="text-blue-800 text-lg">
                   &nbsp; "I have read the consent form and agree to participate
                   in the study"
                 </strong>
