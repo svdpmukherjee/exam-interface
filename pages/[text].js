@@ -439,7 +439,7 @@ export default function Home(props) {
                   </div>
                 </div>
                 <div className="grid col-span-2 ">
-                  <div className=" flex justify-center my-auto">
+                  <div className=" flex justify-center my-auto ">
                     {(() => {
                       // if (currentQuestion > 3) {
                       //   return (
@@ -461,8 +461,11 @@ export default function Home(props) {
                           );
                         } else if (designElem == 2) {
                           return (
-                            <div className="flex h-1/2 w-2/3 ">
-                              <img src="images/warning_final.png"></img>
+                            <div className="flex h-1/2 w-2/3 border-red-800 border-4">
+                              <img
+                                src="images/warning_final.png"
+                                className=""
+                              ></img>
                             </div>
                           );
                         } else if (designElem == 3) {

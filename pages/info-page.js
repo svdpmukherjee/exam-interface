@@ -78,7 +78,8 @@ export default function Home() {
                 <ul className=" my-10 space-y-10">
                   <li>
                     -<span className="text-blue-700"> &nbsp; BONUS: </span> If
-                    you can answer <strong>5 questions correctly</strong>,{' '}
+                    you can answer{' '}
+                    <strong>5 questions correctly (out of 6)</strong>,{' '}
                     <strong>you will receive a bonus (£1) </strong> along with
                     your compensation
                   </li>
