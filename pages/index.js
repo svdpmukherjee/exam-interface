@@ -36,7 +36,7 @@ export default function Home() {
                 <li>
                   {' '}
                   &nbsp; &nbsp; &nbsp;{' '}
-                  <span className="underline">
+                  <span className="bg-blue-600 text-white">
                     The entire study has 2 parts
                   </span>{' '}
                   which should take around 25 minutes in total -{' '}

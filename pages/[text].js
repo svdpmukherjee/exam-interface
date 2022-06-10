@@ -461,7 +461,7 @@ export default function Home(props) {
                           );
                         } else if (designElem == 2) {
                           return (
-                            <div className="flex h-1/2 w-2/3 border-red-800 border-4">
+                            <div className="flex h-1/2 w-2/3">
                               <img
                                 src="images/warning_final.png"
                                 className=""
