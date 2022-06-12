@@ -21,7 +21,7 @@ export default function Home() {
           <title>Online test</title>
         </Head>
 
-        <div className="font-serif px-10 py-7 text-2xl text-center font-semibold row-span-1 bg-gray-100 ">
+        <div className="font-serif px-10 py-7 text-xl text-center font-semibold row-span-1 bg-yellow-50 ">
           Thank you for taking participation in the study
         </div>
 
@@ -31,7 +31,8 @@ export default function Home() {
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
             </p>
-            <div className="border-2 p-5 rounded-2xl">
+            <br />
+            <div className="border-2 p-5 rounded-2xl text-sm">
               <div className="leading-10 mx-10">
                 <li>
                   {' '}
@@ -39,7 +40,7 @@ export default function Home() {
                   <span className="bg-blue-600 text-white">
                     The entire study has 2 parts
                   </span>{' '}
-                  which should take around 25 minutes in total -{' '}
+                  which should take around 30 minutes in total -{' '}
                   <span className="bg-blue-600 text-white">
                     In the first part
                   </span>
@@ -72,10 +73,9 @@ export default function Home() {
                 <li>
                   &nbsp; &nbsp; &nbsp; Please remember that we do NOT test you,{' '}
                   <span className="underline">
-                    we only evaluate your experience with the online test
-                    interface
+                    we only evaluate your experience with the online test system
                   </span>{' '}
-                  and your perceptions about various criteria being asked in the
+                  and also some of your valuable opinions which are asked in the
                   survey later.
                 </li>
               </div>
@@ -96,6 +96,7 @@ export default function Home() {
                   &nbsp; &nbsp; &nbsp; You may go through the consent form and
                   information sheet by clicking here:{' '}
                   <a
+                    className="text-blue-500"
                     href="https://drive.google.com/drive/u/1/folders/1IUs0tUXan0M3tOExn8NhdAHGNC9yXTPV"
                     target="_blank"
                   >
@@ -115,7 +116,7 @@ export default function Home() {
               />
               <label for="check" className="">
                 {' '}
-                <strong className="text-blue-800 text-lg">
+                <strong className="text-blue-800 text-md">
                   &nbsp; "I have read the consent form and agree to participate
                   in the study"
                 </strong>
@@ -123,7 +124,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex py-5 pr-4 justify-center bg-gray-100 row-span-1 ">
+        <div className="flex py-5 pr-4 justify-center bg-gray-50 row-span-1 ">
           <button
             className="flex px-5 py-2 my-auto bg-sky-800 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
             onClick={checkInfo}

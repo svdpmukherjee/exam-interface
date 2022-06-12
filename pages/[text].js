@@ -35,6 +35,7 @@ export default function Home(props) {
   let bonusBorder = '';
   let deviceType = '';
   let designNumber = 0;
+  let link = '';
 
   // let selfControlTimer = {
   //   time: time,
@@ -262,7 +263,7 @@ export default function Home(props) {
             </h1> */}
             <div className="grid grid-cols-3 my-auto">
               <div className="row-span-1"></div>
-              <div className="row-span-1 space-y-8 mx-10 justify-center text-lg ">
+              <div className="row-span-1 space-y-8 mx-8 justify-center text-lg ">
                 {/* <div className="space-y-4"> */}
                 <li>
                   &nbsp; You have answered <strong>{answered} out of 6 </strong>{' '}
@@ -276,7 +277,7 @@ export default function Home(props) {
 
                 <li>
                   &nbsp; Your{' '}
-                  <span className="text-blue-600">
+                  <span className="font-semibold">
                     eligibility to the bonus
                   </span>{' '}
                   will be announced once you finish the survey successfully
@@ -289,7 +290,18 @@ export default function Home(props) {
             <div className="container m-auto mb-40 py-10  bg-red-100">
               <div className="text-3xl text-center font-serif">
                 To complete the rest of study, please{' '}
-                <a href="http://ulsurvey.uni.lu/index.php/635786?lang=en">
+                {(() => {
+                  if (designElem == 0) {
+                    link = 'http://ulsurvey.uni.lu/index.php/496933?lang=en';
+                  } else if (designElem == 1) {
+                    link = 'http://ulsurvey.uni.lu/index.php/136117?lang=en';
+                  } else if (designElem == 2) {
+                    link = 'http://ulsurvey.uni.lu/index.php/936536?lang=en';
+                  } else {
+                    link = 'http://ulsurvey.uni.lu/index.php/287541?lang=en';
+                  }
+                })()}
+                <a href={link}>
                   <span className="bg-blue-500 text-white p-2">click here</span>{' '}
                   to proceed with the survey
                 </a>
