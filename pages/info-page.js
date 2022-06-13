@@ -25,7 +25,7 @@ export default function Home() {
           <title>Online test</title>
         </Head>
 
-        <div className="font-serif px-10 py-7 text-2xl text-center font-semibold row-span-1 bg-gray-100 my-auto">
+        <div className="font-serif px-10 py-7 text-2xl text-center font-semibold row-span-1 bg-gray-100 ">
           Welcome to the Online Test
         </div>
         {/* <div className="px-10 py-5 row-span-1 border-b-2 ">

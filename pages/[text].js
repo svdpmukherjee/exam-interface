@@ -447,11 +447,20 @@ export default function Home(props) {
                           placeholder="Type only the number"
                         />
                       </div>
+                      {(() => {
+                        if (currentQuestion >= 3) {
+                          infoIconColor = 'text-red-400';
+                        } else if (time_2 - time_3 >= 120) {
+                          infoIconColor = 'text-amber-600';
+                        } else {
+                          infoIconColor = 'text-blue-500';
+                        }
+                      })()}
                     </>
                   </div>
                 </div>
                 <div className="grid col-span-2 ">
-                  <div className=" flex justify-center my-auto ">
+                  <div className=" flex justify-center my-auto">
                     {(() => {
                       // if (currentQuestion > 3) {
                       //   return (

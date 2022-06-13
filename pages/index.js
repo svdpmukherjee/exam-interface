@@ -25,14 +25,14 @@ export default function Home() {
           Thank you for taking participation in the study
         </div>
 
-        <div className="container mx-auto row-span-6 flex text-justify">
+        <div className="container mx-auto row-span-5 flex text-justify my-auto">
           <div className="">
             <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
             </p>
-            <br />
-            <div className="border-2 p-5 rounded-2xl text-sm">
+
+            <div className="border-2 p-5 rounded-2xl text-md">
               <div className="leading-10 mx-10">
                 <li>
                   {' '}
@@ -93,35 +93,35 @@ export default function Home() {
               <div className="leading-10 mx-10">
                 <li>
                   {' '}
-                  &nbsp; &nbsp; &nbsp; You may go through the consent form and
-                  information sheet by clicking here:{' '}
+                  &nbsp; &nbsp; &nbsp; You may go through the study information
+                  and consent form by clicking here{' '}
                   <a
                     className="text-blue-500"
-                    href="https://drive.google.com/drive/u/1/folders/1IUs0tUXan0M3tOExn8NhdAHGNC9yXTPV"
+                    href="https://drive.google.com/file/d/12-MbSQfMgO3741DSRgR1zSuWwQ5t6ONd/view?usp=sharing"
                     target="_blank"
                   >
-                    <span className="underline">
-                      google drive link to consent form and information sheet
-                    </span>
+                    <span className="underline">google drive link</span>
                   </a>
                 </li>
               </div>
             </div>
-            <div className="mt-10 mx-5 flex justify-center">
-              <input
-                type="checkbox"
-                id="check"
-                name="check"
-                onChange={(event) => setChecked(!checked)}
-              />
-              <label for="check" className="">
-                {' '}
-                <strong className="text-blue-800 text-md">
-                  &nbsp; "I have read the consent form and agree to participate
-                  in the study"
-                </strong>
-              </label>
-            </div>
+          </div>
+        </div>
+        <div className="flex py-5 pr-4 justify-center row-span-1 ">
+          <div className="mt-10 mx-5 flex justify-center my-auto">
+            <input
+              type="checkbox"
+              id="check"
+              name="check"
+              onChange={(event) => setChecked(!checked)}
+            />
+            <label for="check" className="">
+              {' '}
+              <strong className="text-blue-800 text-md">
+                &nbsp; "I have read the consent form and agree to participate in
+                the study"
+              </strong>
+            </label>
           </div>
         </div>
         <div className="flex py-5 pr-4 justify-center bg-gray-50 row-span-1 ">
