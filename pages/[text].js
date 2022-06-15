@@ -77,49 +77,91 @@ export default function Home(props) {
       enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
       enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
       // if (currentQuestion > 0) {
-      let response_design = await fetch('/api/add-database', {
-        method: 'GET',
-      });
-      let data = await response_design.json();
+      // let response_design = await fetch('/api/add-database', {
+      //   method: 'GET',
+      // });
+      // let data = await response_design.json();
       // console.log(data);
       // console.log('reaching 2');
+      // if (stateVar == 0) {
+      //   // console.log('only once');
+
+      //   designNumber = parseInt(data.message);
+      //   setStateVar(1);
+      //   let response_design = await fetch('/api/add-database', {
+      //     method: 'PUT',
+      //     body: ++designNumber % 4,
+      //   });
+      //   --designNumber;
+      // } else {
+      //   if (data.message == 0) designNumber = 3;
+      //   else designNumber = parseInt(data.message) - 1;
+      // }
+
       if (stateVar == 0) {
         // console.log('only once');
+        let response_design = await fetch('/api/add-database', {
+          method: 'GET',
+        });
+        let data = await response_design.json();
         designNumber = parseInt(data.message);
         setStateVar(1);
-        let response_design = await fetch('/api/add-database', {
+        response_design = await fetch('/api/add-database', {
           method: 'PUT',
           body: ++designNumber % 4,
         });
         --designNumber;
-      } else {
+
         if (data.message == 0) designNumber = 3;
         else designNumber = parseInt(data.message) - 1;
+        setDesignElem(designNumber);
+        const answerWritten = enteredAnswer;
+        setEnteredAnswer('');
+        // console.log(enteredAnswer);
+        let databaseEntry = {
+          participant_id: participant_id,
+          design_element: designNumber,
+          ip_address_1: ip_address_1,
+          ip_address_2: ip_address_2,
+          questionNo: question,
+          enteredAnswer: answerWritten,
+          timeTaken: timeTaken,
+          date: date,
+          deviceType: deviceType,
+          browser: browserName,
+        };
+        // setEnteredAnswer('');
+        // console.log(enteredAnswer);
+        let response = await fetch('/api/add-database', {
+          method: 'POST',
+          body: JSON.stringify(databaseEntry),
+        });
+      } else {
+        // setDesignElem(designNumber);
+        // }
+        const answerWritten = enteredAnswer;
+        setEnteredAnswer('');
+        // console.log(enteredAnswer);
+        let databaseEntry = {
+          participant_id: participant_id,
+          design_element: designElem,
+          ip_address_1: ip_address_1,
+          ip_address_2: ip_address_2,
+          questionNo: question,
+          enteredAnswer: answerWritten,
+          timeTaken: timeTaken,
+          date: date,
+          deviceType: deviceType,
+          browser: browserName,
+        };
+        // setEnteredAnswer('');
+        // console.log(enteredAnswer);
+        let response = await fetch('/api/add-database', {
+          method: 'POST',
+          body: JSON.stringify(databaseEntry),
+        });
+        // console.log('reaching 3');
       }
-      setDesignElem(designNumber);
-      // }
-      const answerWritten = enteredAnswer;
-      setEnteredAnswer('');
-      // console.log(enteredAnswer);
-      let databaseEntry = {
-        participant_id: participant_id,
-        design_element: designNumber,
-        ip_address_1: ip_address_1,
-        ip_address_2: ip_address_2,
-        questionNo: question,
-        enteredAnswer: answerWritten,
-        timeTaken: timeTaken,
-        date: date,
-        deviceType: deviceType,
-        browser: browserName,
-      };
-      // setEnteredAnswer('');
-      // console.log(enteredAnswer);
-      let response = await fetch('/api/add-database', {
-        method: 'POST',
-        body: JSON.stringify(databaseEntry),
-      });
-      // console.log('reaching 3');
     }
   };
   // const controlTimer = async () => {

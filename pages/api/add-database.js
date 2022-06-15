@@ -54,7 +54,7 @@ async function getDesign(req, res) {
   try {
     let { db } = await connectToDatabase();
     const data = await db.collection('tracking_db').findOne();
-    console.log(data.design_number);
+    console.log('design number:', data.design_number);
 
     return res.json({
       message: data.design_number,
