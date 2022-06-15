@@ -84,9 +84,9 @@ export default function Home() {
                     your compensation
                   </li>
                   <li>
-                    -<span> &nbsp; </span>You are <strong>NOT </strong> supposed
-                    to visit other websites or take help from other people
-                    during the test.{' '}
+                    -<span> &nbsp; </span>You are{' '}
+                    <strong>not authorized</strong> to visit other websites or
+                    take help from other people during the test.{' '}
                     <span className="underline">
                       However, you may use calculator if required
                     </span>

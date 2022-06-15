@@ -446,16 +446,16 @@ export default function Home(props) {
                           className="w-48 h-12 border-blue-300 border-2 shadow-md rounded-md"
                           placeholder="Type only the number"
                         />
+                        {/* {(() => {
+                          if (currentQuestion == 0) {
+                            return <p>years</p>;
+                          } else if (time_2 - time_3 >= 120) {
+                            infoIconColor = 'text-amber-600';
+                          } else {
+                            infoIconColor = 'text-blue-500';
+                          }
+                        })()} */}
                       </div>
-                      {(() => {
-                        if (currentQuestion >= 3) {
-                          infoIconColor = 'text-red-400';
-                        } else if (time_2 - time_3 >= 120) {
-                          infoIconColor = 'text-amber-600';
-                        } else {
-                          infoIconColor = 'text-blue-500';
-                        }
-                      })()}
                     </>
                   </div>
                 </div>

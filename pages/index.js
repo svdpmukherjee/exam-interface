@@ -21,19 +21,20 @@ export default function Home() {
           <title>Online test</title>
         </Head>
 
-        <div className="font-serif px-10 py-7 text-xl text-center font-semibold row-span-1 bg-yellow-50 ">
-          Thank you for taking participation in the study
+        <div className="font-serif px-10 py-7 text-xl text-center font-semibold row-span-1  ">
+          &#128075; Hi There! Please read the details of the study carefully
+          before proceeding
         </div>
 
-        <div className="container mx-auto row-span-5 flex text-justify my-auto">
+        <div className="container mx-auto row-span-6 flex text-justify my-auto ">
           <div className="">
-            <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
+            {/* <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
-            </p>
+            </p> */}
 
-            <div className="border-2 p-5 rounded-2xl text-md">
-              <div className="leading-10 mx-10">
+            <div className="border-2 border-green-600 p-2 rounded-2xl text-md space-y-4">
+              <div className="leading-10 mx-10 px-6">
                 <li>
                   {' '}
                   &nbsp; &nbsp; &nbsp;{' '}
@@ -60,16 +61,14 @@ export default function Home() {
                 </li>
               </div>
 
-              <div className="leading-10 mx-10">
-                {' '}
+              <div className="leading-10 mx-10  px-6">
                 <li>
                   &nbsp; &nbsp; &nbsp; Please read the instructions carefully
                   for each part of the study before proceeding with them.
                 </li>
               </div>
 
-              <div className="leading-10 mx-10">
-                {' '}
+              <div className="leading-10 mx-10  px-6">
                 <li>
                   &nbsp; &nbsp; &nbsp; Please remember that we do NOT test you,{' '}
                   <span className="underline">
@@ -80,7 +79,7 @@ export default function Home() {
                 </li>
               </div>
 
-              <div className="leading-10 mx-10">
+              <div className="leading-10 mx-10  px-6">
                 {' '}
                 <li>
                   {' '}
@@ -90,7 +89,7 @@ export default function Home() {
                 </li>
               </div>
 
-              <div className="leading-10 mx-10">
+              <div className="leading-10 mx-10 px-6">
                 <li>
                   {' '}
                   &nbsp; &nbsp; &nbsp; You may go through the study information
