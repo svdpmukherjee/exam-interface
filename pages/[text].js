@@ -188,12 +188,12 @@ export default function Home(props) {
       let response_design = await fetch('/api/add-database', {
         method: 'GET',
       });
-      let data = await response_design.json();
-      designNumber = designElem;
+      // let data = await response_design.json();
+      // designNumber = designElem;
 
       let databaseEntry = {
         participant_id: participant_id,
-        design_element: designNumber,
+        design_element: designElem,
         ip_address_1: ip_address_1,
         ip_address_2: ip_address_2,
         questionNo: question,
