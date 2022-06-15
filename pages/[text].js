@@ -36,6 +36,7 @@ export default function Home(props) {
   let deviceType = '';
   let designNumber = 0;
   let link = '';
+  let answerWritten = '';
 
   // let selfControlTimer = {
   //   time: time,
@@ -97,12 +98,12 @@ export default function Home(props) {
       //   if (data.message == 0) designNumber = 3;
       //   else designNumber = parseInt(data.message) - 1;
       // }
-
+      let response_design = await fetch('/api/add-database', {
+        method: 'GET',
+      });
       if (stateVar == 0) {
         // console.log('only once');
-        let response_design = await fetch('/api/add-database', {
-          method: 'GET',
-        });
+
         let data = await response_design.json();
         designNumber = parseInt(data.message);
         setStateVar(1);
@@ -115,7 +116,7 @@ export default function Home(props) {
         if (data.message == 0) designNumber = 3;
         else designNumber = parseInt(data.message) - 1;
         setDesignElem(designNumber);
-        const answerWritten = enteredAnswer;
+        answerWritten = enteredAnswer;
         setEnteredAnswer('');
         // console.log(enteredAnswer);
         let databaseEntry = {
@@ -139,7 +140,7 @@ export default function Home(props) {
       } else {
         // setDesignElem(designNumber);
         // }
-        const answerWritten = enteredAnswer;
+        answerWritten = enteredAnswer;
         setEnteredAnswer('');
         // console.log(enteredAnswer);
         let databaseEntry = {
