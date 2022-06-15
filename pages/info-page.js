@@ -92,7 +92,7 @@ export default function Home() {
                     </span>
                   </li>
                 </ul>
-                <div className="space-y-8 p-3 border-2 border-black mt-16">
+                <div className="space-y-8 p-3 border-2 border-black mt-16 my-auto">
                   <p className="text-sm text-gray-400">
                     Please read out the Honor Code Pledge below and{' '}
                     <strong> click the box </strong> to go to the next page

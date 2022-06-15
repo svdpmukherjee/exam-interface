@@ -26,7 +26,7 @@ export default function Home() {
           before proceeding
         </div>
 
-        <div className="container mx-auto row-span-6 flex text-justify my-auto ">
+        <div className="container mx-auto row-span-6 flex  my-auto ">
           <div className="">
             {/* <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
@@ -96,7 +96,7 @@ export default function Home() {
                   and consent form by clicking here{' '}
                   <a
                     className="text-blue-500"
-                    href="https://drive.google.com/file/d/12-MbSQfMgO3741DSRgR1zSuWwQ5t6ONd/view?usp=sharing"
+                    href="https://drive.google.com/file/d/1cYZf7CG_VdSWSTLhDlPTyFDowI9bmq83/view?usp=sharing"
                     target="_blank"
                   >
                     <span className="underline">google drive link</span>
@@ -112,9 +112,10 @@ export default function Home() {
               type="checkbox"
               id="check"
               name="check"
+              className="my-auto"
               onChange={(event) => setChecked(!checked)}
             />
-            <label for="check" className="">
+            <label for="check" className="my-auto">
               {' '}
               <strong className="text-blue-800 text-md">
                 &nbsp; "I have read the consent form and agree to participate in
