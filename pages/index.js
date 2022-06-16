@@ -36,66 +36,62 @@ export default function Home() {
           before proceeding
         </div>
 
-        <div className="mx-auto row-span-4 flex text-md ">
-          <div className="">
-            {/* <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
+        <div className="m-auto  row-span-4 text-md ">
+          {/* <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
             </p> */}
 
-            <div className="m-24 rounded-2xl text-md space-y-8">
-              <div className=" text-justify flex">
-                <div className="">
-                  <span className="font-bold">
-                    The entire study has 2 parts
-                  </span>{' '}
-                  which should take around 30 minutes in total -{' '}
-                  <div className="mx-10">
-                    <li>
-                      <span className="font-bold">In the first part</span>, you
-                      shall take an{' '}
-                      <span className="">
-                        online test of some quantitative aptitude questions
-                      </span>{' '}
-                      in a time-bound manner.{' '}
-                    </li>
-                    <li>
-                      <span className="font-bold">In the second part</span>, you
-                      shall{' '}
-                      <span className="">
-                        fill an online survey questionnaires
-                      </span>{' '}
-                      right after the online test is submitted.
-                    </li>
-                  </div>
-                </div>
-              </div>
-
-              <div className=" flex">
-                <div className="">
-                  <span className="font-bold">
-                    Please read the instructions carefully for each part of the
-                    study before proceeding with them.
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex">
-                <div>
-                  Please remember that we do not test you,{' '}
-                  <span className="font-bold">
-                    we only evaluate your experience with the online test
-                    system.
-                  </span>{' '}
-                </div>
-              </div>
-
+          <div className="text-md space-y-12 px-10">
+            <div className="text-justify flex">
               <div className="">
-                Please use <strong> laptop or desktop </strong> to take this
-                study for a better view.
+                <span className="font-bold">The entire study has 2 parts</span>{' '}
+                which should take around 30 minutes in total -{' '}
+                <div className="mx-10">
+                  <li>
+                    <span className="font-bold">In the first part</span>, you
+                    shall take an{' '}
+                    <span className="">
+                      online test of some quantitative aptitude questions
+                    </span>{' '}
+                    in a time-bound manner.{' '}
+                  </li>
+                  <li>
+                    <span className="font-bold">In the second part</span>, you
+                    shall{' '}
+                    <span className="">
+                      fill an online survey questionnaires
+                    </span>{' '}
+                    right after the online test is submitted.
+                  </li>
+                </div>
               </div>
+            </div>
 
-              {/* <div className="leading-10 mx-10 px-6">
+            <div className=" flex">
+              <div className="">
+                <span className="font-bold">
+                  Please read the instructions carefully for each part of the
+                  study before proceeding with them.
+                </span>
+              </div>
+            </div>
+
+            <div className="flex">
+              <div>
+                Please remember that we do not test you,{' '}
+                <span className="font-bold">
+                  we only evaluate your experience with the online test system.
+                </span>{' '}
+              </div>
+            </div>
+
+            <div className="">
+              Please use <strong> laptop or desktop </strong> to take this study
+              for a better view.
+            </div>
+
+            {/* <div className="leading-10 mx-10 px-6">
                 <li>
                   {' '}
                   &nbsp; &nbsp; &nbsp; You may go through the study information
@@ -109,7 +105,6 @@ export default function Home() {
                   </a>
                 </li>
               </div> */}
-            </div>
           </div>
         </div>
         {/* <div className="flex  pr-4 justify-center row-span-1 ">
