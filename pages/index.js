@@ -1,95 +1,101 @@
 import Head from 'next/head';
 import { useEffect, useState, createContext } from 'react';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 
 // export const ApplicationContext = createContext();
 export default function Home() {
   const [checked, setChecked] = useState(false);
+  // const [modal, setModal] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
 
+  // const openModal = () => {
+  //   setModal(1);
+  // };
   const checkInfo = () => {
-    if (checked) {
-      router.push('/test-instructions');
-    } else alert('We need your consent to proceed with the study');
+    setShowModal(false);
+    router.push('/test-instructions');
+    // alert('We need your consent to proceed with the study');
   };
   // JSX
   return (
     <div className="">
-      <div className="grid grid-rows-9 h-screen ">
+      <div className="grid grid-rows-6 h-screen ">
         <Head>
           <title>Online test</title>
+          {/* <link
+            rel="stylesheet"
+            href="https://unpkg.com/flowbite@1.4.5/dist/flowbite.min.css"
+          /> */}
         </Head>
 
-        <div className="font-serif px-10 py-7 text-xl text-center font-semibold row-span-1  ">
+        <div className="font-serif py-10 text-2xl text-center font-semibold row-span-1">
           &#128075; Hi There! Please read the details of the study carefully
           before proceeding
         </div>
 
-        <div className="container mx-auto row-span-6 flex  my-auto ">
+        <div className="mx-auto row-span-4 flex text-md ">
           <div className="">
             {/* <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
             </p> */}
 
-            <div className="border-2 border-green-600 p-2 rounded-2xl text-md space-y-4">
-              <div className="leading-10 mx-10 px-6">
-                <li>
-                  {' '}
-                  &nbsp; &nbsp; &nbsp;{' '}
-                  <span className="bg-blue-600 text-white">
+            <div className="m-24 rounded-2xl text-md space-y-8">
+              <div className=" text-justify flex">
+                <div className="">
+                  <span className="font-bold">
                     The entire study has 2 parts
                   </span>{' '}
                   which should take around 30 minutes in total -{' '}
-                  <span className="bg-blue-600 text-white">
-                    In the first part
+                  <div className="mx-10">
+                    <li>
+                      <span className="font-bold">In the first part</span>, you
+                      shall take an{' '}
+                      <span className="">
+                        online test of some quantitative aptitude questions
+                      </span>{' '}
+                      in a time-bound manner.{' '}
+                    </li>
+                    <li>
+                      <span className="font-bold">In the second part</span>, you
+                      shall{' '}
+                      <span className="">
+                        fill an online survey questionnaires
+                      </span>{' '}
+                      right after the online test is submitted.
+                    </li>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" flex">
+                <div className="">
+                  <span className="font-bold">
+                    Please read the instructions carefully for each part of the
+                    study before proceeding with them.
                   </span>
-                  , you shall take an{' '}
-                  <span className="underline">
-                    online test of some quantitative aptitude questions
+                </div>
+              </div>
+
+              <div className="flex">
+                <div>
+                  Please remember that we do not test you,{' '}
+                  <span className="font-bold">
+                    we only evaluate your experience with the online test
+                    system.
                   </span>{' '}
-                  in a time-bound manner.{' '}
-                  <span className="bg-blue-600 text-white">
-                    In the second part
-                  </span>
-                  , you shall{' '}
-                  <span className="underline">
-                    fill an online survey questionnaires up
-                  </span>{' '}
-                  right after the online test is submitted.
-                </li>
+                </div>
               </div>
 
-              <div className="leading-10 mx-10  px-6">
-                <li>
-                  &nbsp; &nbsp; &nbsp; Please read the instructions carefully
-                  for each part of the study before proceeding with them.
-                </li>
+              <div className="">
+                Please use <strong> laptop or desktop </strong> to take this
+                study for a better view.
               </div>
 
-              <div className="leading-10 mx-10  px-6">
-                <li>
-                  &nbsp; &nbsp; &nbsp; Please remember that we do NOT test you,{' '}
-                  <span className="underline">
-                    we only evaluate your experience with the online test system
-                  </span>{' '}
-                  and also some of your valuable opinions which are asked in the
-                  survey later.
-                </li>
-              </div>
-
-              <div className="leading-10 mx-10  px-6">
-                {' '}
-                <li>
-                  {' '}
-                  &nbsp; &nbsp; &nbsp; Please use{' '}
-                  <strong>your laptop or desktop</strong> to take this study for
-                  a better view.
-                </li>
-              </div>
-
-              <div className="leading-10 mx-10 px-6">
+              {/* <div className="leading-10 mx-10 px-6">
                 <li>
                   {' '}
                   &nbsp; &nbsp; &nbsp; You may go through the study information
@@ -102,11 +108,11 @@ export default function Home() {
                     <span className="underline">google drive link</span>
                   </a>
                 </li>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
-        <div className="flex py-5 pr-4 justify-center row-span-1 ">
+        {/* <div className="flex  pr-4 justify-center row-span-1 ">
           <div className="mt-10 mx-5 flex justify-center my-auto">
             <input
               type="checkbox"
@@ -123,28 +129,126 @@ export default function Home() {
               </strong>
             </label>
           </div>
-        </div>
-        <div className="flex py-5 pr-4 justify-center bg-gray-50 row-span-1 ">
-          <button
-            className="flex px-5 py-2 my-auto bg-sky-800 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
-            onClick={checkInfo}
+        </div> */}
+
+        {/* <div className="flex  pr-4 justify-center row-span-1 bg-gray-50"> */}
+        {/* <button
+            className="bg-blue-200 text-black active:bg-blue-500 
+      font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+            type="button"
+            onClick={() => setShowModal(true)}
           >
-            Proceed to the first part of the study
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="26"
-              height="26"
-              fill="#FFFFFF"
-              enableBackground="new 0 0 512 512"
-              version="1.1"
-              viewBox="0 0 512 512"
-              xmlSpace="preserve"
-            >
-              <path d="M160 115.4L180.7 96 352 256 180.7 416 160 396.7 310.5 256z"></path>
-            </svg>
-          </button>
-        </div>
+            Fill Details
+          </button> */}
+        <button
+          type="button"
+          class="inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xl leading-tight uppercase rounded shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          onClick={() => setShowModal(true)}
+        >
+          Click here to Read the Study Information and Consent Form to Proceed
+        </button>
+        {showModal ? (
+          <>
+            <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none row-span-1">
+              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
+                    <h3 className="text-3xl font=semibold text-center">
+                      Evaluation of User Interaction with a Computer Based
+                      Assessment System
+                    </h3>
+                    {/* <button
+                        className="bg-transparent border-0 text-black float-right"
+                        onClick={() => setShowModal(false)}
+                      >
+                        <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
+                          x
+                        </span>
+                      </button> */}
+                  </div>
+                  <div className="relative p-6 flex-auto text-sm text-justify space-y-6">
+                    <div>
+                      <span className="font-bold">
+                        Description of the study:{' '}
+                      </span>
+                      During the study, you are about to solve 6 quantitative
+                      aptitude questions in an online test system within 12
+                      minutes, using a critical thinking approach. You are asked
+                      NOT to look for the answers either in the internet or
+                      taking help from others during the test.{' '}
+                      <span className="font-semibold">
+                        You will be rewarded with a bonus (£1) at the end of the
+                        study if you could solve at least 5 questions correctly.
+                      </span>{' '}
+                      After the test, you will be presented with a survey
+                      questionnaire regarding your experience with the test
+                      system and some of your general opinions related to it. We
+                      expect you to answer them honestly.{' '}
+                      <span className="font-semibold">
+                        The total duration will take approximately 25-30
+                        minutes. To thank you for your participation, you will
+                        receive a £4 compensation.
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-bold">
+                        What data would we collect?{' '}
+                      </span>
+                      In the survey, we will ask you to share some information
+                      about yourself, e.g. birth year, gender, native language,
+                      qualification, and educational background.{' '}
+                      <span className="font-semibold">
+                        All your personal data will strictly be anonymized.
+                      </span>{' '}
+                      Your answers (both from the online test and survey), along
+                      with the time taken to answer them will be stored in a
+                      secured server in University of Luxembourg. During the
+                      online test, IP address of your test-taking device shall
+                      be recorded and be strictly pseudonymized before storing
+                      it in the same server. Only the researchers working on
+                      this study will have the access to these data. The data
+                      collected during the study will only be used for the
+                      research project.{' '}
+                      <span className="font-semibold">
+                        The data will be used for publications without
+                        personally identifying you.
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-bold">Your Consent -</span> I have
+                      been informed in writing on how the study will be carried
+                      out. I have also been informed about the anonymity of my
+                      personal data and processing of it without revealing my
+                      identity, under the conditions detailed in the GDPR. I am
+                      aware that I may withdraw my consent any time and I don’t
+                      need to give reasons for my withdrawal and that there will
+                      be no negative consequences.
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <button
+                      className="text-black background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                      onClick={() => setShowModal(false)}
+                    >
+                      Close
+                    </button>
+                    <button
+                      className="text-white bg-green-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                      onClick={checkInfo}
+                    >
+                      Yes, I give my consent
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
+        {/* </div> */}
       </div>
+      {/* <Script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></Script> */}
     </div>
   );
 }

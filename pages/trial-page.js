@@ -37,7 +37,7 @@ export default function Home() {
           Welcome to the Online Test
         </div>
         <div className="px-10 py-5 row-span-1 border-b-2 ">
-          Enter Your Profilic ID: <span> </span>
+          Enter Your Prolific ID: <span> </span>
           {(() => {
             if (id == '') {
               return (

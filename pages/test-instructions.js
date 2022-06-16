@@ -32,11 +32,7 @@ export default function Home() {
             <div className="mx-auto px-5 space-y-4">
               <li>
                 <span> &nbsp; &nbsp; &nbsp; </span>There are{' '}
-                <strong>
-                  6{' '}
-                  <span className="text-violet-700">quantitative aptitude</span>{' '}
-                  questions{' '}
-                </strong>
+                <strong>6 quantitative aptitude questions </strong>
                 to answer <span className="underline"></span>
               </li>
               <li>
