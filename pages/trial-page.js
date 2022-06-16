@@ -92,7 +92,7 @@ export default function Home() {
                   </li>
                   <li>
                     &#8226;&nbsp; You{' '}
-                    <span className="underline">
+                    <span className="font-semibold">
                       should not spend much time
                     </span>{' '}
                     on a single question
@@ -126,8 +126,8 @@ export default function Home() {
           </div>
           <p className="mt-6">
             When you are ready, click the{' '}
-            <span className="text-sky-600">Start Test</span> below and the timer
-            will begin. Good Luck!
+            <span className="font-semibold">Start Test</span> below and the
+            timer will begin. Good Luck!
           </p>
         </div>
 

@@ -20,7 +20,7 @@ export default function Home() {
   // JSX
   return (
     <div className="">
-      <div className="grid grid-rows-9 h-screen ">
+      <div className="grid grid-rows-7 h-screen ">
         <Head>
           <title>Online test</title>
         </Head>

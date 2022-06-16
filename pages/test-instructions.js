@@ -12,17 +12,17 @@ export default function Home() {
   // JSX
   return (
     <div className="">
-      <div className="grid grid-rows-9 h-screen ">
+      <div className="grid grid-rows-7 h-screen ">
         <Head>
           <title>Online test</title>
         </Head>
 
-        <div className="font-serif px-10 py-7 text-2xl text-center font-semibold row-span-1 bg-gray-100 ">
+        <div className="font-serif px-10 py-7 text-2xl text-center font-semibold row-span-1 bg-gray-100">
           Welcome to the Online Test
         </div>
 
-        <div className="container mx-auto h-full row-span-6 flex justify-center">
-          <div className="pt-20">
+        <div className="container mx-auto h-full row-span-5 flex justify-center">
+          <div className="my-auto">
             <p className="font-serif pb-10 text-lg">
               &#10148; This is the first part of the study <br /> <br />
               &#10148; Below are the instructions to read before starting with
@@ -57,7 +57,7 @@ export default function Home() {
         </div>
         <div className="flex py-5 pr-4 justify-end bg-gray-100 row-span-1">
           <button
-            className=" px-5 py-2 bg-sky-800 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
+            className=" px-5 bg-sky-800 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
             onClick={() => router.push('/info-page')}
           >
             Proceed to Next Page

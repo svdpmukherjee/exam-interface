@@ -345,7 +345,9 @@ export default function Home(props) {
                   }
                 })()}
                 <a href={link}>
-                  <span className="bg-blue-500 text-white p-2">click here</span>{' '}
+                  <span className="bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-700">
+                    click here
+                  </span>{' '}
                   to proceed with the survey
                 </a>
               </div>

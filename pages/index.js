@@ -31,12 +31,14 @@ export default function Home() {
           /> */}
         </Head>
 
-        <div className="font-serif py-10 text-2xl text-center font-semibold row-span-1">
-          &#128075; Hi There! Please read the details of the study carefully
-          before proceeding
+        <div className="font-serif py-10 text-2xl text-center font-semibold row-span-1 mx-auto">
+          <p className="border-t-2 border-b-2 py-6">
+            Hi There! Please read the details of the study carefully before
+            proceeding
+          </p>
         </div>
 
-        <div className="m-auto  row-span-4 text-md ">
+        <div className="m-auto row-span-4 text-md ">
           {/* <p className="font-serif pb-10 mt-10 text-lg flex justify-center">
               &#128075; Hi There! Please read the details of the study carefully
               before proceeding &#8628;
@@ -45,14 +47,14 @@ export default function Home() {
           <div className="text-md space-y-12 px-10">
             <div className="text-justify flex">
               <div className="">
-                <span className="font-bold">The entire study has 2 parts</span>{' '}
-                which should take around 30 minutes in total -{' '}
+                <span className="">The entire study has 2 parts</span> which
+                should take around 30 minutes in total -{' '}
                 <div className="mx-10">
                   <li>
                     <span className="font-bold">In the first part</span>, you
                     shall take an{' '}
                     <span className="">
-                      online test of some quantitative aptitude questions
+                      online test of 6 quantitative aptitude (maths) questions
                     </span>{' '}
                     in a time-bound manner.{' '}
                   </li>
@@ -60,7 +62,7 @@ export default function Home() {
                     <span className="font-bold">In the second part</span>, you
                     shall{' '}
                     <span className="">
-                      fill an online survey questionnaires
+                      fill an online survey questionnaire
                     </span>{' '}
                     right after the online test is submitted.
                   </li>
@@ -222,14 +224,14 @@ export default function Home() {
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                      className="text-black background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      className="text-black background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 hover:text-blue-600"
                       type="button"
                       onClick={() => setShowModal(false)}
                     >
                       Close
                     </button>
                     <button
-                      className="text-white bg-green-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                      className="text-white bg-green-500  font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg hover:bg-green-700 outline-none focus:outline-none mr-1 mb-1"
                       type="button"
                       onClick={checkInfo}
                     >
