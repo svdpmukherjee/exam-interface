@@ -81,7 +81,7 @@ export default function Home() {
 
             <div className="flex">
               <div>
-                Please remember that we do not test you,{' '}
+                Remember that we do not test you,{' '}
                 <span className="font-bold">
                   we only evaluate your experience with the online test system.
                 </span>{' '}
@@ -89,8 +89,9 @@ export default function Home() {
             </div>
 
             <div className="">
-              Please use <strong> laptop or desktop </strong> to take this study
-              for a better view.
+              Please use <strong> laptop or desktop </strong> to take this
+              study. Participating in the study using{' '}
+              <strong> mobile or tablet is strictly not allowed.</strong>
             </div>
 
             {/* <div className="leading-10 mx-10 px-6">
@@ -139,7 +140,7 @@ export default function Home() {
           </button> */}
         <button
           type="button"
-          class="inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xl leading-tight uppercase rounded shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          class="inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xl leading-tight uppercase shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
           onClick={() => setShowModal(true)}
         >
           Click here to Read the Study Information and Consent Form to
@@ -152,7 +153,7 @@ export default function Home() {
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
                     <h3 className="text-3xl font=semibold text-center">
-                      Evaluation of User Interaction with a Computer Based
+                      Evaluation of User Interaction with a Computer-based
                       Assessment System
                     </h3>
                     {/* <button

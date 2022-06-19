@@ -380,7 +380,7 @@ export default function Home(props) {
                   </div> */}
               {/* </div> */}
               {(() => {
-                if (timeLeftCheck <= 60) {
+                if (timeLeftCheck <= 90) {
                   infoIconColor = 'text-red-400';
                 } else if (time_2 - time_3 >= 120) {
                   infoIconColor = 'text-amber-600';
@@ -408,7 +408,7 @@ export default function Home(props) {
                         <line x1="12" y1="16" x2="12.01" y2="16" />
                       </svg>
                       {(() => {
-                        if (timeLeftCheck <= 60) {
+                        if (timeLeftCheck <= 90) {
                           return (
                             <div className="my-auto  text-red-400 text-sm">
                               {' '}

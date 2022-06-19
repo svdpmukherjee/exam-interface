@@ -117,7 +117,7 @@ export default function Home() {
                         className="w-48 h-12 border-blue-500 border-2 shadow-md rounded-md"
                         placeholder="Type only the number"
                       />{' '}
-                      mins
+                      minutes
                     </div>
                   </li>
                 </ul>
