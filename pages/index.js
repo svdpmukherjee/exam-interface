@@ -89,9 +89,9 @@ export default function Home() {
             </div>
 
             <div className="">
-              Please use <strong> laptop or desktop </strong> to take this
+              Please use <strong> a laptop or desktop </strong> to take this
               study. Participating in the study using{' '}
-              <strong> mobile or tablet is strictly not allowed.</strong>
+              <strong> a mobile or tablet is strictly not allowed.</strong>
             </div>
 
             {/* <div className="leading-10 mx-10 px-6">
