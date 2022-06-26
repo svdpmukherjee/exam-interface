@@ -3,10 +3,15 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   // darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        pulse: 'pulse 1s linear infinite',
+      },
+    },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  // plugins: [require('flowbite/src/plugin')],
+  // content: ['node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
 };

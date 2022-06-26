@@ -8,13 +8,10 @@ export default function Home() {
   const [id, setID] = useState('');
 
   const router = useRouter();
-
   // Proceed with test
   const checkInfo = () => {
-    console.log(id);
-    if (checked) {
-      router.push('/trial-page');
-    } else alert('Click the box to pledge and proceed');
+    if (checked) router.push('/info-page-2');
+    else alert('Click the box to proceed');
   };
 
   // JSX
@@ -57,7 +54,7 @@ export default function Home() {
           })()}
         </div> */}
         {/* </div> */}
-        <div class="container mx-auto px-16 pt-10 row-span-5">
+        <div class="mx-auto px-16 pt-10 row-span-5">
           <div className="py-10">
             <div class="relative flex flex-col flex-wrap p-8 bg-opacity-75 border border-gray-300 ">
               <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
@@ -75,24 +72,67 @@ export default function Home() {
                 <div className="my-auto">IMPORTANT INFO</div>
               </div>
               <div className="mx-auto px-5">
-                <ul className=" my-10 space-y-10">
+                <ul className=" my-10 space-y-4">
+                  {/* <li>
+                    -<span> &nbsp; </span>There are{' '}
+                    <strong>6 quantitative aptitude questions </strong>
+                    to answer
+                  </li>
                   <li>
-                    -<span className="text-blue-700"> &nbsp; BONUS: </span> If
-                    you can answer{' '}
-                    <strong>5 questions correctly (out of 6)</strong>,{' '}
-                    <strong>you will receive a bonus (£1) </strong> along with
+                    -<span> &nbsp; </span>You have total{' '}
+                    <strong>10 minutes</strong> of time to answer them all
+                  </li>
+                  <li>
+                    -<span> &nbsp; </span>You shall write the answers in the box
+                    provided with each question
+                  </li> */}
+                  <li>
+                    -<span className="font-bold"> &nbsp; BONUS: </span> If you
+                    can answer <strong>5 questions correctly (out of 6)</strong>
+                    , <strong>you will receive a bonus (£3) </strong> along with
                     your compensation
                   </li>
                   <li>
-                    -<span> &nbsp; </span>You are{' '}
-                    <strong>not authorized</strong> to visit other websites or
-                    take help from other people during the test.{' '}
-                    <span className="underline">
-                      However, you may use calculator if required
+                    -<span> &nbsp; </span>
+                    <span className="">
+                      You cannot go back to the previous questions
                     </span>
                   </li>
+                  {/* <li>
+                    -<span> &nbsp; </span>
+                    <span className="">
+                      You should not spend too much time
+                    </span>{' '}
+                    on a single question
+                  </li> */}
+                  <br />
+                  <br />
+
+                  <div className="space-y-8 p-3  mx-auto">
+                    <p className="text-sm text-gray-400">
+                      Please read out the statement below and{' '}
+                      <strong> click the box </strong> to proceed to the next
+                      page
+                    </p>
+
+                    <input
+                      type="checkbox"
+                      id="check"
+                      name="check"
+                      onChange={(event) => setChecked(!checked)}
+                    />
+                    <label for="check" className="">
+                      {' '}
+                      <span className=""></span>{' '}
+                      <span className="font-semibold">
+                        &nbsp;"I understand that this is a research study and no
+                        activities of mine as a part of it pose any threat to my
+                        Prolific membership"
+                      </span>
+                    </label>
+                  </div>
                 </ul>
-                <div className="space-y-8 p-3 border-2 border-black mt-16 my-auto">
+                {/* <div className="space-y-8 p-3 border-2 border-black mt-16 my-auto">
                   <p className="text-sm text-gray-400">
                     Please read out the Honor Code Pledge below and{' '}
                     <strong> click the box </strong> to go to the next page
@@ -114,7 +154,7 @@ export default function Home() {
                       during this test, and that all work will be my own"
                     </strong>
                   </label>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -126,7 +166,7 @@ export default function Home() {
 
         <div className="flex py-5 pr-4 justify-center bg-gray-100 row-span-1">
           <button
-            className="px-5 py-2 bg-sky-700 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
+            className="px-5 py-2 bg-blue-700 hover:bg-sky-700 text-white rounded-lg shadow-2xl"
             onClick={checkInfo}
           >
             Next Page

@@ -19,6 +19,11 @@ export default async function handler(req, res) {
       return updateDesign(req, res);
     }
 
+    case 'DELETE': {
+      console.log(req.method);
+      return addBonus(req, res);
+    }
+
     // case 'UPDATE_DESIGN': {
     //   console.log(req.method);
     //   return updateDesign(req, res);
@@ -36,7 +41,7 @@ async function addEntry(req, res) {
   try {
     let { db } = await connectToDatabase();
     console.log(data);
-    db.collection('exam_interface').insertOne(data);
+    db.collection('demo_exam_interface').insertOne(data);
 
     return res.json({
       message: 'Entry added successfully',
@@ -86,6 +91,25 @@ async function updateDesign(req, res) {
 
     return res.json({
       message: 'updated successfully',
+      success: true,
+    });
+  } catch (error) {
+    return res.json({
+      message: new Error(error).message,
+      success: false,
+    });
+  }
+}
+
+async function addBonus(req, res) {
+  const data = JSON.parse(req.body);
+  try {
+    let { db } = await connectToDatabase();
+    console.log(data);
+    db.collection('bonus_db').insertOne(data);
+
+    return res.json({
+      message: 'Entry added successfully',
       success: true,
     });
   } catch (error) {

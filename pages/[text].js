@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Timer from '../components/Timer';
 import { browserName, isMobile } from 'react-device-detect';
 
-const time = 12 * 60; // setting time limit as 30 mins
+const time = 10 * 60; // setting time limit as 30 mins
 
 export default function Home(props) {
   const { ip_address_1, ip_address_2 } = props;
@@ -19,17 +19,22 @@ export default function Home(props) {
   const [answered, setAnswered] = useState(0);
   const [time_2, setTime_2] = useState(time);
   const [time_3, setTime_3] = useState(time_2);
-  const [colorAnswer, setColorAnswer] = useState([]);
   const [timeLeftCheck, setTimeLeftCheck] = useState(time);
+  const [savedAnswer, setSavedAnswer] = useState([]);
+  const correctAnswer = [42, 95, 678, 62, 1667, 143];
+  const [completionCode, setcompletionCode] = useState('');
+  const [blurScore, setBlurScore] = useState(1);
+  const [finalPulse, setFinalPulse] = useState(0);
+
   // const [stopTimer, setStopTimer] = useState(false);
   // const [timerButtonText, setTimerButtonText] = useState('Stop Timer');
   const router = useRouter();
 
   let submit = 0;
   let isAnswered = '';
-  let nextSubmitColor = '';
-  let nextSubmitText = '';
+
   let timeColor = '';
+
   let timerIconColor = '';
   let infoIconColor = '';
   let bonusBorder = '';
@@ -37,6 +42,8 @@ export default function Home(props) {
   let designNumber = 0;
   let link = '';
   let answerWritten = '';
+  let blurStatus = '';
+  let correct = 0;
 
   // let selfControlTimer = {
   //   time: time,
@@ -60,6 +67,37 @@ export default function Home(props) {
     return () => clearTimeout(intervalId);
   }, [timeLeftCheck]);
 
+  const checkCompletionCode = async () => {
+    if (completionCode == '') {
+      alert('Please enter the Completion Code');
+    } else if (completionCode != '7104E4BD') {
+      alert('Please enter the correct completion code');
+      setcompletionCode('');
+    } else {
+      setBlurScore(0);
+      setFinalPulse(1);
+      isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
+      if (correct >= 5) {
+        let bonusEntry = {
+          participant_id: participant_id,
+          condition: designNumber,
+          ip_address_1: ip_address_1,
+          ip_address_2: ip_address_2,
+          savedAnswer: savedAnswer,
+          date: new Date().toISOString().substring(0, 10),
+          time: new Date().toISOString().substring(11, 19),
+          deviceType: deviceType,
+          browser: browserName,
+        };
+
+        let response = await fetch('/api/add-database', {
+          method: 'DELETE',
+          body: JSON.stringify(bonusEntry),
+        });
+      }
+    }
+  };
+
   // next button
   const handleNext = async () => {
     if (isNaN(enteredAnswer)) {
@@ -69,7 +107,7 @@ export default function Home(props) {
       // router.push('/disqualified');
       isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
       const nextQues = currentQuestion + 1;
-      let date = new Date().toISOString();
+      // let date = new Date().toISOString();
       nextQues < questions.length && setCurrentQuestion(nextQues);
       let timeTaken = time_2 - time_3;
       setTime_2(time_3);
@@ -105,6 +143,7 @@ export default function Home(props) {
         // console.log('only once');
 
         let data = await response_design.json();
+
         designNumber = parseInt(data.message);
         setStateVar(1);
         response_design = await fetch('/api/add-database', {
@@ -117,17 +156,25 @@ export default function Home(props) {
         else designNumber = parseInt(data.message) - 1;
         setDesignElem(designNumber);
         answerWritten = enteredAnswer;
+        // setSavedAnswer((savedAnswer) => [
+        //   ...savedAnswer,
+        //   {
+        //     currentQuestion: currentQuestion + 1,
+        //     answerWritten: answerWritten,
+        //   },
+        // ]);
         setEnteredAnswer('');
         // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
-          design_element: designNumber,
+          condition: designNumber,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
           questionNo: question,
           enteredAnswer: answerWritten,
           timeTaken: timeTaken,
-          date: date,
+          date: new Date().toISOString().substring(0, 10),
+          time: new Date().toISOString().substring(11, 19),
           deviceType: deviceType,
           browser: browserName,
         };
@@ -140,18 +187,21 @@ export default function Home(props) {
       } else {
         // setDesignElem(designNumber);
         // }
+
         answerWritten = enteredAnswer;
+        // setSavedAnswer([...savedAnswer, { answer: answerWritten }]);
         setEnteredAnswer('');
         // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
-          design_element: designElem,
+          condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
           questionNo: question,
           enteredAnswer: answerWritten,
           timeTaken: timeTaken,
-          date: date,
+          date: new Date().toISOString().substring(0, 10),
+          time: new Date().toISOString().substring(11, 19),
           deviceType: deviceType,
           browser: browserName,
         };
@@ -161,10 +211,12 @@ export default function Home(props) {
           method: 'POST',
           body: JSON.stringify(databaseEntry),
         });
-        // console.log('reaching 3');
       }
+      setSavedAnswer([...savedAnswer, enteredAnswer]);
+      // console.log(savedAnswer);
     }
   };
+
   // const controlTimer = async () => {
   //   if (stopTimer === false) setTimerButtonText('Start Timer');
   //   else setTimerButtonText('Stop Timer');
@@ -175,46 +227,51 @@ export default function Home(props) {
   // submit button
   const handleSubmitButton = async () => {
     isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
-    let date = new Date().toISOString();
-    if (window.confirm('You are about to submit the test. Want to Proceed?')) {
-      submit = 1;
-    } else submit = 0;
+    // let date = new Date().toISOString();
+    // if (window.confirm('You are about to submit the test. Want to Proceed?')) {
+    //   submit = 1;
+    // } else submit = 0;
 
-    if (submit == 1) {
-      let timeTaken = time_2 - time_3;
-      setTime_2(time_3);
-      let question = currentQuestion + 1;
+    // if (submit == 1) {
+    let timeTaken = time_2 - time_3;
+    setTime_2(time_3);
+    let question = currentQuestion + 1;
 
-      let response_design = await fetch('/api/add-database', {
-        method: 'GET',
-      });
-      // let data = await response_design.json();
-      // designNumber = designElem;
+    let response_design = await fetch('/api/add-database', {
+      method: 'GET',
+    });
+    // let data = await response_design.json();
+    // designNumber = designElem;
+    setSavedAnswer([...savedAnswer, enteredAnswer]);
+    let databaseEntry = {
+      participant_id: participant_id,
+      condition: designElem,
+      ip_address_1: ip_address_1,
+      ip_address_2: ip_address_2,
+      questionNo: question,
+      enteredAnswer: enteredAnswer,
+      timeTaken: timeTaken,
+      date: new Date().toISOString().substring(0, 10),
+      time: new Date().toISOString().substring(11, 19),
+      deviceType: deviceType,
+      browser: browserName,
+    };
+    let response = await fetch('/api/add-database', {
+      method: 'POST',
+      body: JSON.stringify(databaseEntry),
+    });
 
-      let databaseEntry = {
-        participant_id: participant_id,
-        design_element: designElem,
-        ip_address_1: ip_address_1,
-        ip_address_2: ip_address_2,
-        questionNo: question,
-        enteredAnswer: enteredAnswer,
-        timeTaken: timeTaken,
-        date: date,
-        deviceType: deviceType,
-        browser: browserName,
-      };
-      let response = await fetch('/api/add-database', {
-        method: 'POST',
-        body: JSON.stringify(databaseEntry),
-      });
+    setShowScore(true);
 
-      setShowScore(true);
-
-      enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
-      enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
-      setEnteredAnswer('');
-    }
+    enteredAnswer === '' ? (isAnswered = 'No') : (isAnswered = 'Yes');
+    enteredAnswer === '' ? setAnswered(answered) : setAnswered(answered + 1);
+    setEnteredAnswer('');
+    // console.log(savedAnswer);
+    // }
   };
+  // useEffect(() => {
+  //   console.log(savedAnswer);
+  // }, [savedAnswer]);
   // const checkEnteredAnswer = (answer) => {
   //   if (currentQuestion == 0) {
   //     if (answer == '12, NE') setEnteredAnswer(answer);
@@ -236,7 +293,8 @@ export default function Home(props) {
         {/* <Header showScore={showScore} /> */}
         {showScore ? (
           <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-slate-100 m-auto">
-            Thank you for taking the test!
+            To complete the Part II of the study, please read the instructions
+            below:
           </div>
         ) : (
           // first row
@@ -304,52 +362,215 @@ export default function Home(props) {
             {/* <h1 className="text-2xl font-medium font-serif text-center pt-20 underline">
               Summary of your test:
             </h1> */}
-            <div className="grid grid-cols-3 my-auto">
-              <div className="row-span-1"></div>
-              <div className="row-span-1 space-y-8 mx-8 justify-center text-lg ">
-                {/* <div className="space-y-4"> */}
-                <li>
-                  &nbsp; You have answered <strong>{answered} out of 6 </strong>{' '}
-                  questions
-                </li>
-                {(() => {
-                  if (answered >= 3) {
-                    return <li>&nbsp; Your performance is satisfactory</li>;
-                  }
-                })()}
+            <div className="">
+              <div className="grid grid-cols-9">
+                <div className="col-span-5 flex justify-center">
+                  <div className="m-auto px-5 space-y-10">
+                    <li>
+                      <span> &nbsp; &nbsp; &nbsp; </span>You are now going to
+                      fill a survey questionnaire
+                    </li>
+                    <li>
+                      <span> &nbsp; &nbsp; &nbsp; </span>Once you complete the
+                      survey, you shall receive a{' '}
+                      <strong>completion code</strong>
+                    </li>
+                    <li>
+                      <span> &nbsp; &nbsp; &nbsp; </span>Please copy that
+                      completion code and paste in the right box to unlock your
+                      final score in the test
+                    </li>
+                    <li>
+                      <span> &nbsp; &nbsp; &nbsp; </span>
+                      <>
+                        Your eligibility to the bonus shall be announced along
+                        with your final score
+                      </>
+                    </li>
+                    <li>
+                      <span> &nbsp; &nbsp; &nbsp; </span>{' '}
+                      <strong className="">
+                        Do not refresh or close this page{' '}
+                      </strong>{' '}
+                      as you shall have to come back after completion of the
+                      survey
+                    </li>
+                  </div>
+                </div>
+                <div className="col-span-4  space-y-12 border-l-2 my-auto px-10">
+                  <div className=" font-serif">
+                    Step 1:&nbsp;&nbsp;&nbsp;
+                    {(() => {
+                      if (designElem == 0) {
+                        link =
+                          'http://ulsurvey.uni.lu/index.php/326466?lang=en';
+                      } else if (designElem == 1) {
+                        link =
+                          'http://ulsurvey.uni.lu/index.php/594336?lang=en';
+                      } else if (designElem == 2) {
+                        link =
+                          'http://ulsurvey.uni.lu/index.php/679573?lang=en';
+                      } else {
+                        link =
+                          'http://ulsurvey.uni.lu/index.php/689964?lang=en';
+                      }
+                    })()}
+                    <a href={link} target={'_blank'}>
+                      <span className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-3.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Click to proceed with the survey
+                      </span>{' '}
+                    </a>
+                    (survey opens with a new tab)
+                  </div>
+                  <div className="font-serif gap-y-3">
+                    Step 2: &nbsp;&nbsp;&nbsp;
+                    <input
+                      type="text"
+                      onChange={(event) => {
+                        setcompletionCode(event.target.value);
+                      }}
+                      className="w-56 h-12 border-blue-300 border-2 shadow-md rounded-md"
+                      placeholder="Enter the Completion Code"
+                    />
+                    &nbsp;&nbsp;
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      onClick={checkCompletionCode}
+                    >
+                      Unlock your score
+                    </button>
+                    {/* <button
+                      className="px-5 py-2 bg-blue-700 hover:bg-sky-700 text-white rounded-lg shadow-2xl"
+                      
+                    >
+                      
+                    </button> */}
+                    {(() => {
+                      if (blurScore == 1) {
+                        blurStatus = 'blur-xl';
+                      } else {
+                        blurStatus = 'blur-none';
+                      }
+                    })()}
+                    {/* <table className="table-auto border-2 border-sky-300 mx-auto blur"> */}
+                    <table
+                      className={`${blurStatus} table-auto border-2 my-8 text-sm border-sky-300 mx-auto `}
+                    >
+                      <thead className="text-center  bg-sky-300">
+                        <tr>
+                          <th className="px-3">Question no</th>
+                          <th className="px-3">Your Answer</th>
+                          {/* <th className="px-3">Correct Answer</th> */}
+                          <th className="px-3">Evaluation</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-center">
+                        {
+                          // for (let index = 0; index < 6; index++) {
+                          savedAnswer.map((answer, index) => (
+                            <tr key={index} className="border-2">
+                              <td>{index + 1}</td>
+                              <td>{savedAnswer[index]}</td>
+                              {/* <td>{correctAnswer[index]}</td> */}
+                              <td>
+                                {(() => {
+                                  if (savedAnswer[index] == '') {
+                                    return (
+                                      <span className="text-gray-400">
+                                        Unattempted
+                                      </span>
+                                    );
+                                  } else if (
+                                    (index == 1 &&
+                                      parseFloat(savedAnswer[index]) >=
+                                        correctAnswer[index] - 1 &&
+                                      parseFloat(savedAnswer[index]) <=
+                                        correctAnswer[index]) ||
+                                    (index == 4 &&
+                                      parseFloat(savedAnswer[index]) >=
+                                        correctAnswer[index] - 1 &&
+                                      parseFloat(savedAnswer[index]) <=
+                                        correctAnswer[index])
+                                  ) {
+                                    correct++;
 
-                <li>
-                  &nbsp; Your{' '}
-                  <span className="font-semibold">
-                    eligibility to the bonus
-                  </span>{' '}
-                  will be announced once you finish the survey successfully
-                </li>
-                {/* </div> */}
-              </div>
-              <div className="row-span-1 "></div>
-            </div>
-
-            <div className="container m-auto mb-40 py-10  bg-red-100">
-              <div className="text-3xl text-center font-serif">
-                To complete the rest of study, please{' '}
-                {(() => {
-                  if (designElem == 0) {
-                    link = 'http://ulsurvey.uni.lu/index.php/496933?lang=en';
-                  } else if (designElem == 1) {
-                    link = 'http://ulsurvey.uni.lu/index.php/136117?lang=en';
-                  } else if (designElem == 2) {
-                    link = 'http://ulsurvey.uni.lu/index.php/936536?lang=en';
-                  } else {
-                    link = 'http://ulsurvey.uni.lu/index.php/287541?lang=en';
-                  }
-                })()}
-                <a href={link}>
-                  <span className="bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-700">
-                    click here
-                  </span>{' '}
-                  to proceed with the survey
-                </a>
+                                    return (
+                                      <span className="text-green-500">
+                                        Correct
+                                      </span>
+                                    );
+                                  } else if (
+                                    parseFloat(savedAnswer[index]) ==
+                                    correctAnswer[index]
+                                  ) {
+                                    correct++;
+                                    return (
+                                      <span className="text-green-500">
+                                        Correct
+                                      </span>
+                                    );
+                                  } else {
+                                    return (
+                                      <span className="text-red-500">
+                                        Incorrect
+                                      </span>
+                                    );
+                                  }
+                                })()}
+                              </td>
+                            </tr>
+                          ))
+                        }
+                      </tbody>
+                    </table>
+                    {(() => {
+                      if (correct >= 5) {
+                        return (
+                          <p
+                            className={`${blurStatus}  mx-auto text-xl font-bold text-center my-10 `}
+                          >
+                            Congratulations! You deserse the bonus!
+                          </p>
+                        );
+                      } else {
+                        return (
+                          <p
+                            className={`${blurStatus} text-center text-lg font-bold mx-auto `}
+                          >
+                            You needed {5 - correct} more correct answers to win
+                            the bonus
+                          </p>
+                        );
+                      }
+                    })()}
+                  </div>
+                  {(() => {
+                    if (finalPulse == 0) {
+                      return (
+                        <div className=" font-serif ">
+                          Step 3:&nbsp;&nbsp;&nbsp;
+                          <a href="https://app.prolific.co/submissions/complete?cc=7104E4BD">
+                            <span className=" underline font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
+                              Click here to complete your study in Prolific
+                            </span>{' '}
+                          </a>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div className=" font-serif ">
+                          Step 3:&nbsp;&nbsp;&nbsp;
+                          <a href="https://app.prolific.co/submissions/complete?cc=7104E4BD">
+                            <span className=" underline  rounded-lg text-lg font-semibold px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 animate-pulse">
+                              Click here to complete your study in Prolific
+                            </span>{' '}
+                          </a>
+                        </div>
+                      );
+                    }
+                  })()}
+                </div>
               </div>
             </div>
           </>
@@ -475,7 +696,7 @@ export default function Home(props) {
                     </div>
                     <>
                       <div className="row-span-2 my-auto ">
-                        <p className="text-lg text-justify">
+                        <p className="text-lg text-justify ">
                           {questions[currentQuestion].question}
                         </p>
                       </div>
@@ -505,7 +726,7 @@ export default function Home(props) {
                   </div>
                 </div>
                 <div className="grid col-span-2 ">
-                  <div className=" flex justify-center my-auto">
+                  <div className=" flex justify-center my-auto ">
                     {(() => {
                       // if (currentQuestion > 3) {
                       //   return (
@@ -522,12 +743,15 @@ export default function Home(props) {
                         if (designElem == 1) {
                           return (
                             <div className="flex h-1/2 w-2/3 ">
-                              <img src="images/honor_final.png"></img>
+                              <img
+                                src="images/honor_final.png"
+                                className=""
+                              ></img>
                             </div>
                           );
                         } else if (designElem == 2) {
                           return (
-                            <div className="flex h-1/2 w-2/3">
+                            <div className="flex h-1/2 w-2/3 ">
                               <img
                                 src="images/warning_final.png"
                                 className=""
@@ -537,7 +761,10 @@ export default function Home(props) {
                         } else if (designElem == 3) {
                           return (
                             <div className="flex h-1/2 w-2/3 ">
-                              <img src="images/monitoring_final.png"></img>
+                              <img
+                                src="images/monitoring_final.png"
+                                className=""
+                              ></img>
                             </div>
                           );
                         }
@@ -609,7 +836,7 @@ export default function Home(props) {
                       onClick={() => {
                         if (
                           window.confirm(
-                            'You are about to quit the test. Want to Proceed?'
+                            'You are about to quit the test. Want to quit?'
                           )
                         )
                           router.push('/quit');
@@ -628,11 +855,8 @@ export default function Home(props) {
                     bonusBorder = 'border-none  rounded-lg';
                   }
                 })()} */}
-                <div className="col-span-1 flex my-auto justify-center">
-                  <img
-                    src="images/bonus_final.png"
-                    className={`${bonusBorder}  w-1/2 `}
-                  ></img>
+                <div className="col-span-1 flex my-auto justify-center ">
+                  <img src="images/bonus_final.png" className="w-1/2"></img>
                 </div>
                 <div className="col-span-1 justify-end flex">
                   <button

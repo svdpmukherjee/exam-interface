@@ -16,7 +16,7 @@ export default function Home() {
   // };
   const checkInfo = () => {
     setShowModal(false);
-    router.push('/test-instructions');
+    router.push('/info-page-1');
     // alert('We need your consent to proceed with the study');
   };
   // JSX
@@ -33,8 +33,7 @@ export default function Home() {
 
         <div className="font-serif py-10 text-2xl text-center font-semibold row-span-1 mx-auto">
           <p className="border-t-2 border-b-2 py-6">
-            Hi There! Please read the details of the study carefully before
-            proceeding
+            Hi There! Thank you for participating in the study
           </p>
         </div>
 
@@ -44,12 +43,12 @@ export default function Home() {
               before proceeding &#8628;
             </p> */}
 
-          <div className="text-md space-y-12 px-10">
+          <div className="text-md space-y-8 pl-10">
             <div className="text-justify flex">
               <div className="">
-                <span className="">The entire study has 2 parts</span> which
-                should take around 30 minutes in total -{' '}
-                <div className="mx-10">
+                <span className="">The entire study has 2 parts</span> - an
+                online maths test followed by an online questionnaire.{' '}
+                {/* <div className="mx-10">
                   <li>
                     <span className="font-bold">In the first part</span>, you
                     shall take an{' '}
@@ -66,32 +65,34 @@ export default function Home() {
                     </span>{' '}
                     right after the online test is submitted.
                   </li>
-                </div>
+                </div> */}
               </div>
             </div>
 
-            <div className=" flex">
+            {/* <div className=" flex">
               <div className="">
-                <span className="font-bold">
-                  Please read the instructions carefully for each part of the
-                  study before proceeding with them.
+                <span className="">
+                  The study should take around 20-23 minutes in total.
                 </span>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex">
               <div>
-                Remember that we do not test you,{' '}
+                Through this study,{' '}
                 <span className="font-bold">
-                  we only evaluate your experience with the online test system.
+                  we evaluate your experience with an online test system.
                 </span>{' '}
               </div>
             </div>
 
             <div className="">
               Please use <strong> a laptop or desktop </strong> to take this
-              study. Participating in the study using{' '}
+              study. Using{' '}
               <strong> a mobile or tablet is strictly not allowed.</strong>
+            </div>
+            <div className="">
+              For study details and consent form, please click below.
             </div>
 
             {/* <div className="leading-10 mx-10 px-6">
@@ -149,7 +150,7 @@ export default function Home() {
         {showModal ? (
           <>
             <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none row-span-1">
-              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              <div className="relative w-auto my-6 mx-auto max-w-4xl">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
                     <h3 className="text-3xl font=semibold text-center">
@@ -165,28 +166,28 @@ export default function Home() {
                         </span>
                       </button> */}
                   </div>
-                  <div className="relative p-6 flex-auto text-sm text-justify space-y-6">
-                    <div>
+                  <div className="relative p-6 flex-auto text-sm text-justify space-y-6 leading-6">
+                    <div className="">
                       <span className="font-bold">
                         Description of the study:{' '}
                       </span>
                       During the study, you are about to solve 6 quantitative
-                      aptitude questions in an online test system within 12
-                      minutes, using a critical thinking approach. You are asked
-                      NOT to look for the answers either in the internet or
-                      taking help from others during the test.{' '}
+                      aptitude questions in an online test system within 10
+                      minutes.{' '}
                       <span className="font-semibold">
-                        You will be rewarded with a bonus (£1) at the end of the
+                        You will be rewarded with a bonus (£3) at the end of the
                         study if you could solve at least 5 questions correctly.
                       </span>{' '}
-                      After the test, you will be presented with a survey
-                      questionnaire regarding your experience with the test
-                      system and some of your general opinions related to it. We
-                      expect you to answer them honestly.{' '}
+                      You should not look for any help either on the internet or
+                      from anyone else during the test. After the test, you will
+                      be presented with a survey questionnaire regarding your
+                      experience with the test system and some of your general
+                      opinions related to it. We expect you to answer them
+                      honestly.{' '}
                       <span className="font-semibold">
-                        The total duration will take approximately 25-30
-                        minutes. To thank you for your participation, you will
-                        receive a £4 compensation.
+                        The total duration will take around 20-23 minutes. To
+                        thank you for your participation, you will receive a £3
+                        compensation.
                       </span>
                     </div>
                     <div>

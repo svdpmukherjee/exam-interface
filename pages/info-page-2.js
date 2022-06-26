@@ -4,26 +4,44 @@ import { useRouter } from 'next/router';
 
 // export const ApplicationContext = createContext();
 export default function Home() {
-  const [trialAnswer, setTrialAnswer] = useState('');
+  const [trialMinutes, settrialMinutes] = useState('');
+  const [trialSeconds, settrialSeconds] = useState('');
+  const [checked, setChecked] = useState(false);
   const [id, setID] = useState('');
 
   const router = useRouter();
+  // const [designNumber, setDesignNumber] = useState(0);
 
   // Proceed with test
   const checkInfo = () => {
     console.log(id);
     if (id == '') {
       alert('Please enter your ID');
-    } else if (isNaN(trialAnswer)) {
+    }
+    // else if (!checked & (designNumber == 1))
+    //   alert('Click the box to pledge and proceed');
+    else if (isNaN(trialMinutes) | isNaN(trialSeconds)) {
       alert('Please type the number only');
-      setTrialAnswer('');
-    } else if (trialAnswer == '2') {
+      settrialMinutes('');
+      settrialSeconds('');
+    } else if ((trialMinutes == '1') & (trialSeconds == '40')) {
       router.push('test?id=' + id);
     } else {
-      alert('You should spend 2 mins on average');
-      setTrialAnswer('');
+      alert('You should spend 1 minute and 40 seconds on average');
+      settrialMinutes('');
+      settrialSeconds('');
     }
   };
+
+  // useEffect(async () => {
+  //   let response_design = await fetch('/api/add-database', {
+  //     method: 'GET',
+  //   });
+  //   let data = await response_design.json();
+
+  //   setDesignNumber(parseInt(data.message));
+  //   console.log(data.message);
+  // }, [designNumber]);
 
   // JSX
   return (
@@ -65,9 +83,9 @@ export default function Home() {
           })()}
         </div>
         {/* </div> */}
-        <div class="container mx-auto px-16 row-span-5">
+        <div class=" mx-auto px-16 row-span-5">
           <div className="py-10">
-            <div class="relative flex  p-8 bg-opacity-75 border border-gray-300 ">
+            <div class="relative flex p-8  border border-gray-300 ">
               {/* <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,12 +106,12 @@ export default function Home() {
                     &#8226;&nbsp; Number of questions: <strong>6</strong>
                   </li>
                   <li>
-                    &#8226;&nbsp; Total time: <strong>12 mins</strong>
+                    &#8226;&nbsp; Total time: <strong>10 minutes</strong>
                   </li>
                   <li>
                     &#8226;&nbsp; You{' '}
                     <span className="font-semibold">
-                      should not spend much time
+                      should not spend too much time
                     </span>{' '}
                     on a single question
                   </li>
@@ -110,21 +128,58 @@ export default function Home() {
                       My Answer:&nbsp;
                       <input
                         type="text"
-                        value={trialAnswer}
+                        value={trialMinutes}
                         onChange={(event) => {
-                          setTrialAnswer(event.target.value);
+                          settrialMinutes(event.target.value);
                         }}
-                        className="w-48 h-12 border-blue-500 border-2 shadow-md rounded-md"
-                        placeholder="Type only the number"
+                        className="w-20 h-12 px-2 border-blue-500 border-2 shadow-md rounded-md"
                       />{' '}
-                      minutes
+                      minute{' '}
+                      <input
+                        type="text"
+                        value={trialSeconds}
+                        onChange={(event) => {
+                          settrialSeconds(event.target.value);
+                        }}
+                        className="w-20 h-12 px-2 border-blue-500 border-2 shadow-md rounded-md"
+                      />{' '}
+                      seconds
                     </div>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <p className="mt-6">
+          {/* {(() => {
+            if (designNumber == 1) {
+              return (
+                <div className="space-y-8 p-3  mx-auto">
+                  <p className="text-sm text-gray-400">
+                    Please read out the pledge below and{' '}
+                    <strong> click the box </strong> to start with the test
+                  </p>
+
+                  <input
+                    type="checkbox"
+                    id="check"
+                    name="check"
+                    onChange={(event) => setChecked(!checked)}
+                  />
+                  <label for="check" className="">
+                    {' '}
+                    <span className=""></span>{' '}
+                    <span className="">
+                      "I affirm that I will not look for any help on the
+                      internet during the test, and that all work will be my
+                      own"
+                    </span>
+                  </label>
+                </div>
+              );
+            }
+          })()} */}
+
+          <p className="mt-10 text-center">
             When you are ready, click the{' '}
             <span className="font-semibold">Start Test</span> below and the
             timer will begin. Good Luck!
