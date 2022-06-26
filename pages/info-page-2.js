@@ -188,7 +188,7 @@ export default function Home() {
 
         <div className="flex py-5 pr-4 justify-center bg-gray-100 row-span-1">
           <button
-            className="px-5 py-2 bg-sky-700 hover:bg-blue-700 text-white rounded-lg shadow-2xl"
+            className="px-5 py-2 bg-blue-700 hover:bg-sky-700 text-white rounded-lg shadow-2xl"
             onClick={checkInfo}
           >
             Start test
