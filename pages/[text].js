@@ -550,7 +550,7 @@ export default function Home(props) {
                       return (
                         <div className=" font-serif ">
                           Step 3:&nbsp;&nbsp;&nbsp;
-                          <a href="https://app.prolific.co/submissions/complete?cc=7104E4BD">
+                          <a href="#">
                             <span className=" underline font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
                               Click here to complete your study in Prolific
                             </span>{' '}
