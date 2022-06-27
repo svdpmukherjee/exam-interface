@@ -696,7 +696,7 @@ export default function Home(props) {
                     </div>
                     <>
                       <div className="row-span-2 my-auto ">
-                        <p className="text-lg text-justify ">
+                        <p className="text-lg text-justify">
                           {questions[currentQuestion].question}
                         </p>
                       </div>

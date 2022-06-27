@@ -41,7 +41,7 @@ async function addEntry(req, res) {
   try {
     let { db } = await connectToDatabase();
     console.log(data);
-    db.collection('demo_exam_interface').insertOne(data);
+    db.collection('exam_interface').insertOne(data);
 
     return res.json({
       message: 'Entry added successfully',
