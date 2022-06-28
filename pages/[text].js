@@ -407,7 +407,7 @@ export default function Home(props) {
                     {(() => {
                       if (designElem == 0) {
                         link =
-                          'http://ulsurvey.uni.lu/index.php/326466?lang=en';
+                          'http://ulsurvey.uni.lu/index.php/581713?lang=en';
                       } else if (designElem == 1) {
                         link =
                           'http://ulsurvey.uni.lu/index.php/594336?lang=en';
@@ -859,7 +859,7 @@ export default function Home(props) {
                     bonusBorder = 'border-none  rounded-lg';
                   }
                 })()} */}
-                <div className="col-span-1 flex my-auto justify-center ">
+                <div className="col-span-1 flex my-auto justify-center">
                   <img src="images/bonus_final.png" className="w-1/2"></img>
                 </div>
                 <div className="col-span-1 justify-end flex">
