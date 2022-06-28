@@ -8,9 +8,10 @@ export default function Home() {
   const [id, setID] = useState('');
 
   const router = useRouter();
+  const param = router.query.par;
   // Proceed with test
   const checkInfo = () => {
-    if (checked) router.push('/info-page-2');
+    if (checked) router.push('/info-page-2?par=' + param);
     else alert('Click the box to proceed');
   };
 

@@ -9,15 +9,21 @@ export default function Home() {
   // const [modal, setModal] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
+  const [link, setLink] = useState(0);
+  const [button, setButton] = useState(0);
 
   const router = useRouter();
 
-  // const openModal = () => {
-  //   setModal(1);
-  // };
+  const buttonClicked = () => {
+    setButton(1);
+    setShowQuestion(true);
+  };
+  const linkClicked = () => {
+    setLink(1);
+  };
   const checkInfo = () => {
     setShowModal(false);
-    router.push('/info-page-1');
+    router.push('/info-page-1?par=' + `${button}${link}`);
     // alert('We need your consent to proceed with the study');
   };
   // JSX
@@ -65,7 +71,7 @@ export default function Home() {
                     <button
                       type="button"
                       className=" px-6 py-2.5 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
-                      onClick={() => setShowQuestion(true)}
+                      onClick={buttonClicked}
                     >
                       Example of such questions
                     </button>
@@ -84,6 +90,7 @@ export default function Home() {
 
                                     <a
                                       className="font-semibold"
+                                      onClick={linkClicked}
                                       href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
                                       target="_blank"
                                     >

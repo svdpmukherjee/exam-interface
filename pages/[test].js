@@ -9,7 +9,12 @@ const time = 10 * 60; // setting time limit as 30 mins
 
 export default function Home(props) {
   const { ip_address_1, ip_address_2 } = props;
-  const participant_id = useRouter().query.id;
+  const sampleQuestionClicked =
+    useRouter().query.id.substring(0, 1) == 1 ? true : false;
+  const sampleLinkClicked =
+    useRouter().query.id.substring(1, 2) == 1 ? true : false;
+  const participant_id = useRouter().query.id.substring(2);
+
   const [designElem, setDesignElem] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
@@ -45,10 +50,7 @@ export default function Home(props) {
   let blurStatus = '';
   let correct = 0;
 
-  // let selfControlTimer = {
-  //   time: time,
-  //   stopTimer: stopTimer,
-  // };
+  console.log(participant_id, sampleQuestionClicked, sampleLinkClicked);
 
   // calculate time taken to solve each question
   useEffect(() => {
@@ -80,6 +82,8 @@ export default function Home(props) {
       if (correct >= 5) {
         let bonusEntry = {
           participant_id: participant_id,
+          sampleQuestionClicked: sampleQuestionClicked,
+          sampleLinkClicked: sampleLinkClicked,
           condition: designNumber,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -171,6 +175,8 @@ export default function Home(props) {
         // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
+          sampleQuestionClicked: sampleQuestionClicked,
+          sampleLinkClicked: sampleLinkClicked,
           condition: designNumber,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -198,6 +204,8 @@ export default function Home(props) {
         // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
+          sampleQuestionClicked: sampleQuestionClicked,
+          sampleLinkClicked: sampleLinkClicked,
           condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -249,6 +257,8 @@ export default function Home(props) {
     setSavedAnswer([...savedAnswer, enteredAnswer]);
     let databaseEntry = {
       participant_id: participant_id,
+      sampleQuestionClicked: sampleQuestionClicked,
+      sampleLinkClicked: sampleLinkClicked,
       condition: designElem,
       ip_address_1: ip_address_1,
       ip_address_2: ip_address_2,

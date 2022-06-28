@@ -10,6 +10,7 @@ export default function Home() {
   const [id, setID] = useState('');
 
   const router = useRouter();
+  const param = router.query.par;
   // const [designNumber, setDesignNumber] = useState(0);
 
   // Proceed with test
@@ -25,7 +26,7 @@ export default function Home() {
       settrialMinutes('');
       settrialSeconds('');
     } else if ((trialMinutes == '1') & (trialSeconds == '40')) {
-      router.push('test?id=' + id);
+      router.push('test?id=' + param + id);
     } else {
       alert('You should spend 1 minute and 40 seconds on average');
       settrialMinutes('');
