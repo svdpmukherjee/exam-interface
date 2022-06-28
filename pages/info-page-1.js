@@ -94,7 +94,7 @@ export default function Home() {
                   <li>
                     -<span> &nbsp; </span>
                     <span className="">
-                      The questions are taken from few highly reputed online
+                      The questions are taken from highly reputed online
                       competitive exams. You might{' '}
                       <span className="font-bold">find somewhat difficult</span>{' '}
                       to solve them within the time

@@ -144,6 +144,8 @@ export default function Home(props) {
 
         let data = await response_design.json();
 
+        // ---------  conditions  -------------
+
         designNumber = parseInt(data.message);
         setStateVar(1);
         response_design = await fetch('/api/add-database', {
@@ -154,6 +156,8 @@ export default function Home(props) {
 
         if (data.message == 0) designNumber = 3;
         else designNumber = parseInt(data.message) - 1;
+
+        designNumber = 0; // ---------- needs to remove ------------
         setDesignElem(designNumber);
         answerWritten = enteredAnswer;
         // setSavedAnswer((savedAnswer) => [

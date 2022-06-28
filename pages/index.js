@@ -55,16 +55,16 @@ export default function Home() {
                   followed by{' '}
                   <span className="font-semibold">an online questionnaire</span>
                 </span>{' '}
-                <div className="mx-10 mt-6 space-y-8">
-                  <li>
-                    Questions for the test are mostly taken from few previous
-                    online competitive exams
-                  </li>
+                <div className="mx- mt-6 space-y-8">
+                  <ol>
+                    Questions for the test are mostly taken from past online
+                    competitive exams
+                  </ol>
                   {/* <ol> */}
                   <div className="flex justify-center">
                     <button
                       type="button"
-                      class=" px-6 py-2.5 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
+                      className=" px-6 py-2.5 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
                       onClick={() => setShowQuestion(true)}
                     >
                       Example of such questions
@@ -194,7 +194,7 @@ export default function Home() {
           </button> */}
         <button
           type="button"
-          class="inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xl leading-tight uppercase shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          className="inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xl leading-tight uppercase shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
           onClick={() => setShowModal(true)}
         >
           Click here to Read the Study Information and Consent Form to
