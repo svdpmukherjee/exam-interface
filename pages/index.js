@@ -50,7 +50,7 @@ export default function Home() {
               before proceeding &#8628;
             </p> */}
 
-          <div className="text-md space-y-16  max-w-xl">
+          <div className="text-lg space-y-16  max-w-2xl">
             <div className="text-justify flex">
               <div className="">
                 <span className="">
@@ -61,7 +61,7 @@ export default function Home() {
                   followed by{' '}
                   <span className="font-semibold">an online questionnaire</span>
                 </span>{' '}
-                <div className="mx- mt-6 space-y-8">
+                <div className="mx- mt-6 space-y-8 border-2">
                   <ol>
                     Questions for the test are mostly taken from past online
                     competitive exams
@@ -70,7 +70,7 @@ export default function Home() {
                   <div className="flex justify-center">
                     <button
                       type="button"
-                      className=" px-6 py-2.5 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
+                      className=" px-6 py-4 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
                       onClick={buttonClicked}
                     >
                       Example of such questions
@@ -146,7 +146,7 @@ export default function Home() {
               </div>
             </div> */}
 
-            <div className="">
+            <div className="border-2">
               Please use <strong> a laptop or desktop </strong> to take this
               study. Using{' '}
               <strong> a mobile or tablet is strictly not allowed.</strong>
