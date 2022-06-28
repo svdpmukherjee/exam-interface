@@ -146,7 +146,7 @@ export default function Home() {
               </div>
             </div> */}
 
-            <div className="border-2">
+            <div className="">
               Please use <strong> a laptop or desktop </strong> to take this
               study. Using{' '}
               <strong> a mobile or tablet is strictly not allowed.</strong>
