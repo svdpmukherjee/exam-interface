@@ -87,10 +87,18 @@ export default function Home() {
                     provided with each question
                   </li> */}
                   <li>
-                    -<span className="font-bold"> &nbsp; BONUS: </span> If you
-                    can answer <strong>5 questions correctly (out of 6)</strong>
-                    , <strong>you will receive a bonus (£3) </strong> along with
-                    your compensation
+                    -<span className=""> &nbsp; </span> If you can answer{' '}
+                    <strong>at least 5 questions correctly </strong>(out of 6),
+                    you will receive a <strong> bonus (£10) </strong>
+                  </li>
+                  <li>
+                    -<span> &nbsp; </span>
+                    <span className="">
+                      The questions are taken from few highly reputed online
+                      competitive exams. You might{' '}
+                      <span className="font-bold">find somewhat difficult</span>{' '}
+                      to solve them within the time
+                    </span>
                   </li>
                   <li>
                     -<span> &nbsp; </span>
@@ -105,7 +113,6 @@ export default function Home() {
                     </span>{' '}
                     on a single question
                   </li> */}
-                  <br />
                   <br />
 
                   <div className="space-y-8 p-3  mx-auto">

@@ -8,6 +8,7 @@ export default function Home() {
   const [checked, setChecked] = useState(false);
   // const [modal, setModal] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
 
   const router = useRouter();
 
@@ -43,29 +44,81 @@ export default function Home() {
               before proceeding &#8628;
             </p> */}
 
-          <div className="text-md space-y-8 pl-10">
+          <div className="text-md space-y-16  max-w-xl">
             <div className="text-justify flex">
               <div className="">
-                <span className="">The entire study has 2 parts</span> - an
-                online maths test followed by an online questionnaire.{' '}
-                {/* <div className="mx-10">
+                <span className="">
+                  The entire study has 2 parts -{' '}
+                  <span className="font-semibold">
+                    an online quantitative aptitude test
+                  </span>{' '}
+                  followed by{' '}
+                  <span className="font-semibold">an online questionnaire</span>
+                </span>{' '}
+                <div className="mx-10 mt-6 space-y-8">
                   <li>
-                    <span className="font-bold">In the first part</span>, you
-                    shall take an{' '}
-                    <span className="">
-                      online test of 6 quantitative aptitude (maths) questions
-                    </span>{' '}
-                    in a time-bound manner.{' '}
+                    Questions for the test are mostly taken from few previous
+                    online competitive exams
                   </li>
-                  <li>
-                    <span className="font-bold">In the second part</span>, you
-                    shall{' '}
-                    <span className="">
-                      fill an online survey questionnaire
-                    </span>{' '}
-                    right after the online test is submitted.
-                  </li>
-                </div> */}
+                  {/* <ol> */}
+                  <div className="flex justify-center">
+                    <button
+                      type="button"
+                      class=" px-6 py-2.5 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
+                      onClick={() => setShowQuestion(true)}
+                    >
+                      Example of such questions
+                    </button>
+                    {showQuestion ? (
+                      <>
+                        <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none row-span-1">
+                          <div className="relative w-auto my-6 mx-auto max-w-4xl ">
+                            <div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none bg-yellow-50">
+                              <div className="grid grid-cols-4 border-b border-solid border-blueGray-200 rounded-b">
+                                <div className="col-span-3  px-6 py-2">
+                                  <span className="text-blue-600">
+                                    <span className="text-black">
+                                      {' '}
+                                      Question asked in{' '}
+                                    </span>
+
+                                    <a
+                                      className="font-semibold"
+                                      href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
+                                      target="_blank"
+                                    >
+                                      Graduate Management Admission Test (GMAT),
+                                      2015
+                                    </a>
+                                  </span>{' '}
+                                </div>
+                                <div className="col-span-1  justify-end flex">
+                                  <button
+                                    className="text-red-500 background-transparent font uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 hover:text-purple-600 "
+                                    type="button"
+                                    onClick={() => setShowQuestion(false)}
+                                  >
+                                    Close
+                                  </button>
+                                </div>
+                              </div>
+                              <div className="relative p-6 pb-10 flex-auto  text-justify space-y-6 leading-6">
+                                <div>
+                                  A contractor undertakes to do a job within 100
+                                  days and hires 10 people to do it. After 20
+                                  days, he realizes that one fourth of the work
+                                  is done so he fires 2 people. In how many more
+                                  days will the work get over?
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
+                  {/* </ol> */}
+                </div>
               </div>
             </div>
 
@@ -77,23 +130,23 @@ export default function Home() {
               </div>
             </div> */}
 
-            <div className="flex">
+            {/* <div className="flex">
               <div>
                 Through this study,{' '}
-                <span className="font-bold">
+                <span className="">
                   we evaluate your experience with an online test system.
                 </span>{' '}
               </div>
-            </div>
+            </div> */}
 
             <div className="">
               Please use <strong> a laptop or desktop </strong> to take this
               study. Using{' '}
               <strong> a mobile or tablet is strictly not allowed.</strong>
             </div>
-            <div className="">
+            {/* <div className="">
               For study details and consent form, please click below.
-            </div>
+            </div> */}
 
             {/* <div className="leading-10 mx-10 px-6">
                 <li>
@@ -171,24 +224,28 @@ export default function Home() {
                       <span className="font-bold">
                         Description of the study:{' '}
                       </span>
-                      During the study, you are about to solve 6 quantitative
-                      aptitude questions in an online test system within 10
-                      minutes.{' '}
+                      You are about to solve{' '}
                       <span className="font-semibold">
-                        You will be rewarded with a bonus (£3) at the end of the
-                        study if you could solve at least 5 questions correctly.
-                      </span>{' '}
-                      You should not look for any help either on the internet or
-                      from anyone else during the test. After the test, you will
-                      be presented with a survey questionnaire regarding your
-                      experience with the test system and some of your general
-                      opinions related to it. We expect you to answer them
-                      honestly.{' '}
-                      <span className="font-semibold">
-                        The total duration will take around 20-23 minutes. To
-                        thank you for your participation, you will receive a £3
-                        compensation.
+                        6 quantitative aptitude questions{' '}
                       </span>
+                      in an online test system within{' '}
+                      <span className="font-semibold">10 minutes</span>. You
+                      will be rewarded with a{' '}
+                      <span className="font-semibold"> bonus (£10) </span> at
+                      the end of the study if you could solve{' '}
+                      <span className="font-semibold">
+                        at least 5 questions correctly
+                      </span>
+                      . You should not look for any help either on the internet
+                      or from anyone else during the test. After the test, you
+                      shall fill up an online questionnaire regarding your
+                      experience and some of your general opinions.{' '}
+                      <span className="font-semibold">
+                        The total duration of the study will take around 20-23
+                        minutes
+                      </span>
+                      . To thank you for your participation, you will receive a{' '}
+                      <span className="font-semibold">£3 compensation</span>.
                     </div>
                     <div>
                       <span className="font-bold">
@@ -200,15 +257,14 @@ export default function Home() {
                       <span className="font-semibold">
                         All your personal data will strictly be anonymized.
                       </span>{' '}
-                      Your answers (both from the online test and survey), along
-                      with the time taken to answer them will be stored in a
-                      secured server in University of Luxembourg. During the
-                      online test, IP address of your test-taking device shall
-                      be recorded and be strictly pseudonymized before storing
-                      it in the same server. Only the researchers working on
-                      this study will have the access to these data. The data
-                      collected during the study will only be used for the
-                      research project.{' '}
+                      Your answers (both from the online test and survey) will
+                      be stored in a secured server in University of Luxembourg.
+                      During the online test, IP address of your test-taking
+                      device shall be recorded and be strictly pseudonymized
+                      before storing it in the same server. Only the researchers
+                      working on this study will have the access to these data.
+                      The data collected during the study will only be used for
+                      the research project.{' '}
                       <span className="font-semibold">
                         The data will be used for publications without
                         personally identifying you.

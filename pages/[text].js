@@ -21,7 +21,7 @@ export default function Home(props) {
   const [time_3, setTime_3] = useState(time_2);
   const [timeLeftCheck, setTimeLeftCheck] = useState(time);
   const [savedAnswer, setSavedAnswer] = useState([]);
-  const correctAnswer = [42, 95, 678, 62, 1667, 143];
+  const correctAnswer = [42, 143, 678, 62, 1667, 95];
   const [completionCode, setcompletionCode] = useState('');
   const [blurScore, setBlurScore] = useState(1);
   const [finalPulse, setFinalPulse] = useState(0);
@@ -482,12 +482,12 @@ export default function Home(props) {
                                       </span>
                                     );
                                   } else if (
-                                    (index == 1 &&
+                                    (index == 4 &&
                                       parseFloat(savedAnswer[index]) >=
                                         correctAnswer[index] - 1 &&
                                       parseFloat(savedAnswer[index]) <=
                                         correctAnswer[index]) ||
-                                    (index == 4 &&
+                                    (index == 5 &&
                                       parseFloat(savedAnswer[index]) >=
                                         correctAnswer[index] - 1 &&
                                       parseFloat(savedAnswer[index]) <=
@@ -538,8 +538,8 @@ export default function Home(props) {
                           <p
                             className={`${blurStatus} text-center text-lg font-bold mx-auto `}
                           >
-                            You needed {5 - correct} more correct answers to win
-                            the bonus
+                            You needed {5 - correct} more correct answer(s) to
+                            win the bonus
                           </p>
                         );
                       }
