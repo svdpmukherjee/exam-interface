@@ -50,81 +50,83 @@ export default function Home() {
               before proceeding &#8628;
             </p> */}
 
-          <div className="text-lg space-y-16  max-w-2xl">
+          <div className="text-lg  max-w-2xl">
             <div className="text-justify flex">
-              <div className="">
-                <span className="">
+              <div className="space-y-12">
+                <div>
                   The entire study has 2 parts -{' '}
                   <span className="font-semibold">
                     an online quantitative aptitude test
                   </span>{' '}
                   followed by{' '}
                   <span className="font-semibold">an online questionnaire</span>
-                </span>{' '}
-                <div className="mx- mt-6 space-y-8 ">
-                  <ol>
-                    Questions for the test are mostly taken from past online
-                    competitive exams
-                  </ol>
-                  {/* <ol> */}
-                  <div className="flex justify-center">
-                    <button
-                      type="button"
-                      className=" px-6 py-4 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
-                      onClick={buttonClicked}
-                    >
-                      Example of such questions
-                    </button>
-                    {showQuestion ? (
-                      <>
-                        <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none row-span-1">
-                          <div className="relative w-auto my-6 mx-auto max-w-4xl ">
-                            <div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none bg-yellow-50">
-                              <div className="grid grid-cols-4 border-b border-solid border-blueGray-200 rounded-b">
-                                <div className="col-span-3  px-6 py-2">
-                                  <span className="text-blue-600">
-                                    <span className="text-black">
-                                      {' '}
-                                      Question asked in{' '}
-                                    </span>
+                </div>
 
-                                    <a
-                                      className="font-semibold"
-                                      onClick={linkClicked}
-                                      href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
-                                      target="_blank"
-                                    >
-                                      Graduate Management Admission Test (GMAT),
-                                      2015
-                                    </a>
-                                  </span>{' '}
-                                </div>
-                                <div className="col-span-1  justify-end flex">
-                                  <button
-                                    className="text-red-500 background-transparent font uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 hover:text-purple-600 "
-                                    type="button"
-                                    onClick={() => setShowQuestion(false)}
+                <div className="mx- mt-  ">
+                  Questions for the test are mostly taken from past online
+                  competitive exams
+                </div>
+                <div className="flex ">
+                  <button
+                    type="button"
+                    className=" px-6 py-4 bg-teal-600 text-white font-medium text-md leading-tight uppercase shadow-lg hover:bg-teal-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-lg"
+                    onClick={buttonClicked}
+                  >
+                    Example of such questions
+                  </button>
+                  {showQuestion ? (
+                    <>
+                      <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none row-span-1">
+                        <div className="relative w-auto my-6 mx-auto max-w-5xl ">
+                          <div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none bg-yellow-50">
+                            <div className="grid grid-cols-4 border-b border-solid border-blueGray-200 rounded-b ">
+                              <div className="col-span-3  px-6 py-2 ">
+                                <span className="text-blue-600 ">
+                                  <span className="text-black">
+                                    {' '}
+                                    Question asked in{' '}
+                                  </span>
+
+                                  <a
+                                    className="font-semibold"
+                                    onClick={linkClicked}
+                                    href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
+                                    target="_blank"
                                   >
-                                    Close
-                                  </button>
-                                </div>
+                                    Graduate Management Admission Test (GMAT),
+                                    2015
+                                  </a>
+                                </span>{' '}
                               </div>
-                              <div className="relative p-6 pb-10 flex-auto  text-justify space-y-6 leading-6">
-                                <div>
-                                  A contractor undertakes to do a job within 100
-                                  days and hires 10 people to do it. After 20
-                                  days, he realizes that one fourth of the work
-                                  is done so he fires 2 people. In how many more
-                                  days will the work get over?
-                                </div>
+                              <div className="col-span-1  justify-end flex">
+                                <button
+                                  className="text-red-500 background-transparent font uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 hover:text-purple-600 "
+                                  type="button"
+                                  onClick={() => setShowQuestion(false)}
+                                >
+                                  Close
+                                </button>
+                              </div>
+                            </div>
+                            <div className="relative p-6 pb-10 flex-auto  text-justify space-y-6 leading-10">
+                              <div>
+                                A contractor undertakes to do a job within 100
+                                days and hires 10 people to do it. After 20
+                                days, he realizes that one fourth of the work is
+                                done so he fires 2 people. In how many more days
+                                will the work get over?
                               </div>
                             </div>
                           </div>
                         </div>
-                      </>
-                    ) : null}
-                  </div>
-                  {/* </ol> */}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+                <div className="">
+                  Please use <strong> a laptop or desktop </strong> to take this
+                  study. Using{' '}
+                  <strong> a mobile or tablet is strictly not allowed.</strong>
                 </div>
               </div>
             </div>
@@ -146,11 +148,11 @@ export default function Home() {
               </div>
             </div> */}
 
-            <div className="">
+            {/* <div className="">
               Please use <strong> a laptop or desktop </strong> to take this
               study. Using{' '}
               <strong> a mobile or tablet is strictly not allowed.</strong>
-            </div>
+            </div> */}
             {/* <div className="">
               For study details and consent form, please click below.
             </div> */}
