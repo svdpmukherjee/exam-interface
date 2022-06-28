@@ -61,7 +61,7 @@ export default function Home() {
                   followed by{' '}
                   <span className="font-semibold">an online questionnaire</span>
                 </span>{' '}
-                <div className="mx- mt-6 space-y-8 border-2">
+                <div className="mx- mt-6 space-y-8 ">
                   <ol>
                     Questions for the test are mostly taken from past online
                     competitive exams
