@@ -245,7 +245,7 @@ export default function Home() {
                         minutes
                       </span>
                       . To thank you for your participation, you will receive a{' '}
-                      <span className="font-semibold">£3 compensation</span>.
+                      <span className="font-semibold">£2 compensation</span>.
                     </div>
                     <div>
                       <span className="font-bold">
