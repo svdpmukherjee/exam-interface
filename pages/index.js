@@ -241,7 +241,7 @@ export default function Home() {
                       shall fill up an online questionnaire regarding your
                       experience and some of your general opinions.{' '}
                       <span className="font-semibold">
-                        The total duration of the study will take around 20-23
+                        The total duration of the study will take around 15
                         minutes
                       </span>
                       . To thank you for your participation, you will receive a{' '}
