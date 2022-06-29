@@ -84,7 +84,7 @@ export default function Home(props) {
           participant_id: participant_id,
           sampleQuestionClicked: sampleQuestionClicked,
           sampleLinkClicked: sampleLinkClicked,
-          condition: designNumber,
+          condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
           savedAnswer: savedAnswer,
