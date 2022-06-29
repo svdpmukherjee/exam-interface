@@ -26,7 +26,7 @@ export default function Home(props) {
   const [time_3, setTime_3] = useState(time_2);
   const [timeLeftCheck, setTimeLeftCheck] = useState(time);
   const [savedAnswer, setSavedAnswer] = useState([]);
-  const correctAnswer = [42, 143, 678, 62, 1667, 95];
+  const correctAnswer = [143, 62, 678, 1667, 42];
   const [completionCode, setcompletionCode] = useState('');
   const [blurScore, setBlurScore] = useState(1);
   const [finalPulse, setFinalPulse] = useState(0);
@@ -50,7 +50,7 @@ export default function Home(props) {
   let blurStatus = '';
   let correct = 0;
 
-  console.log(participant_id, sampleQuestionClicked, sampleLinkClicked);
+  // console.log(participant_id, sampleQuestionClicked, sampleLinkClicked);
 
   // calculate time taken to solve each question
   useEffect(() => {
@@ -99,6 +99,14 @@ export default function Home(props) {
           body: JSON.stringify(bonusEntry),
         });
       }
+
+      console.log(completionCode);
+
+      const timer = setTimeout(() => {
+        window.location.href =
+          'https://app.prolific.co/submissions/complete?cc=7104E4BD';
+      }, 30000);
+      return () => clearTimeout(timer);
     }
   };
 
@@ -161,7 +169,7 @@ export default function Home(props) {
         if (data.message == 0) designNumber = 3;
         else designNumber = parseInt(data.message) - 1;
 
-        designNumber = 0; // ---------- needs to remove ------------
+        designNumber = 3; // ---------- needs to remove ------------
         setDesignElem(designNumber);
         answerWritten = enteredAnswer;
         // setSavedAnswer((savedAnswer) => [
@@ -426,7 +434,7 @@ export default function Home(props) {
                           'http://ulsurvey.uni.lu/index.php/679573?lang=en';
                       } else {
                         link =
-                          'http://ulsurvey.uni.lu/index.php/689964?lang=en';
+                          'http://ulsurvey.uni.lu/index.php/737243?lang=en';
                       }
                     })()}
                     <a href={link} target={'_blank'}>
@@ -496,16 +504,16 @@ export default function Home(props) {
                                       </span>
                                     );
                                   } else if (
-                                    (index == 4 &&
-                                      parseFloat(savedAnswer[index]) >=
-                                        correctAnswer[index] - 1 &&
-                                      parseFloat(savedAnswer[index]) <=
-                                        correctAnswer[index]) ||
-                                    (index == 5 &&
-                                      parseFloat(savedAnswer[index]) >=
-                                        correctAnswer[index] - 1 &&
-                                      parseFloat(savedAnswer[index]) <=
-                                        correctAnswer[index])
+                                    index == 3 &&
+                                    parseFloat(savedAnswer[index]) >=
+                                      correctAnswer[index] - 1 &&
+                                    parseFloat(savedAnswer[index]) <=
+                                      correctAnswer[index]
+                                    // ||(index == 3 &&
+                                    //   parseFloat(savedAnswer[index]) >=
+                                    //     correctAnswer[index] - 1 &&
+                                    //   parseFloat(savedAnswer[index]) <=
+                                    //     correctAnswer[index])
                                   ) {
                                     correct++;
 
@@ -578,7 +586,8 @@ export default function Home(props) {
                           <a href="https://app.prolific.co/submissions/complete?cc=7104E4BD">
                             <span className=" underline  rounded-lg text-lg font-semibold px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 animate-pulse">
                               Click here to complete your study in Prolific
-                            </span>{' '}
+                            </span>
+                            (re-directs automatically in 30 seconds)
                           </a>
                         </div>
                       );
@@ -710,7 +719,7 @@ export default function Home(props) {
                     </div>
                     <>
                       <div className="row-span-2 my-auto ">
-                        <p className="text-lg text-justify">
+                        <p className="text-lg text-justify ">
                           {questions[currentQuestion].question}
                         </p>
                       </div>
@@ -774,7 +783,7 @@ export default function Home(props) {
                           );
                         } else if (designElem == 3) {
                           return (
-                            <div className="flex h-1/2 w-2/3 ">
+                            <div className="flex h-1/2 w-2/3">
                               <img
                                 src="images/monitoring_final.png"
                                 className=""
@@ -870,7 +879,7 @@ export default function Home(props) {
                   }
                 })()} */}
                 <div className="col-span-1 flex my-auto justify-center">
-                  <img src="images/bonus_final.png" className="w-1/2"></img>
+                  <img src="images/bonus_final.png" className="w-1/2 "></img>
                 </div>
                 <div className="col-span-1 justify-end flex">
                   <button

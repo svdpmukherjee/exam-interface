@@ -55,10 +55,10 @@ export default function Home() {
           })()}
         </div> */}
         {/* </div> */}
-        <div class="mx-auto px-16 pt-10 row-span-5">
+        <div className="mx-auto px-16 pt-10 row-span-5">
           <div className="py-10">
-            <div class="relative flex flex-col flex-wrap p-8 bg-opacity-75 border border-gray-300 ">
-              <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
+            <div className="relative flex flex-col flex-wrap p-8 bg-opacity-75 border border-gray-300 ">
+              <div className="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-8 h-8 my-auto"
@@ -89,8 +89,8 @@ export default function Home() {
                   </li> */}
                   <li>
                     -<span className=""> &nbsp; </span> If you can answer{' '}
-                    <strong>at least 5 questions correctly </strong>(out of 6),
-                    you will receive a <strong> bonus (£10) </strong>
+                    <strong>all 5 questions correctly</strong>, you will receive
+                    a <strong> bonus (£15) </strong>
                   </li>
                   <li>
                     -<span> &nbsp; </span>

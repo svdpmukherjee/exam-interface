@@ -81,14 +81,14 @@ export default function Home() {
                           <div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none bg-yellow-50">
                             <div className="grid grid-cols-4 border-b border-solid border-blueGray-200 rounded-b ">
                               <div className="col-span-3  px-6 py-2 ">
-                                <span className="text-blue-600 ">
+                                <span className="text-blue-500 ">
                                   <span className="text-black">
                                     {' '}
                                     Question asked in{' '}
                                   </span>
 
                                   <a
-                                    className="font-semibold"
+                                    className="font-semibold underline"
                                     onClick={linkClicked}
                                     href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
                                     target="_blank"
@@ -108,7 +108,7 @@ export default function Home() {
                                 </button>
                               </div>
                             </div>
-                            <div className="relative p-6 pb-10 flex-auto  text-justify space-y-6 leading-10">
+                            <div className="relative p-6 pb-10 flex-auto  text-justify space-y-6 leading-8">
                               <div>
                                 A contractor undertakes to do a job within 100
                                 days and hires 10 people to do it. After 20
@@ -235,15 +235,15 @@ export default function Home() {
                       </span>
                       You are about to solve{' '}
                       <span className="font-semibold">
-                        6 quantitative aptitude questions{' '}
+                        5 quantitative aptitude questions{' '}
                       </span>
                       in an online test system within{' '}
                       <span className="font-semibold">10 minutes</span>. You
                       will be rewarded with a{' '}
-                      <span className="font-semibold"> bonus (£10) </span> at
+                      <span className="font-semibold"> bonus (£15) </span> at
                       the end of the study if you could solve{' '}
                       <span className="font-semibold">
-                        at least 5 questions correctly
+                        all 5 questions correctly
                       </span>
                       . You should not look for any help either on the internet
                       or from anyone else during the test. After the test, you
@@ -269,11 +269,11 @@ export default function Home() {
                       Your answers (both from the online test and survey) will
                       be stored in a secured server in University of Luxembourg.
                       During the online test, IP address of your test-taking
-                      device shall be recorded and be strictly pseudonymized
-                      before storing it in the same server. Only the researchers
-                      working on this study will have the access to these data.
-                      The data collected during the study will only be used for
-                      the research project.{' '}
+                      device along with the device type shall be recorded and be
+                      strictly pseudonymized before storing it in the same
+                      server. Only the researchers working on this study will
+                      have the access to these data. The data collected during
+                      the study will only be used for the research project.{' '}
                       <span className="font-semibold">
                         The data will be used for publications without
                         personally identifying you.

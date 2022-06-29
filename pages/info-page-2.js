@@ -15,22 +15,22 @@ export default function Home() {
 
   // Proceed with test
   const checkInfo = () => {
-    console.log(id);
+    // console.log(id);
     if (id == '') {
       alert('Please enter your ID');
     }
     // else if (!checked & (designNumber == 1))
     //   alert('Click the box to pledge and proceed');
-    else if (isNaN(trialMinutes) | isNaN(trialSeconds)) {
+    else if (isNaN(trialMinutes)) {
       alert('Please type the number only');
       settrialMinutes('');
-      settrialSeconds('');
-    } else if ((trialMinutes == '1') & (trialSeconds == '40')) {
+      // settrialSeconds('');
+    } else if (trialMinutes == '2') {
       router.push('test?id=' + param + id);
     } else {
-      alert('You should spend 1 minute and 40 seconds on average');
+      alert('You should spend 2 minutes on average');
       settrialMinutes('');
-      settrialSeconds('');
+      // settrialSeconds('');
     }
   };
 
@@ -104,7 +104,7 @@ export default function Home() {
               <div className="mx-auto px-5 border-r-2">
                 <ul className=" py-3 space-y-4 ">
                   <li>
-                    &#8226;&nbsp; Number of questions: <strong>6</strong>
+                    &#8226;&nbsp; Number of questions: <strong>5</strong>
                   </li>
                   <li>
                     &#8226;&nbsp; Total time: <strong>10 minutes</strong>
@@ -135,8 +135,8 @@ export default function Home() {
                         }}
                         className="w-20 h-12 px-2 border-blue-500 border-2 shadow-md rounded-md"
                       />{' '}
-                      minute{' '}
-                      <input
+                      minutes{' '}
+                      {/* <input
                         type="text"
                         value={trialSeconds}
                         onChange={(event) => {
@@ -144,7 +144,7 @@ export default function Home() {
                         }}
                         className="w-20 h-12 px-2 border-blue-500 border-2 shadow-md rounded-md"
                       />{' '}
-                      seconds
+                      seconds */}
                     </div>
                   </li>
                 </ul>
