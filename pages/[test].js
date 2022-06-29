@@ -78,6 +78,9 @@ export default function Home(props) {
     } else {
       setBlurScore(0);
       setFinalPulse(1);
+      let response_design = await fetch('/api/add-database', {
+        method: 'GET',
+      });
       isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
       if (correct >= 5) {
         let bonusEntry = {
