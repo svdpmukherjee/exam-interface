@@ -11,8 +11,8 @@ export default function Home(props) {
   const { ip_address_1, ip_address_2 } = props;
   const sampleQuestionClicked =
     useRouter().query.id.substring(0, 1) == 1 ? true : false;
-  const sampleLinkClicked =
-    useRouter().query.id.substring(1, 2) == 1 ? true : false;
+  // const sampleLinkClicked =
+  //   useRouter().query.id.substring(1, 2) == 1 ? true : false;
   const participant_id = useRouter().query.id.substring(2);
 
   const [designElem, setDesignElem] = useState(0);
@@ -86,7 +86,7 @@ export default function Home(props) {
         let bonusEntry = {
           participant_id: participant_id,
           sampleQuestionClicked: sampleQuestionClicked,
-          sampleLinkClicked: sampleLinkClicked,
+          // sampleLinkClicked: sampleLinkClicked,
           condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -187,7 +187,7 @@ export default function Home(props) {
         let databaseEntry = {
           participant_id: participant_id,
           sampleQuestionClicked: sampleQuestionClicked,
-          sampleLinkClicked: sampleLinkClicked,
+          // sampleLinkClicked: sampleLinkClicked,
           condition: designNumber,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -216,7 +216,7 @@ export default function Home(props) {
         let databaseEntry = {
           participant_id: participant_id,
           sampleQuestionClicked: sampleQuestionClicked,
-          sampleLinkClicked: sampleLinkClicked,
+          // sampleLinkClicked: sampleLinkClicked,
           condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -269,7 +269,7 @@ export default function Home(props) {
     let databaseEntry = {
       participant_id: participant_id,
       sampleQuestionClicked: sampleQuestionClicked,
-      sampleLinkClicked: sampleLinkClicked,
+      // sampleLinkClicked: sampleLinkClicked,
       condition: designElem,
       ip_address_1: ip_address_1,
       ip_address_2: ip_address_2,

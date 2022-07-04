@@ -9,7 +9,7 @@ export default function Home() {
   // const [modal, setModal] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [link, setLink] = useState(0);
+  // const [link, setLink] = useState(0);
   const [button, setButton] = useState(0);
 
   const router = useRouter();
@@ -18,12 +18,12 @@ export default function Home() {
     setButton(1);
     setShowQuestion(true);
   };
-  const linkClicked = () => {
-    setLink(1);
-  };
+  // const linkClicked = () => {
+  //   setLink(1);
+  // };
   const checkInfo = () => {
     setShowModal(false);
-    router.push('/info-page-1?par=' + `${button}${link}`);
+    router.push('/info-page-1?par=' + `${button}`);
     // alert('We need your consent to proceed with the study');
   };
   // JSX
@@ -81,17 +81,17 @@ export default function Home() {
                           <div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none bg-yellow-50">
                             <div className="grid grid-cols-4 border-b border-solid border-blueGray-200 rounded-b ">
                               <div className="col-span-3  px-6 py-2 ">
-                                <span className="text-blue-500 ">
+                                <span className="text-blue-700 ">
                                   <span className="text-black">
                                     {' '}
                                     Question asked in{' '}
                                   </span>
 
                                   <a
-                                    className="font-semibold underline"
-                                    onClick={linkClicked}
-                                    href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
-                                    target="_blank"
+                                    className="font-semibold "
+                                    // onClick={linkClicked}
+                                    // href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
+                                    // target="_blank"
                                   >
                                     Graduate Management Admission Test (GMAT),
                                     2015
