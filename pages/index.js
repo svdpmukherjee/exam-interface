@@ -82,12 +82,13 @@ export default function Home() {
                             <div className="grid grid-cols-4 border-b border-solid border-blueGray-200 rounded-b ">
                               <div className="col-span-3  px-6 py-2 ">
                                 <span className="text-blue-700 ">
-                                  <span className="text-black">
+                                  <span className="text-blue-800">
                                     {' '}
-                                    Question asked in{' '}
+                                    Question asked in a reputed online admission
+                                    test
                                   </span>
 
-                                  <a
+                                  {/* <a
                                     className="font-semibold "
                                     // onClick={linkClicked}
                                     // href="https://gmatclub.com/forum/a-contractor-undertakes-to-do-a-job-within-100-days-and-hires-10-peopl-205203.html"
@@ -95,7 +96,7 @@ export default function Home() {
                                   >
                                     Graduate Management Admission Test (GMAT),
                                     2015
-                                  </a>
+                                  </a> */}
                                 </span>{' '}
                               </div>
                               <div className="col-span-1  justify-end flex">
@@ -248,7 +249,7 @@ export default function Home() {
                       . You should not look for any help either on the internet
                       or from anyone else during the test. After the test, you
                       shall fill up an online questionnaire regarding your
-                      experience and some of your general opinions.{' '}
+                      experience.{' '}
                       <span className="font-semibold">
                         The total duration of the study will take around 15
                         minutes
