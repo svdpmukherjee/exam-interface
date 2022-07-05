@@ -763,8 +763,8 @@ export default function Home(props) {
                       // } else
                       // if ((designElem == 0) & (currentQuestion >= 6)) {          // to be replaced with the below statement
                       if (
-                        ((currentQuestion == 2) & (time_2 - time_3 > 7)) |
-                        (currentQuestion >= 3)
+                        ((currentQuestion == 1) & (time_2 - time_3 > 10)) |
+                        (currentQuestion >= 2)
                       ) {
                         if (designElem == 1) {
                           return (
