@@ -234,6 +234,10 @@ export default function Home(props) {
           time: new Date().toISOString().substring(11, 19),
           deviceType: deviceType,
           browser: browserName,
+          efficacy_1: SE1,
+          efficacy_2: SE2,
+          efficacy_3: SE3,
+          efficacy_4: SE4,
         };
         // setEnteredAnswer('');
         // console.log(enteredAnswer);
@@ -287,6 +291,10 @@ export default function Home(props) {
       time: new Date().toISOString().substring(11, 19),
       deviceType: deviceType,
       browser: browserName,
+      efficacy_1: SE1,
+      efficacy_2: SE2,
+      efficacy_3: SE3,
+      efficacy_4: SE4,
     };
     let response = await fetch('/api/add-database', {
       method: 'POST',
