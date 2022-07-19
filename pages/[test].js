@@ -13,8 +13,11 @@ export default function Home(props) {
     useRouter().query.id.substring(0, 1) == 1 ? true : false;
   // const sampleLinkClicked =
   //   useRouter().query.id.substring(1, 2) == 1 ? true : false;
-  const participant_id = useRouter().query.id.substring(2);
-
+  const SE1 = useRouter().query.id.substring(1, 2);
+  const SE2 = useRouter().query.id.substring(2, 3);
+  const SE3 = useRouter().query.id.substring(3, 4);
+  const SE4 = useRouter().query.id.substring(4, 5);
+  const participant_id = useRouter().query.id.substring(5);
   const [designElem, setDesignElem] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
@@ -198,6 +201,10 @@ export default function Home(props) {
           time: new Date().toISOString().substring(11, 19),
           deviceType: deviceType,
           browser: browserName,
+          efficacy_1: SE1,
+          efficacy_2: SE2,
+          efficacy_3: SE3,
+          efficacy_4: SE4,
         };
         // setEnteredAnswer('');
         // console.log(enteredAnswer);
@@ -768,7 +775,7 @@ export default function Home(props) {
                       ) {
                         if (designElem == 1) {
                           return (
-                            <div className="flex h-1/2 w-2/3 ">
+                            <div className="flex h-1/2 w-2/3">
                               <img
                                 src="images/honor_final.png"
                                 className=""

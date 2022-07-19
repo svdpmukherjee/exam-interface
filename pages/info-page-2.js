@@ -6,12 +6,28 @@ import { useRouter } from 'next/router';
 export default function Home() {
   const [trialMinutes, settrialMinutes] = useState('');
   const [trialSeconds, settrialSeconds] = useState('');
-  const [checked, setChecked] = useState(false);
+  const [checked1, setChecked1] = useState('');
+  const [checked2, setChecked2] = useState('');
+  const [checked3, setChecked3] = useState('');
+  const [checked4, setChecked4] = useState('');
   const [id, setID] = useState('');
 
   const router = useRouter();
   const param = router.query.par;
   // const [designNumber, setDesignNumber] = useState(0);
+
+  const handleChange1 = (event) => {
+    setChecked1(event.target.value);
+  };
+  const handleChange2 = (event) => {
+    setChecked2(event.target.value);
+  };
+  const handleChange3 = (event) => {
+    setChecked3(event.target.value);
+  };
+  const handleChange4 = (event) => {
+    setChecked4(event.target.value);
+  };
 
   // Proceed with test
   const checkInfo = () => {
@@ -25,12 +41,27 @@ export default function Home() {
       alert('Please type the number only');
       settrialMinutes('');
       // settrialSeconds('');
-    } else if (trialMinutes == '2') {
-      router.push('test?id=' + param + id);
-    } else {
+    } else if (trialMinutes != '2') {
       alert('You should spend 2 minutes on average');
       settrialMinutes('');
       // settrialSeconds('');
+    } else if (
+      (checked1 == '') |
+      (checked2 == '') |
+      (checked3 == '') |
+      (checked4 == '')
+    )
+      alert('Please rate all statements before proceeding');
+    else {
+      router.push(
+        'test?id=' +
+          param +
+          checked1.substring(1) +
+          checked2.substring(1) +
+          checked3.substring(1) +
+          checked4.substring(1) +
+          id
+      );
     }
   };
 
@@ -86,7 +117,7 @@ export default function Home() {
         {/* </div> */}
         <div class=" mx-auto px-16 row-span-5">
           <div className="py-10">
-            <div class="relative flex p-8  border border-gray-300 ">
+            <div class="relative flex py-3 border border-gray-300 ">
               {/* <div class="absolute flex px-3 py-1 text-sm font-medium text-white  bg-sky-800 -top-5 rounded-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +132,7 @@ export default function Home() {
                 &nbsp;&nbsp;
                 <div className="my-auto">IMPORTANT INFO</div>
               </div> */}
-              <div className="mx-auto px-5 border-r-2">
+              <div className="mx-auto px-5 border-r-2 text-sm">
                 <ul className=" py-3 space-y-4 ">
                   <li>
                     &#8226;&nbsp; Number of questions: <strong>5</strong>
@@ -118,9 +149,9 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-              <div className="mx-auto px-5">
+              <div className="mx-auto text-sm">
                 <ul className=" py-3 space-y-4 ">
-                  <li className="text-lg ">
+                  <li className="text-md">
                     "How much time on average should you spend on each
                     question?"
                   </li>
@@ -180,11 +211,210 @@ export default function Home() {
             }
           })()} */}
 
-          <p className="mt-10 text-center">
-            When you are ready, click the{' '}
-            <span className="font-semibold">Start Test</span> below and the
-            timer will begin. Good Luck!
+          <p className="mt-10 mb-5 text-center ">
+            Please indicate your agreement with the following statements:
           </p>
+          <div className="flex justify-center">
+            <table className="table-fixed border-separate py-5 ">
+              <thead className="text-center ">
+                <tr>
+                  <th className="px-3"></th>
+                  <th className="px-3">Strongly Disagree</th>
+                  <th className="px-3">Disagree</th>
+                  <th className="px-3">Neither Disagree nor Agree</th>
+                  <th className="px-3">Agree</th>
+                  <th className="px-3">Strongly Agree</th>
+                </tr>
+              </thead>
+              <tbody className="text-center">
+                <tr className="">
+                  <td className="text-left">
+                    I am confident that I can perform effectively on many
+                    different problems in the test
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="11"
+                      checked={checked1 === '11'}
+                      onChange={handleChange1}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="12"
+                      checked={checked1 === '12'}
+                      onChange={handleChange1}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="13"
+                      checked={checked1 === '13'}
+                      onChange={handleChange1}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="14"
+                      checked={checked1 === '14'}
+                      onChange={handleChange1}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="15"
+                      checked={checked1 === '15'}
+                      onChange={handleChange1}
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="text-left">
+                    I think I can obtain outcomes in the test that are important
+                    to me
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="21"
+                      checked={checked2 === '21'}
+                      onChange={handleChange2}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="22"
+                      checked={checked2 === '22'}
+                      onChange={handleChange2}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="23"
+                      checked={checked2 === '23'}
+                      onChange={handleChange2}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="24"
+                      checked={checked2 === '24'}
+                      onChange={handleChange2}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="25"
+                      checked={checked2 === '25'}
+                      onChange={handleChange2}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-left">
+                    Compared to other people, I can do most tasks very well in
+                    the test
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="31"
+                      checked={checked3 === '31'}
+                      onChange={handleChange3}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="32"
+                      checked={checked3 === '32'}
+                      onChange={handleChange3}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="33"
+                      checked={checked3 === '33'}
+                      onChange={handleChange3}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="34"
+                      checked={checked3 === '34'}
+                      onChange={handleChange3}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="35"
+                      checked={checked3 === '35'}
+                      onChange={handleChange3}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-left">
+                    Even when things are tough in the test, I can perform quite
+                    well
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="41"
+                      checked={checked4 === '41'}
+                      onChange={handleChange4}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="42"
+                      checked={checked4 === '42'}
+                      onChange={handleChange4}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="43"
+                      checked={checked4 === '43'}
+                      onChange={handleChange4}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="44"
+                      checked={checked4 === '44'}
+                      onChange={handleChange4}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="radio"
+                      value="45"
+                      checked={checked4 === '45'}
+                      onChange={handleChange4}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className="flex py-5 pr-4 justify-center bg-gray-100 row-span-1">
