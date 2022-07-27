@@ -9,15 +9,7 @@ const time = 10 * 60; // setting time limit as 30 mins
 
 export default function Home(props) {
   const { ip_address_1, ip_address_2 } = props;
-  const sampleQuestionClicked =
-    useRouter().query.id.substring(0, 1) == 1 ? true : false;
-  // const sampleLinkClicked =
-  //   useRouter().query.id.substring(1, 2) == 1 ? true : false;
-  const SE1 = useRouter().query.id.substring(1, 2);
-  const SE2 = useRouter().query.id.substring(2, 3);
-  const SE3 = useRouter().query.id.substring(3, 4);
-  const SE4 = useRouter().query.id.substring(4, 5);
-  const participant_id = useRouter().query.id.substring(5);
+  const participant_id = useRouter().query.id;
   const [designElem, setDesignElem] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [enteredAnswer, setEnteredAnswer] = useState('');
@@ -53,8 +45,6 @@ export default function Home(props) {
   let blurStatus = '';
   let correct = 0;
 
-  // console.log(participant_id, sampleQuestionClicked, sampleLinkClicked);
-
   // calculate time taken to solve each question
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -88,8 +78,6 @@ export default function Home(props) {
       if (correct >= 5) {
         let bonusEntry = {
           participant_id: participant_id,
-          sampleQuestionClicked: sampleQuestionClicked,
-          // sampleLinkClicked: sampleLinkClicked,
           condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -106,8 +94,6 @@ export default function Home(props) {
         });
       }
 
-      console.log(completionCode);
-
       const timer = setTimeout(() => {
         window.location.href =
           'https://app.prolific.co/submissions/complete?cc=7104E4BD';
@@ -122,10 +108,8 @@ export default function Home(props) {
       alert('Please type the number only');
       setEnteredAnswer('');
     } else {
-      // router.push('/disqualified');
       isMobile ? (deviceType = 'Mobile') : (deviceType = 'Desktop');
       const nextQues = currentQuestion + 1;
-      // let date = new Date().toISOString();
       nextQues < questions.length && setCurrentQuestion(nextQues);
       let timeTaken = time_2 - time_3;
       setTime_2(time_3);
@@ -175,7 +159,7 @@ export default function Home(props) {
         if (data.message == 0) designNumber = 3;
         else designNumber = parseInt(data.message) - 1;
 
-        designNumber = 3; // ---------- needs to remove ------------
+        // designNumber = 3; // ---------- needs to remove ------------
         setDesignElem(designNumber);
         answerWritten = enteredAnswer;
         // setSavedAnswer((savedAnswer) => [
@@ -189,8 +173,6 @@ export default function Home(props) {
         // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
-          sampleQuestionClicked: sampleQuestionClicked,
-          // sampleLinkClicked: sampleLinkClicked,
           condition: designNumber,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -201,10 +183,6 @@ export default function Home(props) {
           time: new Date().toISOString().substring(11, 19),
           deviceType: deviceType,
           browser: browserName,
-          efficacy_1: SE1,
-          efficacy_2: SE2,
-          efficacy_3: SE3,
-          efficacy_4: SE4,
         };
         // setEnteredAnswer('');
         // console.log(enteredAnswer);
@@ -222,8 +200,6 @@ export default function Home(props) {
         // console.log(enteredAnswer);
         let databaseEntry = {
           participant_id: participant_id,
-          sampleQuestionClicked: sampleQuestionClicked,
-          // sampleLinkClicked: sampleLinkClicked,
           condition: designElem,
           ip_address_1: ip_address_1,
           ip_address_2: ip_address_2,
@@ -234,10 +210,6 @@ export default function Home(props) {
           time: new Date().toISOString().substring(11, 19),
           deviceType: deviceType,
           browser: browserName,
-          efficacy_1: SE1,
-          efficacy_2: SE2,
-          efficacy_3: SE3,
-          efficacy_4: SE4,
         };
         // setEnteredAnswer('');
         // console.log(enteredAnswer);
@@ -279,8 +251,6 @@ export default function Home(props) {
     setSavedAnswer([...savedAnswer, enteredAnswer]);
     let databaseEntry = {
       participant_id: participant_id,
-      sampleQuestionClicked: sampleQuestionClicked,
-      // sampleLinkClicked: sampleLinkClicked,
       condition: designElem,
       ip_address_1: ip_address_1,
       ip_address_2: ip_address_2,
@@ -291,10 +261,6 @@ export default function Home(props) {
       time: new Date().toISOString().substring(11, 19),
       deviceType: deviceType,
       browser: browserName,
-      efficacy_1: SE1,
-      efficacy_2: SE2,
-      efficacy_3: SE3,
-      efficacy_4: SE4,
     };
     let response = await fetch('/api/add-database', {
       method: 'POST',
@@ -332,14 +298,13 @@ export default function Home(props) {
 
         {/* <Header showScore={showScore} /> */}
         {showScore ? (
-          <div className="font-serif px-10 py-7 text-2xl font-semibold row-span-1 bg-slate-100 m-auto">
-            To complete the Part II of the study, please read the instructions
-            below:
+          <div className="font-serif px-10 py-4 pb-20 text-2xl font-semibold row-span-1 bg-slae-100 m-auto">
+            Part I is done. Please complete the following steps:
           </div>
         ) : (
           // first row
           <div className="grid grid-cols-8 row-span-2 pr-10 bg-sky-50 ">
-            <div className="col-span-5 font-serif text-2xl flex text-slate-700 ">
+            <div className="col-span-5 font-serif text-2xl flex text-slate-700">
               <div className=" p-3 pl-10 pr-7 my-auto">
                 {/* <p className="">Test Your Aptitude Skill</p> */}
                 <div className="col-span-5 font-serif text-2xl flex  ">
@@ -403,89 +368,81 @@ export default function Home(props) {
               Summary of your test:
             </h1> */}
             <div className="">
-              <div className="grid grid-cols-9">
-                <div className="col-span-5 flex justify-center">
-                  <div className="m-auto px-5 space-y-10">
-                    <li>
-                      <span> &nbsp; &nbsp; &nbsp; </span>You are now going to
-                      fill a survey questionnaire
-                    </li>
-                    <li>
-                      <span> &nbsp; &nbsp; &nbsp; </span>Once you complete the
-                      survey, you shall receive a{' '}
-                      <strong>completion code</strong>
-                    </li>
-                    <li>
-                      <span> &nbsp; &nbsp; &nbsp; </span>Please copy that
-                      completion code and paste in the right box to unlock your
-                      final score in the test
-                    </li>
-                    <li>
-                      <span> &nbsp; &nbsp; &nbsp; </span>
-                      <>
-                        Your eligibility to the bonus shall be announced along
-                        with your final score
-                      </>
-                    </li>
-                    <li>
-                      <span> &nbsp; &nbsp; &nbsp; </span>{' '}
-                      <strong className="">
-                        Do not refresh or close this page{' '}
-                      </strong>{' '}
-                      as you shall have to come back after completion of the
-                      survey
-                    </li>
+              <div className="grid grid-cols-9 gap-2">
+                <div className="col-span-3 flex justify-center border-gray-300 border-r">
+                  <div className="mx-auto px-5 space-y-10">
+                    <div className="flex justify-center">
+                      <span className="bg-gray-100 rounded-full px-6 py-4 font-bold text-lg">
+                        1
+                      </span>
+                    </div>
+                    <ul className="space-y-10">
+                      <li>Fill in the questionnaire.</li>
+
+                      <li>
+                        <strong className="">
+                          Do not refresh or close this page{' '}
+                        </strong>{' '}
+                        as you have to come back once the questionnaire is
+                        completed.
+                      </li>
+                    </ul>
+                    <br />
+                    <div className=" flex justify-center font-serif">
+                      {(() => {
+                        if (designElem == 0) {
+                          link =
+                            'http://ulsurvey.uni.lu/index.php/316689?lang=en';
+                        } else if (designElem == 1) {
+                          link =
+                            'http://ulsurvey.uni.lu/index.php/774929?lang=en';
+                        } else if (designElem == 2) {
+                          link =
+                            'http://ulsurvey.uni.lu/index.php/989298?lang=en';
+                        } else {
+                          link =
+                            'http://ulsurvey.uni.lu/index.php/389254?lang=en';
+                        }
+                      })()}
+                      <a href={link} target={'_blank'}>
+                        <span className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-3.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                          Go to Part 2: Survey
+                        </span>{' '}
+                      </a>
+                    </div>
                   </div>
                 </div>
-                <div className="col-span-4  space-y-12 border-l-2 my-auto px-10">
-                  <div className=" font-serif">
-                    Step 1:&nbsp;&nbsp;&nbsp;
-                    {(() => {
-                      if (designElem == 0) {
-                        link =
-                          'http://ulsurvey.uni.lu/index.php/581713?lang=en';
-                      } else if (designElem == 1) {
-                        link =
-                          'http://ulsurvey.uni.lu/index.php/594336?lang=en';
-                      } else if (designElem == 2) {
-                        link =
-                          'http://ulsurvey.uni.lu/index.php/679573?lang=en';
-                      } else {
-                        link =
-                          'http://ulsurvey.uni.lu/index.php/737243?lang=en';
-                      }
-                    })()}
-                    <a href={link} target={'_blank'}>
-                      <span className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-3.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Click to proceed with the survey
-                      </span>{' '}
-                    </a>
-                    (survey opens with a new tab)
-                  </div>
-                  <div className="font-serif gap-y-3">
-                    Step 2: &nbsp;&nbsp;&nbsp;
-                    <input
-                      type="text"
-                      onChange={(event) => {
-                        setcompletionCode(event.target.value);
-                      }}
-                      className="w-56 h-12 border-blue-300 border-2 shadow-md rounded-md"
-                      placeholder="Enter the Completion Code"
-                    />
-                    &nbsp;&nbsp;
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                      onClick={checkCompletionCode}
-                    >
-                      Unlock your score
-                    </button>
-                    {/* <button
-                      className="px-5 py-2 bg-blue-700 hover:bg-sky-700 text-white rounded-lg shadow-2xl"
-                      
-                    >
-                      
-                    </button> */}
+                <div className="col-span-3 flex justify-center border-gray-300 border-r">
+                  <div className="mx-auto px-5 space-y-10">
+                    <div className="flex justify-center">
+                      <span className="bg-gray-100 rounded-full px-6 py-4 font-bold text-lg">
+                        2
+                      </span>
+                    </div>
+                    <ul className="space-y-10">
+                      <li>
+                        Copy paste the completion code received at the end of
+                        the survey and unlock your final score in the test to
+                        see your eligibility to the bonus.
+                      </li>
+                      <li>Enter the completion code:</li>
+                      <input
+                        type="text"
+                        onChange={(event) => {
+                          setcompletionCode(event.target.value);
+                        }}
+                        className="w-56 h-12 pl-2 border-gray-300 border-2 shadow-md rounded-lg"
+                      />
+                      &nbsp;&nbsp;
+                      <button
+                        type="button"
+                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        onClick={checkCompletionCode}
+                      >
+                        Unlock your scoree
+                      </button>
+                    </ul>
+                    <br />
                     {(() => {
                       if (blurScore == 1) {
                         blurStatus = 'blur-xl';
@@ -495,7 +452,7 @@ export default function Home(props) {
                     })()}
                     {/* <table className="table-auto border-2 border-sky-300 mx-auto blur"> */}
                     <table
-                      className={`${blurStatus} table-auto border-2 my-8 text-sm border-sky-300 mx-auto `}
+                      className={`${blurStatus} table-auto border-2 my-8 text-sm border-sky-300 mx-auto`}
                     >
                       <thead className="text-center  bg-sky-300">
                         <tr>
@@ -584,33 +541,49 @@ export default function Home(props) {
                         );
                       }
                     })()}
+
+                    <br />
                   </div>
-                  {(() => {
-                    if (finalPulse == 0) {
-                      return (
-                        <div className=" font-serif ">
-                          Step 3:&nbsp;&nbsp;&nbsp;
-                          <a href="#">
-                            <span className=" underline font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
-                              Click here to complete your study in Prolific
-                            </span>{' '}
-                          </a>
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div className=" font-serif ">
-                          Step 3:&nbsp;&nbsp;&nbsp;
-                          <a href="https://app.prolific.co/submissions/complete?cc=7104E4BD">
-                            <span className=" underline  rounded-lg text-lg font-semibold px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 animate-pulse">
-                              Click here to complete your study in Prolific
-                            </span>
-                            (re-directs automatically in 30 seconds)
-                          </a>
-                        </div>
-                      );
-                    }
-                  })()}
+                </div>
+                <div className="col-span-3 flex justify-center ">
+                  <div className="mx-auto px-5 space-y-10">
+                    <div className="flex justify-center">
+                      <span className="bg-gray-100 rounded-full px-6 py-4 font-bold text-lg">
+                        3
+                      </span>
+                    </div>
+                    <ul className="space-y-4">
+                      <li>Final step:</li>
+                      <li>
+                        {(() => {
+                          if (finalPulse == 0) {
+                            return (
+                              <div className=" font-serif ">
+                                <a href="#">
+                                  <span className=" underline font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
+                                    Complete your study in Prolific
+                                  </span>{' '}
+                                </a>
+                              </div>
+                            );
+                          } else {
+                            return (
+                              <div className=" font-serif ">
+                                <a href="https://app.prolific.co/submissions/complete?cc=7104E4BD">
+                                  <span className=" underline  rounded-lg text-lg font-semibold px-5 py-2.5 text-center mr-2 mb-2 text-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 animate-pulse">
+                                    Complete your study in Prolific
+                                  </span>
+                                </a>
+                                <li className="pt-10">
+                                  (re-directs automatically after 30 seconds)
+                                </li>
+                              </div>
+                            );
+                          }
+                        })()}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -750,7 +723,7 @@ export default function Home(props) {
                           onChange={(event) => {
                             setEnteredAnswer(event.target.value);
                           }}
-                          className="w-48 h-12 border-blue-300 border-2 shadow-md rounded-md"
+                          className="w-48 h-12 border-blue-300 border-2 shadow-md rounded-md pl-2"
                           placeholder="Type only the number"
                         />
                         {/* {(() => {
