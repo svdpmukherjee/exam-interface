@@ -392,16 +392,16 @@ export default function Home(props) {
                       {(() => {
                         if (designElem == 0) {
                           link =
-                            'http://ulsurvey.uni.lu/index.php/316689?lang=en';
+                            'http://ulsurvey.uni.lu/index.php/195886?lang=en';
                         } else if (designElem == 1) {
                           link =
-                            'http://ulsurvey.uni.lu/index.php/774929?lang=en';
+                            'http://ulsurvey.uni.lu/index.php/442446?lang=en';
                         } else if (designElem == 2) {
                           link =
-                            'http://ulsurvey.uni.lu/index.php/989298?lang=en';
+                            'http://ulsurvey.uni.lu/index.php/387767?lang=en';
                         } else {
                           link =
-                            'http://ulsurvey.uni.lu/index.php/389254?lang=en';
+                            'http://ulsurvey.uni.lu/index.php/843552?lang=en';
                         }
                       })()}
                       <a href={link} target={'_blank'}>
