@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       return updateDesign(req, res);
     }
 
-    case 'DELETE': {
+    case 'OPTIONS': {
       console.log(req.method);
       return addBonus(req, res);
     }
@@ -100,6 +100,42 @@ async function updateDesign(req, res) {
     });
   }
 }
+
+// async function trackConditions(req, res) {
+//   const data = JSON.parse(req.body);
+//   // const data = req.body;
+//   // console.log(typeof data);
+
+//   try {
+//     let { db } = await connectToDatabase();
+//     await db.collection('tracking_db').updateOne(
+//       { design_number: { $lt: 4 } },
+//       {
+//         $set: {
+//           design_number: data,
+//         },
+//         $inc: {
+//           // answer: (parseFloat(answer.toFixed(3)) + 0.001).toString(),
+//           control: 1,
+//           honor: 1,
+//           warning: 1,
+//           monitoring: 1,
+//           total: 1,
+//         },
+//       }
+//     );
+
+//     return res.json({
+//       message: 'updated successfully',
+//       success: true,
+//     });
+//   } catch (error) {
+//     return res.json({
+//       message: new Error(error).message,
+//       success: false,
+//     });
+//   }
+// }
 
 async function addBonus(req, res) {
   const data = JSON.parse(req.body);

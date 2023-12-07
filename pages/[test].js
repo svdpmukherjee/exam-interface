@@ -62,6 +62,18 @@ export default function Home(props) {
     return () => clearTimeout(intervalId);
   }, [timeLeftCheck]);
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', (event) => {
+      if (completionCode == '') {
+        console.log(completionCode);
+        response_design = fetch('/api/add-database', {
+          method: 'PUT',
+          body: designElem,
+        });
+      }
+    });
+  });
+
   const checkCompletionCode = async () => {
     if (completionCode == '') {
       alert('Please enter the Completion Code');
@@ -89,7 +101,7 @@ export default function Home(props) {
         };
 
         let response = await fetch('/api/add-database', {
-          method: 'DELETE',
+          method: 'OPTIONS',
           body: JSON.stringify(bonusEntry),
         });
       }
